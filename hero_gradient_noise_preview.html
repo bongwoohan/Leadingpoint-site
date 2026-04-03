@@ -1,0 +1,150 @@
+
+<style>
+  .hero-preview {
+    width: 100%;
+    height: 420px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+    font-family: 'DM Sans', sans-serif;
+    background: #f2f2f2;
+  }
+  .hero-gradient {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 15% 20%, rgba(255,255,255,0.92) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 70% at 90% 80%, rgba(220,215,210,0.6) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 60% 10%, rgba(240,149,110,0.07) 0%, transparent 55%);
+  }
+  .hero-dots {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(0,0,0,0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+    opacity: 0.5;
+  }
+  .hero-noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.045;
+  }
+  .hero-vignette {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 100% 100% at 50% 50%, transparent 55%, rgba(200,196,190,0.35) 100%);
+  }
+  .hero-content {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 3rem;
+    right: 3rem;
+  }
+  .hero-title-mock {
+    font-size: clamp(4rem, 10vw, 7rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.85;
+    color: #e4e4e4;
+    text-shadow:
+      -6px -6px 12px rgba(255,255,255,0.95),
+      -16px -16px 32px rgba(255,255,255,0.85),
+      6px 6px 12px rgba(0,0,0,0.12),
+      18px 18px 36px rgba(0,0,0,0.08),
+      30px 30px 60px rgba(0,0,0,0.05);
+    margin-bottom: 1.2rem;
+  }
+  .hero-slogan-mock {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.3rem;
+  }
+  .hero-sub-mock {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: rgba(26,26,26,0.5);
+    line-height: 1.7;
+  }
+  .hero-since-mock {
+    margin-top: 1.2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(26,26,26,0.35);
+  }
+  .label-tag {
+    position: absolute;
+    top: 14px; left: 14px;
+    font-size: 11px;
+    background: rgba(0,0,0,0.08);
+    color: rgba(0,0,0,0.5);
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.06em;
+  }
+</style>
+
+<div style="display:flex; flex-direction:column; gap:16px;">
+
+  <div class="hero-preview">
+    <div class="hero-gradient"></div>
+    <div class="hero-dots"></div>
+    <canvas class="hero-noise" id="noise1" width="800" height="420"></canvas>
+    <div class="hero-vignette"></div>
+    <div class="label-tag">그라디언트 + 노이즈 + 비네트</div>
+    <div class="hero-content">
+      <div class="hero-title-mock">LEADING<br>POINT</div>
+      <div style="display:flex; gap:2rem; align-items:flex-start;">
+        <div>
+          <div class="hero-slogan-mock">Resilience, Engineered.</div>
+          <div class="hero-sub-mock">Mission-critical 환경을 위한<br>실전형 Infrastructure & Disaster Recovery</div>
+        </div>
+      </div>
+      <div class="hero-since-mock">IT Solutions · Since 2005</div>
+    </div>
+  </div>
+
+  <div class="hero-preview" style="background:#f0eeeb;">
+    <div style="position:absolute;inset:0;background:
+      radial-gradient(ellipse 80% 70% at 0% 0%, rgba(255,255,255,0.85) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 100% 100%, rgba(200,192,182,0.55) 0%, transparent 55%),
+      radial-gradient(ellipse 35% 35% at 75% 25%, rgba(240,149,110,0.09) 0%, transparent 50%);"></div>
+    <div class="hero-dots" style="opacity:0.35;"></div>
+    <canvas class="hero-noise" id="noise2" width="800" height="420"></canvas>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 100% 100% at 50% 50%, transparent 45%, rgba(180,172,160,0.4) 100%);"></div>
+    <div class="label-tag">좀 더 따뜻한 톤</div>
+    <div class="hero-content">
+      <div class="hero-title-mock">LEADING<br>POINT</div>
+      <div>
+        <div class="hero-slogan-mock">Resilience, Engineered.</div>
+        <div class="hero-sub-mock">Mission-critical 환경을 위한<br>실전형 Infrastructure & Disaster Recovery</div>
+      </div>
+      <div class="hero-since-mock">IT Solutions · Since 2005</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function drawNoise(canvasId) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width, h = canvas.height;
+  const img = ctx.createImageData(w, h);
+  for (let i = 0; i < img.data.length; i += 4) {
+    const v = Math.random() * 255;
+    img.data[i] = v;
+    img.data[i+1] = v;
+    img.data[i+2] = v;
+    img.data[i+3] = 255;
+  }
+  ctx.putImageData(img, 0, 0);
+}
+drawNoise('noise1');
+drawNoise('noise2');
+</script>

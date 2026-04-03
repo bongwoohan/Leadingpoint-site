@@ -1,0 +1,85 @@
+<!-- ── NAV WRAP ── -->
+<div id="nav-wrap">
+  <div class="nav-top">
+    <a href="index.html" class="nav-logo">
+      <img id="nav-logo-img" src="" alt="LeadingPoint"/>
+    </a>
+    <ul class="nav-main-links">
+      <li>
+        <div class="nav-col">
+          <a href="index.html" class="nav-home-link" id="nav-home-link">Home</a>
+        </div>
+      </li>
+      <li>
+        <div class="nav-col">
+          <span class="nav-col-title" id="title-business" onclick="toggleSub('business')">
+            Business <span class="nav-col-arrow">&#9660;</span>
+          </span>
+          <div class="nav-submenu" id="sub-business">
+            <a href="disaster-recovery.html" id="nav-dr">Disaster Recovery</a>
+            <a href="active-active-nas-dr.html" id="nav-nas-dr">Active-Active NAS DR</a>
+            <a href="cloud.html" id="nav-cloud">Cloud</a>
+            <a href="biometrics.html" id="nav-bio">Biometrics</a>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="nav-col">
+          <span class="nav-col-title" id="title-company" onclick="toggleSub('company')">
+            Company <span class="nav-col-arrow">&#9660;</span>
+          </span>
+          <div class="nav-submenu" id="sub-company">
+            <a href="partners.html" id="nav-partners">Partners</a>
+            <a href="clients.html" id="nav-clients">Clients</a>
+            <a href="company.html" id="nav-contact">Contact us</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <button class="nav-menu-btn" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-divider"></div>
+</div>
+
+<!-- ── OVERLAY MENU (mobile) ── -->
+<div id="menu-overlay">
+  <div class="overlay-top">
+    <a href="index.html" class="overlay-logo">
+      <img id="overlay-logo-img" src="" alt="LeadingPoint"/>
+    </a>
+    <button class="overlay-close" onclick="toggleMenu()">CLOSE ✕</button>
+  </div>
+  <ul class="overlay-links">
+    <li>
+      <div class="overlay-item-top">
+        <a href="index.html" class="overlay-item-label" id="ov-home-link" onclick="toggleMenu()">Home</a>
+        <span class="overlay-arrow">↗</span>
+      </div>
+    </li>
+    <li>
+      <div class="overlay-item-top" id="ov-business-top" onclick="toggleOverlaySub('ov-business', this)">
+        <span class="overlay-item-label" id="ov-business-label">Business</span>
+        <span class="overlay-item-arrow">&#9660;</span>
+      </div>
+      <div class="overlay-submenu" id="ov-business">
+        <a href="disaster-recovery.html" id="ov-dr" onclick="toggleMenu()">Disaster Recovery <span class="overlay-arrow">↗</span></a>
+        <a href="active-active-nas-dr.html" id="ov-nas-dr" onclick="toggleMenu()">Active-Active NAS DR <span class="overlay-arrow">↗</span></a>
+        <a href="cloud.html" id="ov-cloud" onclick="toggleMenu()">Cloud <span class="overlay-arrow">↗</span></a>
+        <a href="biometrics.html" id="ov-bio" onclick="toggleMenu()">Biometrics <span class="overlay-arrow">↗</span></a>
+      </div>
+    </li>
+    <li>
+      <div class="overlay-item-top" onclick="toggleOverlaySub('ov-company', this)">
+        <span class="overlay-item-label">Company</span>
+        <span class="overlay-item-arrow">&#9660;</span>
+      </div>
+      <div class="overlay-submenu" id="ov-company">
+        <a href="partners.html" id="ov-partners" onclick="toggleMenu()">Partners <span class="overlay-arrow">↗</span></a>
+        <a href="clients.html" id="ov-clients" onclick="toggleMenu()">Clients <span class="overlay-arrow">↗</span></a>
+        <a href="company.html" id="ov-contact" onclick="toggleMenu()">Contact us <span class="overlay-arrow">↗</span></a>
+      </div>
+    </li>
+  </ul>
+</div>
