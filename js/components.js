@@ -28,6 +28,13 @@
       ovBusinessActive: true,
       footActiveId:    'foot-dr',
     },
+    'active-active-nas-dr': {
+      navActiveId:     'nav-nas-dr',
+      ovActiveId:      'ov-nas-dr',
+      ovBusinessOpen:  true,
+      ovBusinessActive: true,
+      footActiveId:    'foot-nas-dr',
+    },
     'cloud': {
       navActiveId:     'nav-cloud',
       ovActiveId:      'ov-cloud',
