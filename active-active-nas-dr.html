@@ -532,27 +532,30 @@
       color: rgba(255,255,255,0.22);
     }
 
-    /* ── CONTENT PLACEHOLDER ── */
-    .content-placeholder {
+    /* ── CONTENT SECTIONS ── */
+    .sec {
       scroll-snap-align: start;
       min-height: 100vh;
-      background: #f0f4f8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       position: relative;
     }
 
-    .placeholder-inner {
-      text-align: center;
-      color: rgba(42,63,92,0.35);
-    }
+    .sec-light { background: #eef4fa; }
+    .sec-dark  { background: #162538; }
 
-    .placeholder-inner p {
-      font-size: 0.9rem;
+    .sec-num {
+      position: absolute;
+      top: 3rem;
+      left: 3rem;
+      font-size: 0.65rem;
       font-weight: 400;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
+    }
+    .sec-light .sec-num { color: rgba(24,95,165,0.30); }
+    .sec-dark  .sec-num { color: rgba(160,200,236,0.22); }
+
+    @media (max-width: 1100px) {
+      .sec-num { left: 1.5rem; top: 2rem; }
     }
 
     /* ── RESPONSIVE ── */
@@ -611,11 +614,8 @@
         </h1>
       </div>
       <div class="hero-slogan">
-        <p class="slogan-main" id="slogan-main">Active-Active NAS, Always On.</p>
-        <p class="slogan-sub" id="slogan-sub">
-          양 사이트가 동시에 서비스하는 진정한 Active-Active DR.<br>
-          무중단 스토리지 환경을 설계하고 구현합니다.
-        </p>
+        <p class="slogan-main" id="slogan-main">DR 센터를 대기 자원에서 운영 자원으로</p>
+        <p class="slogan-sub" id="slogan-sub">변경된 블록만 전송하는 실시간 NAS 동기화</p>
       </div>
     </div>
 
@@ -628,11 +628,29 @@
 
 </div><!-- /#hero-snap -->
 
-<!-- ── CONTENT SECTIONS (추후 추가) ── -->
-<section class="content-placeholder" id="section-01">
-  <div class="placeholder-inner">
-    <p>Content coming soon</p>
-  </div>
+<!-- ── SECTION 01 · Light ── -->
+<section class="sec sec-light" id="section-01">
+  <span class="sec-num">01</span>
+</section>
+
+<!-- ── SECTION 02 · Dark ── -->
+<section class="sec sec-dark" id="section-02">
+  <span class="sec-num">02</span>
+</section>
+
+<!-- ── SECTION 03 · Light ── -->
+<section class="sec sec-light" id="section-03">
+  <span class="sec-num">03</span>
+</section>
+
+<!-- ── SECTION 04 · Dark ── -->
+<section class="sec sec-dark" id="section-04">
+  <span class="sec-num">04</span>
+</section>
+
+<!-- ── SECTION 05 · Light ── -->
+<section class="sec sec-light" id="section-05">
+  <span class="sec-num">05</span>
 </section>
 
 <div style="height:1px;background:rgba(200,216,240,0.12);"></div>
