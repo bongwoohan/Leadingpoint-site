@@ -570,6 +570,8 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: flex-end;
+      text-align: right;
       border-right: 1px solid rgba(24,95,165,0.10);
     }
 
@@ -681,9 +683,256 @@
       .s1-right { padding: 3rem 2rem 4rem; }
     }
 
-    /* ── RESPONSIVE ── */
+    /* ── SECTION 02 ── */
+    .s2-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+    }
+
+    .s2-left {
+      padding: 7rem 5rem 5rem 6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      text-align: right;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .s2-title {
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.0;
+      color: #eaf6ff;
+      margin-bottom: 0;
+    }
+
+    .s2-right {
+      padding: 7rem 5rem 5rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .s2-body {
+      font-size: clamp(0.85rem, 1.1vw, 1rem);
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(160,200,230,0.70);
+    }
+
+    .s2-rule {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .s2-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .s2-card {
+      background: rgba(95,200,240,0.07);
+      border: 0.5px solid rgba(95,200,240,0.15);
+      border-radius: 10px;
+      padding: 1.4rem 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .s2-card-num {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: #5fc8f0;
+      letter-spacing: 0.12em;
+    }
+
+    .s2-card-label {
+      font-size: clamp(0.82rem, 1vw, 0.95rem);
+      font-weight: 400;
+      line-height: 1.5;
+      color: rgba(160,200,230,0.85);
+    }
+
     @media (max-width: 1100px) {
-      .nav-top { padding: 1.4rem 1.5rem 1rem; }
+      .s2-inner { grid-template-columns: 1fr; }
+      .s2-left {
+        padding: 6rem 2rem 3rem 2rem;
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+        align-items: flex-start;
+        text-align: left;
+      }
+      .s2-right { padding: 3rem 2rem 4rem; }
+    }
+
+    /* ── SECTION 03 ── */
+    .s3-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+      margin: 0 4rem;
+    }
+
+    .s3-left {
+      padding: 7rem 5rem 5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      text-align: right;
+      border-right: 1px solid rgba(24,95,165,0.10);
+      gap: 1.6rem;
+    }
+
+    .s3-title {
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.0;
+      color: #042c53;
+      white-space: nowrap;
+    }
+
+    .s3-body {
+      font-size: clamp(0.85rem, 1.1vw, 1rem);
+      font-weight: 300;
+      line-height: 1.85;
+      color: #185fa5;
+      opacity: 0.7;
+    }
+
+    .s3-right {
+      padding: 7rem 2rem 5rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .s3-feat {
+      display: flex;
+      gap: 14px;
+      padding: 0.9rem 0;
+      border-bottom: 0.5px solid rgba(24,95,165,0.09);
+      align-items: flex-start;
+    }
+
+    .s3-feat:first-child {
+      border-top: 0.5px solid rgba(24,95,165,0.09);
+    }
+
+    .s3-feat-num {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #378add;
+      opacity: 0.4;
+      min-width: 1.4rem;
+      flex-shrink: 0;
+      line-height: 1.6;
+    }
+
+    .s3-feat-key {
+      font-size: clamp(0.8rem, 1vw, 0.9rem);
+      font-weight: 600;
+      color: #185fa5;
+      min-width: 10rem;
+      flex-shrink: 0;
+      line-height: 1.6;
+    }
+
+    .s3-feat-val {
+      font-size: clamp(0.8rem, 1vw, 0.88rem);
+      font-weight: 300;
+      color: #185fa5;
+      opacity: 0.65;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1100px) {
+      .s3-inner { grid-template-columns: 1fr; margin: 0; }
+      .s3-left {
+        padding: 6rem 2rem 3rem 2rem;
+        border-right: none;
+        border-bottom: 1px solid rgba(24,95,165,0.10);
+        align-items: flex-start;
+        text-align: left;
+      }
+      .s3-title { white-space: normal; }
+      .s3-right { padding: 3rem 2rem 4rem; }
+      .s3-feat-key { min-width: 7rem; }
+    }
+
+    /* ── SECTION 04 ── */
+    .s4-inner {
+      display: flex;
+      flex-direction: column;
+      padding: 0 4rem;
+    }
+
+    .s4-top {
+      padding: 6rem 0 2.5rem;
+      border-bottom: 0.5px solid rgba(255,255,255,0.06);
+    }
+
+    .s4-title {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.0;
+      color: #eaf6ff;
+    }
+
+    .s4-table-wrap {
+      overflow-x: auto;
+      padding-bottom: 5rem;
+    }
+
+    .s4-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .s4-table th {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(160,200,230,0.38);
+      padding: 1.1rem 1.8rem;
+      text-align: left;
+      border-bottom: 0.5px solid rgba(255,255,255,0.07);
+      white-space: nowrap;
+    }
+
+    .s4-table td {
+      font-size: clamp(0.78rem, 1vw, 0.88rem);
+      color: rgba(160,200,230,0.62);
+      padding: 1.1rem 1.8rem;
+      border-bottom: 0.5px solid rgba(255,255,255,0.05);
+      vertical-align: middle;
+      line-height: 1.55;
+    }
+
+    .s4-table tr:last-child td { border-bottom: none; }
+    .s4-table td:first-child { color: #c8e0f4; font-weight: 500; }
+
+    .s4-row-hi td { background: rgba(95,200,240,0.06); }
+    .s4-row-hi td:first-child { color: #eaf6ff; font-weight: 600; }
+    .s4-acc { color: #5fc8f0 !important; font-weight: 600 !important; }
+
+    @media (max-width: 1100px) {
+      .s4-inner { padding: 0 1.5rem; }
+      .s4-top { padding: 4rem 0 2rem; }
+      .s4-table th,
+      .s4-table td { padding: 0.9rem 1rem; font-size: 0.78rem; }
+    }
       .nav-main-links { display: none; }
       .nav-menu-btn { display: flex; }
       .nav-divider { margin: 0 1.5rem; }
@@ -774,8 +1023,8 @@
     </div>
 
     <div class="s1-right">
-      <p class="s1-body">기존 DR은 주로 데이터를 복제해 두고, 장애가 발생했을 때 복구하는 방식이었습니다. Resilio의 기술을 활용한 리딩포인트의 Active-Active NAS DR은 DR 센터의 NAS를 단순한 대기 자원이 아니라, 평상시에도 활용 가능한 Active Site로 전환합니다.</p>
-      <p class="s1-body">리딩포인트의 NAS 솔루션은 블록 단위 차등 동기화, 실시간 변경 감지, UDP 기반 WAN 최적화, 체크섬 재개 전송, 대역폭 제어, 파일 잠금, REST API 기반 중앙 관리를 통해 NAS 간 데이터를 빠르고 안정적으로 동기화합니다.</p>
+      <p class="s1-body">기존 DR은 데이터를 복제해 두고, 장애가 발생했을 때 복구하는 방식이 중심이었습니다. Resilio의 기술을 이용한 리딩포인트의 Active-Active NAS DR은 DR 센터의 NAS를 단순한 대기 자원이 아니라, 평상시에도 활용 가능한 Active Site로 전환합니다.</p>
+      <p class="s1-body">Resilio의 기술은 블록 단위 차등 동기화, 실시간 변경 감지, UDP 기반 WAN 최적화, 체크섬 재개 전송, 대역폭 제어, 파일 잠금, REST API 기반 중앙 관리를 통해 NAS 간 데이터를 빠르고 안정적으로 동기화합니다. 이를 통해 RPO 5초 미만, RTO 수분 이내의 Active-Active NAS DR 구성을 지원합니다.</p>
       <div class="s1-divider"></div>
       <div class="s1-chips">
         <span class="s1-chip">블록 단위 차등 동기화</span>
@@ -793,22 +1042,147 @@
 
 <!-- ── SECTION 02 · Dark ── -->
 <section class="sec sec-dark" id="section-02">
-  <span class="sec-num">02</span>
-</section>
+  <div class="s2-inner">
 
+    <div class="s2-left">
+      <h2 class="s2-title">Why<br>Active-Active<br>NAS DR</h2>
+    </div>
+
+    <div class="s2-right">
+      <p class="s2-body">일반적인 NAS DR은 복제는 가능하지만, DR 센터의 NAS가 평상시에는 충분히 활용되지 못하거나, 장애 시 전환 절차가 길어지는 한계가 있습니다. Resilio는 NAS 간 실시간 동기화를 통해 주센터와 DR 센터를 모두 Active하게 운영할 수 있도록 하며, 장애 발생 시에도 빠르게 전환할 수 있는 구조를 제공합니다.</p>
+      <hr class="s2-rule">
+      <div class="s2-grid">
+        <div class="s2-card">
+          <span class="s2-card-num">01</span>
+          <span class="s2-card-label">DR 센터의 평상시 업무 활용</span>
+        </div>
+        <div class="s2-card">
+          <span class="s2-card-num">02</span>
+          <span class="s2-card-label">NAS 병목 감소</span>
+        </div>
+        <div class="s2-card">
+          <span class="s2-card-num">03</span>
+          <span class="s2-card-label">이기종 NAS 환경 지원</span>
+        </div>
+        <div class="s2-card">
+          <span class="s2-card-num">04</span>
+          <span class="s2-card-label">더 짧은 RPO · RTO</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
 <!-- ── SECTION 03 · Light ── -->
 <section class="sec sec-light" id="section-03">
-  <span class="sec-num">03</span>
+  <div class="s3-inner">
+
+    <div class="s3-left">
+      <h2 class="s3-title">The Difference</h2>
+      <p class="s3-body">리딩포인트의 Active-Active NAS DR의 차별점은 스토리지 어레이 내부 복제가 아니라, NAS 간 데이터 동기화 계층에 있다는 점입니다.<br><br>즉, 특정 벤더 NAS에 종속된 복제가 아니라, 다양한 NAS와 서버 환경에서 변경된 데이터만 효율적으로 전송하는 범용 동기화 플랫폼입니다.</p>
+    </div>
+
+    <div class="s3-right">
+      <div class="s3-feat">
+        <span class="s3-feat-num">01</span>
+        <span class="s3-feat-key">차등 동기화</span>
+        <span class="s3-feat-val">변경된 블록만 전송합니다.</span>
+      </div>
+      <div class="s3-feat">
+        <span class="s3-feat-num">02</span>
+        <span class="s3-feat-key">파일 분할 및 체크섬 재개</span>
+        <span class="s3-feat-val">대용량 파일도 중단 지점부터 이어서 전송합니다.</span>
+      </div>
+      <div class="s3-feat">
+        <span class="s3-feat-num">03</span>
+        <span class="s3-feat-key">WAN 최적화</span>
+        <span class="s3-feat-val">UDP 기반 전송으로 고지연, 패킷 손실 환경에 대응합니다.</span>
+      </div>
+      <div class="s3-feat">
+        <span class="s3-feat-num">04</span>
+        <span class="s3-feat-key">실시간 변경 감지</span>
+        <span class="s3-feat-val">파일 변경을 감지하는 즉시 동기화합니다.</span>
+      </div>
+      <div class="s3-feat">
+        <span class="s3-feat-num">05</span>
+        <span class="s3-feat-key">파일 잠금</span>
+        <span class="s3-feat-val">양쪽 사이트 간 데이터 정합성을 보장합니다.</span>
+      </div>
+      <div class="s3-feat">
+        <span class="s3-feat-num">06</span>
+        <span class="s3-feat-key">중앙 관리</span>
+        <span class="s3-feat-val">작업, 대역폭, 상태를 하나의 콘솔에서 관리할 수 있습니다.</span>
+      </div>
+      <div class="s3-feat">
+        <span class="s3-feat-num">07</span>
+        <span class="s3-feat-key">REST API</span>
+        <span class="s3-feat-val">운영 자동화 및 관제 시스템 연동이 가능합니다.</span>
+      </div>
+    </div>
+
+  </div>
 </section>
 
 <!-- ── SECTION 04 · Dark ── -->
-<section class="sec sec-dark" id="section-04">
-  <span class="sec-num">04</span>
-</section>
+<section class="sec sec-dark" id="section-04" style="min-height:auto;">
+  <div class="s4-inner">
 
-<!-- ── SECTION 05 · Light ── -->
-<section class="sec sec-light" id="section-05">
-  <span class="sec-num">05</span>
+    <div class="s4-top">
+      <h2 class="s4-title">Major DR Solutions Comparison</h2>
+    </div>
+
+    <div class="s4-table-wrap">
+      <table class="s4-table">
+        <thead>
+          <tr>
+            <th style="width:22%;">솔루션</th>
+            <th style="width:22%;">방식</th>
+            <th style="width:11%;">RPO</th>
+            <th style="width:20%;">RTO</th>
+            <th style="width:25%;">포인트</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="s4-row-hi">
+            <td>Leading Point Active-Active NAS DR</td>
+            <td>NAS 간 블록 자동 동기화</td>
+            <td class="s4-acc">&lt; 5초</td>
+            <td class="s4-acc">수분 이내</td>
+            <td>이기종 NAS active-active 구성</td>
+          </tr>
+          <tr>
+            <td>Dell Unity 복제</td>
+            <td>스토리지 어레이 복제</td>
+            <td>비동기 5분까지</td>
+            <td>구성 및 전환 절차에 따라 상이</td>
+            <td>Unity 기반 DR</td>
+          </tr>
+          <tr>
+            <td>Dell PowerScale SyncIQ</td>
+            <td>클러스터 간 비동기 복제</td>
+            <td>정책 기반</td>
+            <td>구성 및 전환 절차에 따라 상이</td>
+            <td>PowerScale 중심</td>
+          </tr>
+          <tr>
+            <td>NetApp SnapMirror</td>
+            <td>ONTAP 비동기 복제</td>
+            <td>30분~수시간</td>
+            <td>복제 주기 의존</td>
+            <td>일반 DR용</td>
+          </tr>
+          <tr>
+            <td>NetApp SnapMirror Active Sync</td>
+            <td>ONTAP 동기 복제</td>
+            <td>Zero RPO</td>
+            <td>Zero RTO</td>
+            <td>동기식 연속성, 거리 제약 존재</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
 </section>
 
 <div style="height:1px;background:rgba(200,216,240,0.12);"></div>
