@@ -17,34 +17,61 @@
       --white:        #e8e6e1;
       --muted:        rgba(232,230,225,0.35);
       --border:       rgba(255,255,255,0.06);
-      --active:       #e05c5c;
+      --accent:       #e05c5c;
     }
 
-    html, body {
-      width: 100%; height: 100%;
+    html { height: 100%; }
+
+    body {
+      width: 100%;
+      height: 100%;
       background: var(--bg);
       color: var(--white);
       font-family: 'DM Sans', sans-serif;
       overflow: hidden;
     }
 
-    #page {
+    /* ── SCROLL CONTAINER ── */
+    #scroll-container {
       height: 100vh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+    }
+
+    /* ── PAGE ── */
+    #page {
+      opacity: 0;
+      transition: opacity 0.9s ease;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
+    #page.visible { opacity: 1; }
 
-    /* ── NAV ── */
-    nav {
+    /* ── HERO SNAP ── */
+    #hero-snap {
+      scroll-snap-align: start;
+      height: 100vh;
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ── NAV WRAP ── */
+    #nav-wrap {
+      position: relative;
+      z-index: 5;
+      flex-shrink: 0;
+      background: transparent;
+    }
+
+    .nav-top {
+      display: flex;
+      align-items: flex-start;
       justify-content: space-between;
-      padding: 1.6rem 3rem;
-      border-bottom: 1px solid var(--border);
-      background: var(--bg-raised);
-      box-shadow:
-        0 4px 16px var(--shadow-dark),
-        0 -1px 0 var(--shadow-light);
+      padding: 1.6rem 3rem 1.2rem;
+      background: transparent;
     }
 
     .nav-logo {
@@ -52,50 +79,91 @@
       display: flex;
       align-items: center;
       flex-shrink: 0;
+      min-width: 0;
+      padding-top: 0.15rem;
     }
-    .nav-logo img {
-      height: 26px;
-      width: auto;
-      display: block;
+    .nav-logo img { height: 26px; width: auto; display: block; max-width: 200px; }
+
+    .nav-main-links {
+      display: flex;
+      gap: 4rem;
+      list-style: none;
+      align-items: flex-start;
     }
 
-    .nav-links {
+    .nav-col { display: flex; flex-direction: column; }
+
+    .nav-col-title {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 0.5rem 0;
+      transition: color 0.2s;
+      user-select: none;
+      border-top: 1px solid rgba(255,255,255,0.10);
       display: flex;
-      gap: 0.2rem;
-      list-style: none;
       align-items: center;
+      gap: 0.35rem;
     }
-    .nav-links a {
-      font-size: 0.72rem;
-      font-weight: 400;
-      letter-spacing: 0.06em;
+    .nav-col-title:hover { color: var(--white); }
+    .nav-col-title.open { color: var(--white); }
+
+    .nav-col-arrow {
+      display: inline-block;
+      font-size: 0.6rem;
+      color: rgba(232,230,225,0.35);
+      transition: transform 0.35s ease;
+      line-height: 1;
+      margin-top: 1px;
+    }
+    .nav-col-title.open .nav-col-arrow { transform: rotate(180deg); }
+
+    .nav-home-link {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       color: var(--muted);
       text-decoration: none;
-      text-transform: uppercase;
-      padding: 0.4rem 0.75rem;
-      border-radius: 8px;
-      transition: all 0.2s;
-      white-space: nowrap;
+      padding: 0.5rem 0;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      transition: color 0.2s;
+      display: inline-block;
     }
-    .nav-links a:hover {
-      color: var(--white);
-      background: var(--bg);
-      box-shadow:
-        inset 2px 2px 5px var(--shadow-dark),
-        inset -2px -2px 5px var(--shadow-light);
+    .nav-home-link:hover { color: var(--white); }
+
+    .nav-submenu {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.6s cubic-bezier(0.16,1,0.3,1);
     }
-    .nav-links a.active {
-      color: var(--active);
-      position: relative;
+    .nav-submenu.open { max-height: 200px; }
+
+    .nav-submenu a {
+      font-size: 0.88rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: rgba(232,230,225,0.45);
+      text-decoration: none;
+      padding: 0.55rem 0;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity 0.35s ease, transform 0.35s ease, color 0.2s;
     }
-    .nav-links a.active::after {
-      content: '';
-      position: absolute;
-      bottom: -2px; left: 50%;
-      transform: translateX(-50%);
-      width: 4px; height: 4px;
-      border-radius: 50%;
-      background: var(--active);
+    .nav-submenu.open a { opacity: 1; transform: translateY(0); }
+    .nav-submenu a:hover { color: var(--white); }
+    .nav-submenu a.active { color: var(--accent); }
+
+    .nav-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+      margin: 0 3rem;
     }
 
     /* ── HAMBURGER ── */
@@ -104,20 +172,12 @@
       flex-direction: column;
       justify-content: center;
       gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-      width: 32px;
-      height: 32px;
-      flex-shrink: 0;
+      background: none; border: none; cursor: pointer;
+      padding: 4px; width: 32px; height: 32px; flex-shrink: 0;
     }
     .nav-menu-btn span {
-      display: block;
-      width: 100%;
-      height: 1.5px;
-      background: var(--white);
-      border-radius: 2px;
+      display: block; width: 100%; height: 1.5px;
+      background: var(--white); border-radius: 2px;
       transition: transform 0.35s ease, opacity 0.35s ease, width 0.35s ease;
       transform-origin: left center;
     }
@@ -130,22 +190,15 @@
       position: fixed; inset: 0;
       background: var(--bg-raised);
       z-index: 500;
-      display: flex;
-      flex-direction: column;
+      display: flex; flex-direction: column;
       padding: 2rem 1.5rem;
-      opacity: 0;
-      pointer-events: none;
+      opacity: 0; pointer-events: none;
       transition: opacity 0.4s ease;
     }
-    #menu-overlay.open {
-      opacity: 1;
-      pointer-events: all;
-    }
+    #menu-overlay.open { opacity: 1; pointer-events: all; }
 
     .overlay-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between;
       padding-bottom: 1.5rem;
       border-bottom: 1px solid var(--border);
       margin-bottom: 2.5rem;
@@ -155,58 +208,88 @@
 
     .overlay-close {
       font-family: 'DM Sans', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      background: none;
-      border: none;
-      cursor: pointer;
+      font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); background: none; border: none; cursor: pointer;
       transition: color 0.2s;
     }
     .overlay-close:hover { color: var(--white); }
 
     .overlay-links { list-style: none; }
     .overlay-links li { border-bottom: 1px solid var(--border); }
-    .overlay-links a {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+
+    .overlay-item-top {
+      display: flex; align-items: center; justify-content: space-between;
       padding: 1rem 0;
-      font-size: 1.3rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: #e8e6e1;
-      text-decoration: none;
-      transform: translateX(-20px);
-      opacity: 0;
-      transition: transform 0.4s ease, opacity 0.4s ease, color 0.2s;
+      cursor: pointer;
+      user-select: none;
+      transform: translateX(-20px); opacity: 0;
+      transition: transform 0.4s ease, opacity 0.4s ease;
     }
-    #menu-overlay.open .overlay-links a {
-      transform: translateX(0);
-      opacity: 1;
+    #menu-overlay.open .overlay-item-top { transform: translateX(0); opacity: 1; }
+    .overlay-links li:nth-child(1) .overlay-item-top { transition-delay: 0.05s; }
+    .overlay-links li:nth-child(2) .overlay-item-top { transition-delay: 0.10s; }
+    .overlay-links li:nth-child(3) .overlay-item-top { transition-delay: 0.15s; }
+
+    .overlay-item-label {
+      font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em;
+      color: #e8e6e1; text-decoration: none;
+      transition: color 0.2s;
     }
-    .overlay-links li:nth-child(1) a { transition-delay: 0.05s; }
-    .overlay-links li:nth-child(2) a { transition-delay: 0.10s; }
-    .overlay-links li:nth-child(3) a { transition-delay: 0.15s; }
-    .overlay-links li:nth-child(4) a { transition-delay: 0.20s; }
-    .overlay-links li:nth-child(5) a { transition-delay: 0.25s; }
-    .overlay-links li:nth-child(6) a { transition-delay: 0.30s; }
-    .overlay-links li:nth-child(7) a { transition-delay: 0.35s; }
-    .overlay-links a.active { color: var(--active); }
-    .overlay-links a:hover { color: rgba(255,255,255,0.4); }
-    .overlay-arrow { font-size: 1rem; opacity: 0.3; }
+    a.overlay-item-label { display: block; width: 100%; }
+    a.overlay-item-label:hover { color: rgba(255,255,255,0.4); }
+    .overlay-item-label.active { color: var(--accent); }
+
+    .overlay-item-arrow {
+      font-size: 0.75rem;
+      color: rgba(232,230,225,0.35);
+      transition: transform 0.35s ease;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .overlay-item-top.open .overlay-item-arrow { transform: rotate(180deg); }
+
+    .overlay-submenu {
+      display: flex; flex-direction: column;
+      overflow: hidden; max-height: 0;
+      transition: max-height 0.5s cubic-bezier(0.16,1,0.3,1);
+    }
+    .overlay-submenu.open { max-height: 300px; }
+    .overlay-submenu a {
+      font-size: 1rem; font-weight: 400;
+      letter-spacing: -0.01em;
+      color: rgba(232,230,225,0.45); text-decoration: none;
+      padding: 0.75rem 0 0.75rem 0.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: center; justify-content: space-between;
+      opacity: 0; transform: translateY(-6px);
+      transition: opacity 0.3s ease, transform 0.3s ease, color 0.2s;
+    }
+    .overlay-submenu.open a { opacity: 1; transform: translateY(0); }
+    .overlay-submenu a:hover { color: var(--white); }
+    .overlay-submenu a.active { color: var(--accent); }
+    .overlay-arrow { font-size: 0.8rem; opacity: 0.3; }
 
     /* ── HERO ── */
     .hero {
       flex: 1;
+      min-height: 0;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       padding: 0 3rem 3rem;
       position: relative;
       background: var(--bg);
+      overflow: hidden;
+    }
+
+    #hero-dot-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
     }
 
     .hero-scroll {
@@ -218,6 +301,7 @@
       flex-direction: column;
       align-items: center;
       gap: 0.7rem;
+      z-index: 1;
     }
     .scroll-label {
       font-size: 0.62rem;
@@ -250,28 +334,42 @@
       100% { top: 140%; }
     }
 
-    /* ── TITLE ── */
-    .hero-title-wrap { overflow: visible; }
+    /* ── HERO BODY ── */
+    .hero-body {
+      display: flex;
+      align-items: flex-end;
+      gap: 2.5rem;
+      position: relative;
+      z-index: 2;
+    }
 
+    .hero-title-wrap {
+      overflow: visible;
+      flex-shrink: 0;
+    }
+
+    /* ── TITLE ── */
     .hero-title {
-      font-size: clamp(4rem, 14vw, 14rem);
+      font-size: clamp(4.5rem, 12vw, 13rem);
       font-weight: 900;
-      line-height: 0.92;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.04em;
+      line-height: 0.85;
+      position: relative;
+      z-index: 2;
     }
 
     .title-line { display: block; }
 
     .title-line-inner {
       display: block;
-      visibility: hidden;
-      color: #241215;
+      color: #3a1820;
       text-shadow:
-        -4px -4px  8px  rgba(255,255,255,0.06),
-        -10px -10px 20px rgba(255,255,255,0.04),
-        4px  4px   8px  rgba(0,0,0,0.98),
-        12px 12px  24px rgba(0,0,0,0.88),
-        22px 22px  44px rgba(0,0,0,0.70);
+        -6px -6px 12px  rgba(255,160,160,0.12),
+        -14px -14px 28px rgba(255,140,140,0.08),
+        6px  6px   12px  rgba(0,0,0,0.96),
+        16px 16px  32px  rgba(0,0,0,0.85),
+        28px 28px  56px  rgba(0,0,0,0.65);
+      visibility: hidden;
     }
 
     .char-span {
@@ -287,101 +385,1561 @@
       transform: translateY(0);
     }
 
-    /* ── BREAKPOINT 1100px ── */
-    @media (max-width: 1100px) {
-      nav { padding: 1.4rem 1.5rem; }
-      .nav-links { display: none; }
-      .nav-menu-btn { display: flex; }
-      .hero-scroll { display: none; }
-      .hero { padding: 0 1.5rem 2rem; }
-      .hero-title { font-size: clamp(3.5rem, 18vw, 7rem); }
+    /* ── HERO RIGHT: Wasabi logo + slogan ── */
+    .hero-wasabi-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-left: 2rem;
+      padding-bottom: 0.2rem;
     }
 
-    @media (min-width: 1101px) {
-      #menu-overlay { display: none; }
+    .wasabi-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 0.8rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .wasabi-logo-wrap.up { opacity: 1; transform: translateY(0); }
+
+    .wasabi-logo-img {
+      height: 64px;
+      width: auto;
+      filter: brightness(0) invert(1) opacity(0.92);
+      flex-shrink: 0;
+    }
+
+    .slogan-main {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      color: #f0d8d0;
+      margin-bottom: 0.7rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .slogan-sub {
+      font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(240,216,208,0.5);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;
+    }
+
+    .slogan-main.up, .slogan-sub.up {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── HERO BOTTOM ── */
+    .hero-bottom {
+      margin-top: 1.8rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-since {
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0;
+      transition: opacity 0.6s ease 0.2s;
+    }
+    .hero-since.up { opacity: 1; }
+
+    /* ════════════════════════════════════════
+       SECTION SHARED
+    ════════════════════════════════════════ */
+
+    /* ── SECTION 1: Wasabi Overview ── */
+    .s1-section {
+      scroll-snap-align: start;
+      min-height: 100vh;
+      background: #f2ece6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .s1-inner {
+      width: 100%;
+      max-width: 1300px;
+      padding: 5rem 3rem 4rem;
+    }
+
+    .sec-num {
+      position: absolute;
+      top: 2.5rem;
+      left: 3rem;
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      color: rgba(26,14,16,0.2);
+    }
+
+    .sec-num-light {
+      position: absolute;
+      top: 2.5rem;
+      left: 3rem;
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      color: rgba(232,210,210,0.2);
+    }
+
+    .s1-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      margin-bottom: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(26,14,16,0.1);
+    }
+
+    .s1-headline {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #1a1015;
+      margin-bottom: 1rem;
+    }
+
+    .s1-tagline {
+      font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(26,14,16,0.55);
+    }
+
+    .s1-partner-text {
+      font-size: clamp(0.88rem, 1.2vw, 1rem);
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(26,14,16,0.55);
+    }
+
+    .s1-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .s1-card {
+      background: #e6ddd5;
+      border-radius: 12px;
+      padding: 1.8rem;
+      box-shadow: 0 2px 20px rgba(26,10,14,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+    .s1-card.active { opacity: 1; transform: translateY(0); }
+    .s1-card:nth-child(1) { transition-delay: 0.05s; }
+    .s1-card:nth-child(2) { transition-delay: 0.13s; }
+    .s1-card:nth-child(3) { transition-delay: 0.21s; }
+
+    .s1-card-icon {
+      width: 40px;
+      height: 40px;
+      color: #b03030;
+    }
+
+    .s1-card-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #1a1015;
+    }
+
+    .s1-card-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .s1-card-items li {
+      font-size: 0.85rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(26,14,16,0.6);
+      padding-left: 1rem;
+      position: relative;
+    }
+    .s1-card-items li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: rgba(26,14,16,0.2);
+      font-size: 0.7rem;
+    }
+
+    .reveal-block {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal-block.delay-1 { transition-delay: 0.1s; }
+    .reveal-block.delay-2 { transition-delay: 0.2s; }
+    .reveal-block.active { opacity: 1; transform: translateY(0); }
+
+    /* ── SECTION 2: Hot Cloud Storage ── */
+    .s2-section {
+      scroll-snap-align: start;
+      min-height: 100vh;
+      background: #1c1c22;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .s2-inner {
+      width: 100%;
+      max-width: 1300px;
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      align-items: start;
+      padding: 5rem 3rem 4rem;
+      gap: 0;
+    }
+
+    .s2-left { padding-right: 4rem; }
+    .s2-divider { background: rgba(232,210,210,0.1); width: 1px; align-self: stretch; }
+    .s2-right { padding-left: 4rem; }
+
+    .s2-headline {
+      font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #e8e0de;
+      margin-bottom: 0.6rem;
+    }
+
+    .s2-tag {
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(232,224,222,0.4);
+      margin-bottom: 1.4rem;
+      display: block;
+    }
+
+    .s2-body {
+      font-size: clamp(0.88rem, 1.3vw, 1rem);
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(232,224,222,0.55);
+    }
+
+    .s2-sub-headline {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #e8e0de;
+      margin-bottom: 0.9rem;
+      display: block;
+    }
+
+    .s2-highlight {
+      border-left: 2px solid #e05c5c;
+      padding-left: 1.2rem;
+      font-size: clamp(0.88rem, 1.2vw, 1rem);
+      font-style: italic;
+      font-weight: 500;
+      color: #e05c5c;
+      line-height: 1.6;
+    }
+    .s2-highlight-label {
+      display: block;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(232,224,222,0.3);
+      font-style: normal;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── SECTION 3: Surveillance Cloud ── */
+    .s3-section {
+      scroll-snap-align: start;
+      min-height: 100vh;
+      background: #eaebee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .s3-inner {
+      width: 100%;
+      max-width: 1300px;
+      padding: 5rem 3rem 4rem;
+    }
+
+    .s3-top {
+      display: grid;
+      grid-template-columns: 4fr 6fr;
+      gap: 0;
+      margin-bottom: 3rem;
+    }
+
+    .s3-left {
+      padding-right: 4rem;
+      border-right: 1px solid rgba(26,14,16,0.1);
+    }
+
+    .s3-right { padding-left: 4rem; }
+
+    .s3-headline {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #1a1015;
+      margin-bottom: 0.4rem;
+    }
+
+    .s3-tag {
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(26,14,16,0.35);
+      display: block;
+      margin-bottom: 1.2rem;
+    }
+
+    .s3-body {
+      font-size: clamp(0.88rem, 1.3vw, 1rem);
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(26,14,16,0.58);
+    }
+
+    .s3-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .s3-card {
+      border-top: 1px solid rgba(26,14,16,0.12);
+      padding: 1.4rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+    .s3-card.active { opacity: 1; transform: translateY(0); }
+    .s3-card:nth-child(1) { transition-delay: 0.05s; }
+    .s3-card:nth-child(2) { transition-delay: 0.13s; }
+    .s3-card:nth-child(3) { transition-delay: 0.21s; }
+
+    .s3-card-icon { width: 32px; height: 32px; color: #a83030; }
+
+    .s3-card-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #1a1015;
+    }
+
+    .s3-card-body {
+      font-size: 0.85rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(26,14,16,0.55);
+    }
+
+    .s3-badge-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1.5rem 0;
+    }
+
+    .s3-badge-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(26,14,16,0.35);
+      flex-shrink: 0;
+    }
+
+    .s3-badge-img {
+      width: 60%;
+      height: auto;
+      object-fit: contain;
+      opacity: 0.9;
+    }
+
+    /* ── SECTION 4: Cloud Sync Manager ── */
+    .s4-section {
+      scroll-snap-align: start;
+      min-height: 100vh;
+      background: #24232a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .s4-inner {
+      width: 100%;
+      max-width: 1300px;
+      padding: 5rem 3rem 4rem;
+    }
+
+    .s4-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .s4-headline {
+      font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #e8e0de;
+      margin-bottom: 0.5rem;
+    }
+
+    .s4-tag {
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(232,224,222,0.35);
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .s4-intro {
+      font-size: clamp(0.88rem, 1.3vw, 1rem);
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(232,224,222,0.55);
+      max-width: 700px;
+    }
+
+    .s4-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .s4-card {
+      background: rgba(232,220,220,0.04);
+      border: 1px solid rgba(232,200,200,0.1);
+      border-radius: 12px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+    .s4-card.active { opacity: 1; transform: translateY(0); }
+    .s4-card:nth-child(1) { transition-delay: 0.05s; }
+    .s4-card:nth-child(2) { transition-delay: 0.15s; }
+
+    .s4-card-icon { width: 36px; height: 36px; color: #e05c5c; }
+
+    .s4-card-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #e8e0de;
+    }
+
+    .s4-card-body {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(232,224,222,0.52);
+    }
+
+    /* ── SECTION 5: Bucket Replication ── */
+    .s5-section {
+      scroll-snap-align: start;
+      min-height: 100vh;
+      background: #f0ebe3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .s5-inner {
+      width: 100%;
+      max-width: 1300px;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      align-items: start;
+      gap: 5rem;
+      padding: 5rem 3rem 4rem;
+    }
+
+    .s5-left { padding-top: 0.3rem; }
+
+    .s5-headline {
+      font-size: clamp(1.4rem, 2.2vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #1a1015;
+    }
+
+    .s5-tag {
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(26,14,16,0.35);
+      margin-top: 0.5rem;
+      display: block;
+    }
+
+    .s5-right { }
+
+    .s5-intro {
+      font-size: clamp(0.88rem, 1.3vw, 1rem);
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(26,14,16,0.6);
+      border-top: 1px solid rgba(26,14,16,0.1);
+      padding-top: 1.4rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .s5-benefits {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+    }
+
+    .s5-benefit {
+      border-top: 1px solid rgba(26,14,16,0.1);
+      padding: 1.2rem 0;
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      gap: 0.7rem;
+      padding-right: 2rem;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+    .s5-benefit.active { opacity: 1; transform: translateY(0); }
+    .s5-benefit:nth-child(1) { transition-delay: 0.05s; }
+    .s5-benefit:nth-child(2) { transition-delay: 0.13s; }
+    .s5-benefit:nth-child(3) { transition-delay: 0.21s; }
+    .s5-benefit:nth-child(4) { transition-delay: 0.29s; }
+
+    .s5-benefit-icon { color: #a83030; flex-shrink: 0; margin-top: 2px; }
+
+    .s5-benefit-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #1a1015;
+      margin-bottom: 0.2rem;
+    }
+
+    .s5-benefit-body {
+      font-size: 0.82rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: rgba(26,14,16,0.55);
+    }
+
+    /* ── SECTION 6: S3 Object Lock ── */
+    .s6-section {
+      scroll-snap-align: start;
+      min-height: 100vh;
+      background: #1a191f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .s6-inner {
+      width: 100%;
+      max-width: 1300px;
+      padding: 5rem 3rem 4rem;
+    }
+
+    .s6-header {
+      display: grid;
+      grid-template-columns: 5fr 5fr;
+      gap: 4rem;
+      margin-bottom: 3rem;
+      padding-bottom: 2.5rem;
+    }
+
+    .s6-headline {
+      font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #e8e0de;
+      margin-bottom: 0.5rem;
+    }
+
+    .s6-tag {
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(232,224,222,0.35);
+      display: block;
+      margin-bottom: 1.1rem;
+    }
+
+    .s6-overview {
+      font-size: clamp(0.88rem, 1.3vw, 1rem);
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(232,224,222,0.55);
+    }
+
+    .s6-need-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #e8e0de;
+      margin-bottom: 0.7rem;
+      display: block;
+    }
+
+    .s6-need-body {
+      font-size: clamp(0.88rem, 1.2vw, 0.95rem);
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(232,224,222,0.5);
+    }
+
+    .s6-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .s6-card {
+      border-top: 1px solid rgba(232,210,210,0.12);
+      padding: 1.4rem 0;
+      padding-right: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+    .s6-card.active { opacity: 1; transform: translateY(0); }
+    .s6-card:nth-child(1) { transition-delay: 0.05s; }
+    .s6-card:nth-child(2) { transition-delay: 0.13s; }
+    .s6-card:nth-child(3) { transition-delay: 0.21s; }
+    .s6-card:nth-child(4) { transition-delay: 0.29s; }
+
+    .s6-card-icon { width: 32px; height: 32px; color: #e05c5c; }
+
+    .s6-card-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #e8e0de;
+    }
+
+    .s6-card-body {
+      font-size: 0.82rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(232,224,222,0.5);
+    }
+
+    /* ── SECTION 7: Ransomware ── */
+    .s7-section {
+      scroll-snap-align: start;
+      min-height: 100vh;
+      background: #0e0d12;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .s7-inner {
+      width: 100%;
+      max-width: 1300px;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      align-items: start;
+      gap: 5rem;
+      padding: 5rem 3rem 4rem;
+    }
+
+    .s7-left { padding-top: 0.3rem; }
+
+    .s7-headline {
+      font-size: clamp(1.4rem, 2.2vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #e8e0de;
+    }
+
+    .s7-tag {
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(232,224,222,0.35);
+      margin-top: 0.5rem;
+      display: block;
+    }
+
+    .s7-right { }
+
+    .s7-body {
+      font-size: clamp(0.88rem, 1.3vw, 1rem);
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(232,224,222,0.58);
+      border-top: 1px solid rgba(232,210,210,0.1);
+      padding-top: 1.6rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .s7-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: 1.5px solid rgba(224,92,92,0.4);
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: #e8e0de;
+      text-decoration: none;
+      background: transparent;
+      overflow: hidden;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.25s, border-color 0.2s, box-shadow 0.2s;
+    }
+    .s7-btn.active {
+      opacity: 1;
+      transform: translateY(0);
+      animation: btnPulse 2s ease-in-out infinite 0.7s;
+    }
+    .s7-btn:hover { border-color: #e05c5c; animation: none; box-shadow: 0 0 0 4px rgba(224,92,92,0.15); }
+
+    @keyframes btnPulse {
+      0%, 100% { border-color: rgba(224,92,92,0.4); box-shadow: 0 0 0 0 rgba(224,92,92,0); }
+      50%       { border-color: rgba(224,92,92,1);   box-shadow: 0 0 0 4px rgba(224,92,92,0.12); }
+    }
+
+    .s7-btn-text {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      height: 1.2em;
+      overflow: hidden;
+      vertical-align: middle;
+    }
+    .s7-btn-text span {
+      display: block;
+      line-height: 1.2em;
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+      white-space: nowrap;
+    }
+    .s7-btn-text span:last-child {
+      color: #e05c5c;
+      position: absolute;
+      top: 100%;
+      left: 0;
+    }
+    .s7-btn:hover .s7-btn-text span:first-child { transform: translateY(-100%); }
+    .s7-btn:hover .s7-btn-text span:last-child  { transform: translateY(-100%); }
+
+    .s7-btn-arrow {
+      font-size: 0.9rem;
+      opacity: 0.5;
+      transition: transform 0.3s ease, opacity 0.3s ease, color 0.3s ease;
+    }
+    .s7-btn:hover .s7-btn-arrow {
+      transform: translate(2px, -2px);
+      opacity: 1;
+      color: #e05c5c;
+    }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      background: #080609;
+      padding: 3rem 3rem 0;
+      scroll-snap-align: start;
+      flex-shrink: 0;
+    }
+
+    .footer-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding-bottom: 2.5rem;
+    }
+
+    .footer-logo img {
+      height: 48px;
+      width: auto;
+      display: block;
+      opacity: 0.85;
+    }
+
+    .footer-nav {
+      display: flex;
+      gap: 4rem;
+      list-style: none;
+    }
+
+    .footer-col { display: flex; flex-direction: column; }
+
+    .footer-col-title {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-link {
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.32);
+      text-decoration: none;
+      padding: 0.4rem 0;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .footer-link:hover { color: rgba(255,255,255,0.75); }
+    .footer-link.active { color: var(--accent); }
+
+    .footer-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+      margin: 0 -3rem;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: flex-end;
+      padding: 1.2rem 0;
+    }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.22);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .nav-top { padding: 1.4rem 1.5rem 1rem; }
+      .nav-main-links { display: none; }
+      .nav-menu-btn { display: flex; }
+      .nav-divider { margin: 0 1.5rem; }
+      .hero-scroll { display: none; }
+      .hero { padding: 0 1.5rem 2rem; }
+      .hero-title { font-size: clamp(3.8rem, 17vw, 6rem); }
+      .hero-body { flex-direction: column; gap: 1.2rem; align-items: flex-start; }
+      .hero-wasabi-right { padding-left: 0; padding-bottom: 0; }
+      .sec-num, .sec-num-light { left: 1.5rem; top: 2rem; }
+    }
+
+    @media (min-width: 1101px) { #menu-overlay { display: none; } }
+
+    @media (max-width: 1100px) {
+      .s1-inner, .s2-inner, .s3-inner, .s4-inner, .s5-inner, .s6-inner, .s7-inner { padding: 5rem 1.5rem 4rem; }
+      .s1-top { grid-template-columns: 1fr; gap: 2rem; }
+      .s1-cards { grid-template-columns: 1fr; }
+      .s2-inner { grid-template-columns: 1fr; }
+      .s2-divider { display: none; }
+      .s2-left { padding-right: 0; padding-bottom: 2rem; border-bottom: 1px solid rgba(232,210,210,0.1); }
+      .s2-right { padding-left: 0; }
+      .s3-top { grid-template-columns: 1fr; }
+      .s3-left { padding-right: 0; border-right: none; border-bottom: 1px solid rgba(26,14,16,0.1); padding-bottom: 2rem; }
+      .s3-right { padding-left: 0; }
+      .s3-cards { grid-template-columns: 1fr; }
+      .s4-cards { grid-template-columns: 1fr; }
+      .s5-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .s5-benefits { grid-template-columns: 1fr; }
+      .s6-inner { }
+      .s6-header { grid-template-columns: 1fr; gap: 2rem; }
+      .s6-cards { grid-template-columns: 1fr 1fr; }
+      .s7-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-top { flex-direction: column; gap: 2rem; }
+      .footer-nav { gap: 2.5rem; }
+      .footer-divider { margin: 0 -1.5rem; }
+      .site-footer { padding: 2.5rem 1.5rem 0; }
+    }
+
+    @media (max-width: 640px) {
+      .s6-cards { grid-template-columns: 1fr; }
+      .footer-nav { flex-direction: column; gap: 1.5rem; }
     }
   </style>
 </head>
-<body>
+<body data-page="cloud" data-logo="images/logo/LP-LOGO-transparent.png">
 
+<div id="scroll-container">
 <div id="page">
-  <nav>
-    <a href="index.html" class="nav-logo">
-      <img src="images/logo/LP-LOGO-transparent.png" alt="LeadingPoint"/>
-    </a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="disaster-recovery.html">Disaster Recovery</a></li>
-      <li><a href="biometrics.html">Biometrics</a></li>
-      <li><a href="cloud.html" class="active">Cloud</a></li>
-      <li><a href="partners.html">Partners</a></li>
-      <li><a href="clients.html">Clients</a></li>
-      <li><a href="company.html">Company</a></li>
-    </ul>
-    <button class="nav-menu-btn" id="hamburger" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
 
-  <!-- OVERLAY MENU -->
-  <div id="menu-overlay">
-    <div class="overlay-top">
-      <a href="index.html" class="overlay-logo">
-        <img src="images/logo/LP-LOGO-transparent.png" alt="LeadingPoint"/>
-      </a>
-      <button class="overlay-close" onclick="toggleMenu()">CLOSE ✕</button>
-    </div>
-    <ul class="overlay-links">
-      <li><a href="index.html" onclick="toggleMenu()">Home <span class="overlay-arrow">↗</span></a></li>
-      <li><a href="disaster-recovery.html" onclick="toggleMenu()">Disaster Recovery <span class="overlay-arrow">↗</span></a></li>
-      <li><a href="biometrics.html" onclick="toggleMenu()">Biometrics <span class="overlay-arrow">↗</span></a></li>
-      <li><a href="cloud.html" class="active" onclick="toggleMenu()">Cloud <span class="overlay-arrow">↗</span></a></li>
-      <li><a href="partners.html" onclick="toggleMenu()">Partners <span class="overlay-arrow">↗</span></a></li>
-      <li><a href="clients.html" onclick="toggleMenu()">Clients <span class="overlay-arrow">↗</span></a></li>
-      <li><a href="company.html" onclick="toggleMenu()">Company <span class="overlay-arrow">↗</span></a></li>
-    </ul>
-  </div>
+<!-- ── HERO SNAP ── -->
+<div id="hero-snap">
 
+  <div id="site-header"></div>
+
+  <!-- HERO -->
   <section class="hero">
-    <div class="hero-scroll">
+    <canvas id="hero-dot-canvas"></canvas>
+    <div class="hero-scroll" style="z-index:1;">
       <span class="scroll-label">Scroll</span>
       <div class="scroll-track"><div class="scroll-thumb"></div></div>
     </div>
-    <div class="hero-title-wrap">
-      <h1 class="hero-title">
-        <span class="title-line"><span class="title-line-inner" id="line1">CLOUD</span></span>
-      </h1>
+    <div class="hero-body">
+      <div class="hero-title-wrap">
+        <h1 class="hero-title">
+          <span class="title-line"><span class="title-line-inner" id="line1">CLOUD</span></span>
+        </h1>
+      </div>
+      <div class="hero-wasabi-right">
+        <div class="wasabi-logo-wrap" id="wasabi-logo-wrap">
+          <img src="images/partners/wasabi.svg" alt="Wasabi" class="wasabi-logo-img" onerror="this.style.display='none'"/>
+        </div>
+        <p class="slogan-main" id="slogan-main">Wasabi Powered Business</p>
+        <p class="slogan-sub" id="slogan-sub">
+          Unlimited data, always available,<br>
+          endlessly affordable at the 1/3 cost of AWS
+        </p>
+      </div>
+    </div>
+    <div class="hero-bottom">
+      <span class="hero-since" id="hero-since">Leading Point · Since 2005</span>
     </div>
   </section>
-</div>
+
+</div><!-- /#hero-snap -->
+
+<!-- ── SECTION 1: Wasabi Overview ── -->
+<section class="s1-section" id="s1-section">
+  <span class="sec-num">01</span>
+  <div class="s1-inner">
+
+    <div class="s1-top">
+      <div class="reveal-block">
+        <h2 class="s1-headline">Wasabi Powered Business</h2>
+        <p class="s1-tagline">
+          단일 가격 구조, 업계에서 가장 빠른 속도,<br>
+          숨은 비용이 없는 클라우드 스토리지.
+        </p>
+      </div>
+      <div class="reveal-block delay-1">
+        <p class="s1-partner-text">
+          Wasabi는 백업&복구, 아카이브, 콘텐츠 공유, 미디어 제작 협업 등 수많은 세계 최고 수준의 기술 파트너와 제휴하고 있습니다. 기술 파트너는 혁신적인 Wasabi를 이용한 솔루션을 고객에게 제공하며, 고객은 대폭적인 비용 절감, 뛰어난 성능과 세계 최고로 꼽히는 보호 기술을 갖춘 클라우드 스토리지를 활용할 수 있습니다.
+        </p>
+      </div>
+    </div>
+
+    <div class="s1-cards">
+
+      <div class="s1-card">
+        <svg class="s1-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+        </svg>
+        <div class="s1-card-title">Price</div>
+        <ul class="s1-card-items">
+          <li>AWS 대비 70% 비용 절감</li>
+          <li>No egress fee</li>
+          <li>No API request charge</li>
+        </ul>
+      </div>
+
+      <div class="s1-card">
+        <svg class="s1-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <div class="s1-card-title">Performance</div>
+        <ul class="s1-card-items">
+          <li>경쟁사 대비 최고 속도</li>
+          <li>빠른 업로드 &amp; 다운로드</li>
+          <li>Private network option</li>
+        </ul>
+      </div>
+
+      <div class="s1-card">
+        <svg class="s1-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <div class="s1-card-title">Protection</div>
+        <ul class="s1-card-items">
+          <li>Data center 이중화</li>
+          <li>11x9s data durability</li>
+          <li>Immutable storage</li>
+          <li>Ransomware 대응</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 2: Hot Cloud Storage ── -->
+<section class="s2-section" id="s2-section">
+  <span class="sec-num-light">02</span>
+  <div class="s2-inner">
+
+    <div class="s2-left">
+      <h2 class="s2-headline reveal-block">Wasabi Hot Cloud Storage</h2>
+      <span class="s2-tag reveal-block">Simple · Fast · Affordable</span>
+      <p class="s2-body reveal-block delay-1">
+        Wasabi Hot Cloud Storage는 간단하고 빠르며 경제적인 클라우드 객체 스토리지 솔루션입니다. 티어 구분 없이 안전하고 낮은 레이턴시를 제공하며, 최고 하이퍼스케일러의 고가 티어 이상 성능을 아카이브 수준의 저렴한 비용으로 제공됩니다. 활성 아카이브, 오프사이트 백업, 미디어 아카이브, CCTV 비디오 저장 등 다양한 용도에 최적화되어 있습니다.
+      </p>
+    </div>
+
+    <div class="s2-divider"></div>
+
+    <div class="s2-right">
+      <span class="s2-sub-headline reveal-block">클라우드 스토리지 비용의 구조</span>
+      <p class="s2-body reveal-block delay-1" style="margin-bottom:1.6rem;">
+        기존 클라우드 제공자(AWS, GCP, Azure)는 저장 용량 외에 데이터 검색, 파일 복원, 백업 테스트, 계층 간 이동 등 트랜잭션 비용을 부과해 전체 비용이 2배 가까이 증가합니다. 이러한 비용은 예측 불가능하며, 2022년 IT 의사결정자 91%가 예산 초과 원인으로 꼽았습니다.
+      </p>
+      <div class="s2-highlight reveal-block delay-2">
+        <span class="s2-highlight-label">Key Insight</span>
+        Wasabi는 트랜잭션 비용을 전혀 부과하지 않고 저장 공간 크기만 과금하여 투명하고 효율적인 비용 관리를 실현합니다.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── SECTION 3: Surveillance Cloud ── -->
+<section class="s3-section" id="s3-section">
+  <span class="sec-num">03</span>
+  <div class="s3-inner">
+
+    <div class="s3-top">
+      <div class="s3-left">
+        <div class="reveal-block">
+          <h2 class="s3-headline">Wasabi Surveillance Cloud</h2>
+          <span class="s3-tag">Video · Scale · Security</span>
+          <p class="s3-body">
+            WSC는 VMS용 클라우드 브리지 소프트웨어와 Wasabi 핫 클라우드 스토리지를 번들로 제공하여, 기존 로컬 환경을 그대로 유지하면서 비디오 감시 데이터를 클라우드로 간편하게 확장합니다. 고가의 하드웨어 업그레이드 없이 데이터 폭발적 증가를 예측 가능하게 지원하며, SOC 2, ISO 27001, PCI-DSS 인증 탑티어 데이터센터에서 운영됩니다.
+          </p>
+        </div>
+      </div>
+      <div class="s3-right">
+        <div class="reveal-block delay-1" style="padding-top:0.3rem;">
+          <p class="s3-body" style="color:rgba(26,14,16,0.55);font-size:0.88rem;line-height:1.9;">
+            대부분 주요 VMS와 호환되며, 2023 SIA NPS Awards에서 <strong>'Best in Video Surveillance Data Storage'</strong> 신제품상을 수상했습니다.
+          </p>
+          <div class="s3-badge-area reveal-block delay-2">
+            <span class="s3-badge-label">Awards &amp; Certification</span>
+            <img src="images/partners/nps.jpg" alt="SIA NPS Award" class="s3-badge-img" onerror="this.style.display='none'"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="s3-cards">
+
+      <div class="s3-card">
+        <svg class="s3-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/>
+        </svg>
+        <div class="s3-card-title">Simplicity</div>
+        <p class="s3-card-body">기존 로컬 환경 유지 그대로, 클라우드 확장을 최소한의 설정으로 구현합니다.</p>
+      </div>
+
+      <div class="s3-card">
+        <svg class="s3-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+        <div class="s3-card-title">Scale</div>
+        <p class="s3-card-body">하드웨어 업그레이드 없이 데이터 폭발적 증가를 예측 가능하게 지원합니다.</p>
+      </div>
+
+      <div class="s3-card">
+        <svg class="s3-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+        </svg>
+        <div class="s3-card-title">Security</div>
+        <p class="s3-card-body">SOC 2, ISO 27001, PCI-DSS 인증 탑티어 데이터센터에서 운영됩니다.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ── SECTION 4: Cloud Sync Manager ── -->
+<section class="s4-section" id="s4-section">
+  <span class="sec-num-light">04</span>
+  <div class="s4-inner">
+
+    <div class="s4-header">
+      <h2 class="s4-headline reveal-block">Wasabi Cloud Sync Manager</h2>
+      <span class="s4-tag reveal-block">Migration · Replication · Efficiency</span>
+      <p class="s4-intro reveal-block delay-1">
+        S3 호환 스토리지에서 Wasabi로 데이터를 간편하고 경제적으로 이전하는 서비스입니다. 3rd party 클라우드뿐 아니라 Wasabi 지역 간 버킷 복제에도 활용 가능하며, 스토리지 비용 절감, 클라우드 lock-in·이그레스 비용 제거, 재해 복구, 지역 간 성능 편차 해소 등의 이점을 제공합니다.
+      </p>
+    </div>
+
+    <div class="s4-cards">
+
+      <div class="s4-card">
+        <svg class="s4-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14"/><path d="M12 5l7 7-7 7"/>
+        </svg>
+        <div class="s4-card-title">Cloud-to-Cloud Migration</div>
+        <p class="s4-card-body">AWS·Azure·GCP 등에서 Wasabi로 빠르고 쉬운 이전을 지원하며, 예측 불가 비용·보안 문제를 해결하고 lock-in을 탈피합니다.</p>
+      </div>
+
+      <div class="s4-card">
+        <svg class="s4-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+        <div class="s4-card-title">Wasabi Region 데이터 복제</div>
+        <p class="s4-card-body">다른 지역으로 무료 복제를 통해 가용성·컴플라이언스·데이터 보호를 강화하고, 응답 속도 향상 및 재해 복구를 실현합니다. 추가 저장 비용만 발생합니다.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 5: Bucket Replication ── -->
+<section class="s5-section" id="s5-section">
+  <span class="sec-num">05</span>
+  <div class="s5-inner">
+
+    <div class="s5-left">
+      <h2 class="s5-headline reveal-block">Wasabi Bucket Replication</h2>
+      <span class="s5-tag reveal-block">Free · Automatic · Cross-Region</span>
+    </div>
+
+    <div class="s5-right">
+      <p class="s5-intro reveal-block">
+        Wasabi Bucket Replication은 동일 대륙 내 다른 Wasabi 영역의 버킷 간 객체를 자동 복사합니다. Wasabi 고객에게 무료 서비스로 제공되며, 추가 저장 비용만 발생하고 네트워크 전송·API 요청 비용이 없습니다.
+      </p>
+
+      <div class="s5-benefits">
+
+        <div class="s5-benefit">
+          <svg class="s5-benefit-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <div>
+            <div class="s5-benefit-title">데이터 보호 강화</div>
+            <p class="s5-benefit-body">복수 지역에 데이터 복본을 유지하여 단일 장애점을 제거합니다.</p>
+          </div>
+        </div>
+
+        <div class="s5-benefit">
+          <svg class="s5-benefit-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+          </svg>
+          <div>
+            <div class="s5-benefit-title">규제 준수</div>
+            <p class="s5-benefit-body">지역별 컴플라이언스 요건을 충족하는 데이터 보관 구조를 구현합니다.</p>
+          </div>
+        </div>
+
+        <div class="s5-benefit">
+          <svg class="s5-benefit-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+          </svg>
+          <div>
+            <div class="s5-benefit-title">데이터 주권 충족</div>
+            <p class="s5-benefit-body">특정 지역 내 데이터 보유 요구사항을 유연하게 충족합니다.</p>
+          </div>
+        </div>
+
+        <div class="s5-benefit">
+          <svg class="s5-benefit-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/>
+          </svg>
+          <div>
+            <div class="s5-benefit-title">지연 최소화</div>
+            <p class="s5-benefit-body">사용자에게 가장 가까운 지역에서 데이터 제공으로 응답 속도를 향상합니다.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 6: S3 Object Lock ── -->
+<section class="s6-section" id="s6-section">
+  <span class="sec-num-light">06</span>
+  <div class="s6-inner">
+
+    <div class="s6-header">
+      <div>
+        <h2 class="s6-headline reveal-block">S3 Object Lock</h2>
+        <span class="s6-tag reveal-block">Immutable Data Backups</span>
+        <p class="s6-overview reveal-block delay-1">
+          S3 Object Lock은 물리적 에어갭의 대안으로, 암호화와 해시를 통해 데이터를 불변(immutable) 상태로 만들어 랜섬웨어 공격이나 실수로부터 보호합니다. 개별 객체 또는 전체 버킷에 락을 설정하면 시스템 관리자조차 삭제·수정이 불가능하며, Wasabi에서는 추가 비용 없이 백업 데이터에 즉시 접근·복원이 가능합니다.
+        </p>
+      </div>
+      <div>
+        <span class="s6-need-title reveal-block">Why needed</span>
+        <p class="s6-need-body reveal-block delay-1">
+          악의적 변조, 컴플라이언스 준수, 인적 오류 방지를 위해 데이터 무결성을 보장하며, 원하는 기간(최대 100년) 동안 수정·삭제를 차단합니다. 외부 침입자가 암호화나 요구금 청구를 시도할 수 없어 장기 보존에 적합합니다.
+        </p>
+      </div>
+    </div>
+
+    <div class="s6-cards">
+
+      <div class="s6-card">
+        <svg class="s6-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <div class="s6-card-title">Data Protection</div>
+        <p class="s6-card-body">누구도 변경·삭제 불가한 immutable 백업으로 완전한 데이터 무결성을 보장합니다.</p>
+      </div>
+
+      <div class="s6-card">
+        <svg class="s6-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+        </svg>
+        <div class="s6-card-title">Compliance</div>
+        <p class="s6-card-body">규제 요구사항을 충족하며, 추가 비용 없이 무료로 제공됩니다.</p>
+      </div>
+
+      <div class="s6-card">
+        <svg class="s6-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+        </svg>
+        <div class="s6-card-title">Seamless Integration</div>
+        <p class="s6-card-body">API로 기존 워크플로우에 통합하여 별도 작업 없이 즉시 적용 가능합니다.</p>
+      </div>
+
+      <div class="s6-card">
+        <svg class="s6-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        <div class="s6-card-title">Ransomware 대응</div>
+        <p class="s6-card-body">사이버 공격 시 안전 장치로 데이터 복구를 보장하며, 숨겨진 API 비용이 없습니다.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 7: Ransomware ── -->
+<section class="s7-section" id="s7-section">
+  <span class="sec-num-light">07</span>
+  <div class="s7-inner">
+
+    <div class="s7-left">
+      <h2 class="s7-headline reveal-block">Ransomware 대응</h2>
+      <span class="s7-tag reveal-block">Defense · Recovery · Continuity</span>
+    </div>
+
+    <div class="s7-right">
+      <p class="s7-body reveal-block">
+        랜섬웨어 위협이 일상화된 환경에서 Wasabi의 Immutable Bucket과 S3 Object Lock은 종합 백업 전략의 핵심으로, 데이터 안전성과 무결성을 100% 보장합니다. 오프사이트 복사본을 불변(immutable) 상태로 유지하여 악의적 변경·삭제에 저항하며, 지정 보존 기간 동안 완벽한 보호를 제공합니다. 이를 통해 빠른 복구와 규제 준수를 실현하며, 누구도 접근할 수 없는 안전한 백업 환경을 구축할 수 있습니다.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<div style="height:1px;background:rgba(224,92,92,0.1);"></div>
+<div id="site-footer"></div>
+
+</div><!-- /#page -->
+</div><!-- /#scroll-container -->
 
 <script>
+  /* ── MENU ── */
   function toggleMenu() {
-    document.getElementById('menu-overlay').classList.toggle('open');
+    const overlay = document.getElementById('menu-overlay');
+    overlay.classList.toggle('open');
     document.getElementById('hamburger').classList.toggle('open');
+    if (!overlay.classList.contains('open')) {
+      document.querySelectorAll('.overlay-submenu').forEach(s => s.classList.remove('open'));
+      document.querySelectorAll('.overlay-item-top').forEach(t => t.classList.remove('open'));
+    }
   }
 
+  function toggleOverlaySub(id, topEl) {
+    const sub = document.getElementById(id);
+    const isOpen = sub.classList.contains('open');
+    document.querySelectorAll('.overlay-submenu').forEach(s => s.classList.remove('open'));
+    document.querySelectorAll('.overlay-item-top').forEach(t => t.classList.remove('open'));
+    if (!isOpen) {
+      sub.classList.add('open');
+      topEl.classList.add('open');
+    }
+  }
+
+  const subState = { business: false, company: false };
+
+  function toggleSub(name) {
+    const isOpen = subState[name];
+    Object.keys(subState).forEach(k => {
+      subState[k] = false;
+      const sub = document.getElementById('sub-' + k);
+      if (sub) sub.classList.remove('open');
+      const t = document.getElementById('title-' + k);
+      if (t) t.classList.remove('open');
+    });
+    if (!isOpen) {
+      subState[name] = true;
+      document.getElementById('sub-' + name).classList.add('open');
+      const t = document.getElementById('title-' + name);
+      if (t) t.classList.add('open');
+    }
+  }
+
+  /* ── SCROLL + WHEEL ── */
+  let subOpen = false;
+  let scrollLocked = false;
+  const hero = document.querySelector('.hero');
+  const scrollContainer = document.getElementById('scroll-container');
+
+  function getScrollY() {
+    return scrollContainer ? scrollContainer.scrollTop : window.scrollY;
+  }
+
+  function openAllSubs() {
+    ['business', 'company'].forEach(k => {
+      subState[k] = true;
+      const sub = document.getElementById('sub-' + k);
+      if (sub) sub.classList.add('open');
+      const title = document.getElementById('title-' + k);
+      if (title) title.classList.add('open');
+    });
+    if (hero) {
+      hero.style.transition = 'transform 0.8s cubic-bezier(0.16,1,0.3,1)';
+      hero.style.transform = 'translateY(18px)';
+    }
+  }
+
+  function closeAllSubs() {
+    Object.keys(subState).forEach(k => {
+      subState[k] = false;
+      const sub = document.getElementById('sub-' + k);
+      if (sub) sub.classList.remove('open');
+      const title = document.getElementById('title-' + k);
+      if (title) title.classList.remove('open');
+    });
+    if (hero) hero.style.transform = 'translateY(0)';
+  }
+
+  if (scrollContainer) {
+    scrollContainer.addEventListener('scroll', () => {
+      if (scrollContainer.scrollTop > 80 && subOpen) {
+        subOpen = false;
+        closeAllSubs();
+      }
+    }, { passive: true });
+  }
+
+  function onWheel(e) {
+    const delta = e.deltaY || 0;
+    if (delta > 0 && getScrollY() < 50 && !subOpen) {
+      e.preventDefault(); e.stopPropagation();
+      subOpen = true; scrollLocked = true;
+      openAllSubs();
+      setTimeout(() => { scrollLocked = false; }, 700);
+      return;
+    }
+    if (scrollLocked) { e.preventDefault(); e.stopPropagation(); return; }
+    if (delta < 0 && subOpen && getScrollY() < 50) { subOpen = false; closeAllSubs(); }
+  }
+
+  function registerWheelListeners() {
+    if (scrollContainer) scrollContainer.addEventListener('wheel', onWheel, { passive: false });
+    window.addEventListener('wheel', onWheel, { passive: false });
+  }
+
+  if (document.readyState === 'complete') {
+    registerWheelListeners();
+  } else {
+    window.addEventListener('load', registerWheelListeners);
+  }
+
+  /* ── DOT GRID (Cool Blue: 100, 180, 230) ── */
+  (function () {
+    const canvas = document.getElementById('hero-dot-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const SPACING   = 28;
+    const DOT_R     = 1;
+    const ALPHA_MIN = 0.04;
+    const ALPHA_MAX = 0.26;
+    const CYCLE     = 3200;
+    const DR = 220, DG = 140, DB = 140;  /* warm rose, matching hero #1e0f12 */
+    let animId;
+
+    function resize() {
+      const dpr  = window.devicePixelRatio || 1;
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width  = rect.width  * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+    }
+
+    function draw(ts) {
+      const dpr = window.devicePixelRatio || 1;
+      const W   = canvas.width  / dpr;
+      const H   = canvas.height / dpr;
+      ctx.clearRect(0, 0, W, H);
+
+      const t = (Math.sin((ts / CYCLE) * Math.PI * 2 - Math.PI / 2) + 1) / 2;
+
+      for (let x = SPACING / 2; x < W; x += SPACING) {
+        for (let y = SPACING / 2; y < H; y += SPACING) {
+          const nx   = x / W - 0.5;
+          const ny   = y / H - 0.5;
+          const dist = Math.min(1, Math.sqrt(nx * nx + ny * ny) * 2.2);
+          const phase = t < 0.5
+            ? dist * t * 2
+            : dist * (1 - (t - 0.5) * 2) + (1 - dist) * (t - 0.5) * 2;
+          const alpha = ALPHA_MIN + (ALPHA_MAX - ALPHA_MIN) * phase;
+
+          ctx.beginPath();
+          ctx.arc(x, y, DOT_R, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${DR},${DG},${DB},${alpha.toFixed(3)})`;
+          ctx.fill();
+        }
+      }
+
+      animId = requestAnimationFrame(draw);
+    }
+
+    resize();
+    window.addEventListener('resize', () => {
+      cancelAnimationFrame(animId);
+      resize();
+      animId = requestAnimationFrame(draw);
+    });
+    animId = requestAnimationFrame(draw);
+  })();
+
+  /* ── HERO TITLE ANIMATION ── */
   function buildTitle() {
     const STAGGER = 0.11;
     let idx = 0;
-    const inner = document.getElementById('line1');
-    const text  = inner.textContent;
-    inner.textContent = '';
-    inner.style.visibility = 'visible';
-    text.split('').forEach(ch => {
-      const s = document.createElement('span');
-      s.className = 'char-span';
-      s.textContent = ch;
-      s.style.transitionDelay = (idx * STAGGER).toFixed(2) + 's';
-      inner.appendChild(s);
-      idx++;
+    ['line1'].forEach((id) => {
+      const inner = document.getElementById(id);
+      const text  = inner.textContent;
+      inner.textContent = '';
+      inner.style.visibility = 'visible';
+      text.split('').forEach(ch => {
+        const s = document.createElement('span');
+        s.className = 'char-span';
+        s.textContent = ch;
+        s.style.transitionDelay = (idx * STAGGER).toFixed(2) + 's';
+        inner.appendChild(s);
+        idx++;
+      });
     });
     requestAnimationFrame(() => requestAnimationFrame(() => {
       document.querySelectorAll('.char-span').forEach(s => s.classList.add('up'));
+      const totalDelay = (idx * STAGGER + 0.6) * 1000;
+      setTimeout(showSlogan, totalDelay);
     }));
   }
 
-  window.addEventListener('load', () => setTimeout(buildTitle, 80));
+  /* ── PAGE REVEAL ── */
+  window.addEventListener('load', () => {
+    document.getElementById('page').classList.add('visible');
+    setTimeout(buildTitle, 80);
+  });
+
+  function showSlogan() {
+    const wl = document.getElementById('wasabi-logo-wrap');
+    const sm = document.getElementById('slogan-main');
+    const ss = document.getElementById('slogan-sub');
+    const hs = document.getElementById('hero-since');
+    if (wl) wl.classList.add('up');
+    if (sm) sm.classList.add('up');
+    if (ss) ss.classList.add('up');
+    if (hs) hs.classList.add('up');
+  }
+
+  /* ── SCROLL REVEAL ── */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const targets = entry.target.querySelectorAll(
+        '.reveal-block, .s1-card, .s3-card, .s4-card, .s5-benefit, .s6-card, .s7-btn'
+      );
+      targets.forEach(el => {
+        if (entry.isIntersecting) el.classList.add('active');
+        else el.classList.remove('active');
+      });
+    });
+  }, {
+    root: document.getElementById('scroll-container'),
+    threshold: 0.12
+  });
+
+  ['s1-section','s2-section','s3-section','s4-section','s5-section','s6-section','s7-section'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) revealObserver.observe(el);
+  });
 </script>
+  <script src="js/components.js"></script>
 </body>
 </html>
