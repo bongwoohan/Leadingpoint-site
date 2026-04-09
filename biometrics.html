@@ -509,10 +509,10 @@
     }
 
     /* ══════════════════════════════════════════
-       SECTION 02 — WHAT WE DO
+       SECTION 02 — WHY PALM VEIN
        bg: #18302a (Deep Green)
     ══════════════════════════════════════════ */
-    .wwd-section {
+    .why-section {
       scroll-snap-align: start;
       min-height: 100vh;
       background: #18302a;
@@ -523,7 +523,7 @@
       overflow: hidden;
     }
 
-    .wwd-section-num {
+    .why-section-num {
       position: absolute;
       top: 2.5rem; left: 3rem;
       font-size: 0.65rem; font-weight: 400;
@@ -531,100 +531,239 @@
       color: rgba(110,216,180,0.2);
     }
 
-    .wwd-inner {
+    .why-inner {
       width: 100%;
       max-width: 1300px;
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      align-items: start;
-      gap: 5rem;
-      padding: 4rem 3rem;
+      padding: 5rem 3rem 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
     }
 
-    .wwd-left { padding-top: 0.3rem; }
+    .why-top {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
 
-    .wwd-headline {
+    .why-top-left { padding-top: 0.2rem; }
+
+    .why-headline {
       font-size: clamp(1.4rem, 2.2vw, 2.4rem);
       font-weight: 700;
       letter-spacing: -0.02em;
       line-height: 1.2;
-      white-space: nowrap;
       color: #b8e8d8;
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
     }
-    .wwd-headline.active { opacity: 1; transform: translateY(0); }
+    .why-headline.active { opacity: 1; transform: translateY(0); }
 
-    .wwd-subheadline {
-      font-size: 1rem;
+    .why-subheadline {
+      font-size: 0.82rem;
       font-weight: 400;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(184,232,216,0.45);
-      margin-top: 0.6rem;
+      color: rgba(184,232,216,0.4);
+      margin-top: 0.5rem;
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s;
     }
-    .wwd-subheadline.active { opacity: 1; transform: translateY(0); }
+    .why-subheadline.active { opacity: 1; transform: translateY(0); }
 
-    .wwd-cards {
+    .why-reason-cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      row-gap: 0;
-      column-gap: 2.5rem;
+      gap: 0;
     }
 
-    .wwd-card {
+    .why-reason-card {
       border-top: 1px solid rgba(184,232,216,0.15);
-      padding: 1.6rem 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
+      padding: 1.4rem 1.6rem 1.4rem 0;
       opacity: 0;
-      transform: translateY(24px);
+      transform: translateY(20px);
       transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
     }
-    .wwd-card.active { opacity: 1; transform: translateY(0); }
-    .wwd-card:nth-child(1) { transition-delay: 0.05s; }
-    .wwd-card:nth-child(2) { transition-delay: 0.13s; }
-    .wwd-card:nth-child(3) { transition-delay: 0.21s; }
-    .wwd-card:nth-child(4) { transition-delay: 0.29s; }
-    .wwd-card:nth-child(5) { transition-delay: 0.37s; }
+    .why-reason-card.active { opacity: 1; transform: translateY(0); }
+    .why-reason-card:nth-child(1) { transition-delay: 0.05s; }
+    .why-reason-card:nth-child(2) { transition-delay: 0.15s; }
+    .why-reason-card:nth-child(3) { transition-delay: 0.25s; }
+    .why-reason-card:not(:last-child) { padding-right: 1.6rem; border-right: 1px solid rgba(184,232,216,0.1); }
+    .why-reason-card:not(:first-child) { padding-left: 1.6rem; }
 
-    .wwd-card-header {
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-    }
-
-    .wwd-icon {
-      width: 36px; height: 36px;
-      color: #6ed8b4;
-      flex-shrink: 0;
-    }
-
-    .wwd-card-title {
-      font-size: 0.82rem;
+    .why-reason-num {
+      font-size: 0.6rem;
       font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #6ed8b4;
+      margin-bottom: 0.6rem;
+    }
+
+    .why-reason-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #b8e8d8;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.01em;
+    }
+
+    .why-reason-body {
+      font-size: 0.82rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(184,232,216,0.5);
+    }
+
+    .why-divider {
+      height: 1px;
+      background: rgba(184,232,216,0.1);
+    }
+
+    /* Strength items */
+    .why-strength-wrap { display: flex; flex-direction: column; gap: 1.2rem; }
+
+    .why-strength-tag {
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(184,232,216,0.35);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .why-strength-tag.active { opacity: 1; transform: translateY(0); }
+
+    .why-strength-items {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .why-strength-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+    .why-strength-item.active { opacity: 1; transform: translateY(0); }
+    .why-strength-item:nth-child(1) { transition-delay: 0.05s; }
+    .why-strength-item:nth-child(2) { transition-delay: 0.15s; }
+    .why-strength-item:nth-child(3) { transition-delay: 0.25s; }
+
+    .why-strength-circle {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      border: 1px solid rgba(110,216,180,0.35);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem;
+      color: #6ed8b4;
+      margin-top: 0.1rem;
+    }
+
+    .why-strength-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #b8e8d8;
+      margin-bottom: 0.4rem;
+    }
+
+    .why-strength-body {
+      font-size: 0.82rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(184,232,216,0.5);
+    }
+
+    /* Comparison table */
+    .why-table-wrap { display: flex; flex-direction: column; gap: 1rem; }
+
+    .why-table-tag {
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(184,232,216,0.35);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;
+    }
+    .why-table-tag.active { opacity: 1; transform: translateY(0); }
+
+    .why-table-scroll { overflow-x: auto; }
+
+    .why-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1) 0.15s, transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.15s;
+    }
+    .why-table.active { opacity: 1; transform: translateY(0); }
+
+    .why-table th {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-size: 0.72rem;
+      font-weight: 500;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: #b8e8d8;
+      color: rgba(184,232,216,0.5);
+      border-bottom: 1px solid rgba(184,232,216,0.15);
+      white-space: nowrap;
     }
 
-    .wwd-card-body {
-      font-size: 0.88rem;
+    .why-th-highlight {
+      color: #6ed8b4 !important;
+      background: rgba(110,216,180,0.06);
+    }
+
+    .why-table td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid rgba(184,232,216,0.08);
+      color: rgba(184,232,216,0.45);
       font-weight: 300;
-      line-height: 1.85;
-      color: rgba(184,232,216,0.52);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    .why-td-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: rgba(184,232,216,0.6) !important;
+      white-space: nowrap;
+    }
+
+    .why-td-highlight {
+      background: rgba(110,216,180,0.05);
+      color: rgba(110,216,180,0.7) !important;
+    }
+
+    .why-td-strong {
+      color: #6ed8b4 !important;
+      font-weight: 500 !important;
+    }
+
+    .why-td-sub {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: rgba(110,216,180,0.4);
+      margin-top: 2px;
     }
 
     /* ══════════════════════════════════════════
-       SECTION 03 — APPROACH
+       SECTION 03 — ARMATURA
        bg: #e8ebe4 (Linen Gray)
     ══════════════════════════════════════════ */
-    .app-section {
+    .arm-section {
       scroll-snap-align: start;
       min-height: 100vh;
       background: #e8ebe4;
@@ -635,7 +774,7 @@
       overflow: hidden;
     }
 
-    .app-section-num {
+    .arm-section-num {
       position: absolute;
       top: 2.5rem; left: 3rem;
       font-size: 0.65rem; font-weight: 400;
@@ -643,7 +782,7 @@
       color: rgba(26,40,32,0.2);
     }
 
-    .app-inner {
+    .arm-inner {
       width: 100%;
       max-width: 1300px;
       display: grid;
@@ -652,9 +791,9 @@
       padding: 4rem 3rem;
     }
 
-    .app-left { padding-right: 4rem; }
+    .arm-left { padding-right: 4rem; }
 
-    .app-headline {
+    .arm-headline {
       font-size: clamp(1.8rem, 3vw, 2.8rem);
       font-weight: 700;
       letter-spacing: -0.02em;
@@ -664,9 +803,9 @@
       transform: translateY(20px);
       transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
     }
-    .app-headline.active { opacity: 1; transform: translateY(0); }
+    .arm-headline.active { opacity: 1; transform: translateY(0); }
 
-    .app-tag {
+    .arm-tag {
       font-size: 1rem;
       font-weight: 400;
       letter-spacing: 0.08em;
@@ -679,9 +818,9 @@
       transform: translateY(20px);
       transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s;
     }
-    .app-tag.active { opacity: 1; transform: translateY(0); }
+    .arm-tag.active { opacity: 1; transform: translateY(0); }
 
-    .app-body {
+    .arm-body {
       font-size: clamp(0.88rem, 1.3vw, 1rem);
       font-weight: 300;
       line-height: 1.9;
@@ -691,9 +830,9 @@
       transform: translateY(20px);
       transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1) 0.15s, transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.15s;
     }
-    .app-body.active { opacity: 1; transform: translateY(0); }
+    .arm-body.active { opacity: 1; transform: translateY(0); }
 
-    .app-insight {
+    .arm-insight {
       border-left: 2px solid #1a3a2c;
       padding-left: 1.2rem;
       font-size: clamp(0.88rem, 1.3vw, 1rem);
@@ -705,9 +844,9 @@
       transform: translateY(20px);
       transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.25s;
     }
-    .app-insight.active { opacity: 1; transform: translateY(0); }
+    .arm-insight.active { opacity: 1; transform: translateY(0); }
 
-    .app-insight-label {
+    .arm-insight-label {
       display: block;
       font-size: 0.62rem;
       font-weight: 500;
@@ -718,71 +857,117 @@
       margin-bottom: 0.5rem;
     }
 
-    .app-divider {
+    .arm-divider {
       background: rgba(26,40,32,0.1);
       width: 1px;
       align-self: stretch;
     }
 
-    .app-right { padding-left: 4rem; }
+    .arm-right { padding-left: 4rem; }
 
-    .app-prin-tag {
+    .arm-prin-tag {
       font-size: 0.75rem;
       font-weight: 400;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: rgba(26,40,32,0.4);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.6rem;
       display: block;
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1) 0.05s, transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.05s;
     }
-    .app-prin-tag.active { opacity: 1; transform: translateY(0); }
+    .arm-prin-tag.active { opacity: 1; transform: translateY(0); }
 
-    .app-prin-item {
+    .arm-modal-desc {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(26,40,32,0.55);
+      margin-bottom: 1.4rem;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.65s cubic-bezier(0.22,1,0.36,1) 0.1s;
+    }
+    .arm-modal-desc.active { opacity: 1; transform: translateY(0); }
+
+    .arm-modal-badges {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.8rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1) 0.18s, transform 0.65s cubic-bezier(0.22,1,0.36,1) 0.18s;
+    }
+    .arm-modal-badges.active { opacity: 1; transform: translateY(0); }
+
+    .arm-badge {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 5px 14px;
+      border: 1px solid rgba(26,40,32,0.2);
+      border-radius: 20px;
+      color: rgba(26,40,32,0.6);
+    }
+
+    .arm-badge-accent {
+      border-color: #1a3a2c;
+      color: #1a3a2c;
+      background: rgba(26,58,44,0.08);
+    }
+
+    .arm-badge-plus {
+      font-size: 0.8rem;
+      color: rgba(26,40,32,0.3);
+      font-weight: 300;
+    }
+
+    .arm-specs { display: flex; flex-direction: column; }
+
+    .arm-spec-item {
       border-top: 1px solid rgba(26,40,32,0.1);
-      padding: 1.2rem 0;
+      padding: 1rem 0;
       display: grid;
       grid-template-columns: 2rem 1fr;
       gap: 0.5rem;
       opacity: 0;
-      transform: translateY(16px);
+      transform: translateY(14px);
       transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
     }
-    .app-prin-item.active { opacity: 1; transform: translateY(0); }
-    .app-prin-item:nth-child(2) { transition-delay: 0.08s; }
-    .app-prin-item:nth-child(3) { transition-delay: 0.16s; }
-    .app-prin-item:nth-child(4) { transition-delay: 0.24s; }
-    .app-prin-item:nth-child(5) { transition-delay: 0.32s; }
+    .arm-spec-item.active { opacity: 1; transform: translateY(0); }
+    .arm-spec-item:nth-child(1) { transition-delay: 0.22s; }
+    .arm-spec-item:nth-child(2) { transition-delay: 0.30s; }
+    .arm-spec-item:nth-child(3) { transition-delay: 0.38s; }
 
-    .app-prin-num {
-      font-size: 0.7rem;
+    .arm-spec-num {
+      font-size: 0.65rem;
       font-weight: 500;
       color: rgba(26,40,32,0.25);
       padding-top: 0.15rem;
-      letter-spacing: 0.04em;
     }
 
-    .app-prin-title {
+    .arm-spec-title {
       font-size: 0.85rem;
       font-weight: 700;
       color: #1a2820;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.25rem;
     }
 
-    .app-prin-body {
-      font-size: 0.85rem;
+    .arm-spec-body {
+      font-size: 0.82rem;
       font-weight: 300;
-      line-height: 1.8;
-      color: rgba(26,40,32,0.55);
+      line-height: 1.75;
+      color: rgba(26,40,32,0.52);
     }
 
     /* ══════════════════════════════════════════
-       SECTION 04 — ADVANCED
-       bg: #18302a (Deep Green — 02와 동일 계열, 약간 다른 톤)
+       SECTION 04 — LINE-UP
+       bg: #0e1814 (Ink Black)
     ══════════════════════════════════════════ */
-    .adv-section {
+    .lineup-section {
       scroll-snap-align: start;
       min-height: 100vh;
       background: #0e1814;
@@ -793,7 +978,7 @@
       overflow: hidden;
     }
 
-    .adv-section-num {
+    .lineup-section-num {
       position: absolute;
       top: 2.5rem; left: 3rem;
       font-size: 0.65rem; font-weight: 400;
@@ -801,116 +986,345 @@
       color: rgba(110,216,180,0.2);
     }
 
-    .adv-inner {
+    .lineup-inner {
       width: 100%;
       max-width: 1300px;
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      align-items: start;
-      gap: 5rem;
-      padding: 4rem 3rem;
+      padding: 5rem 3rem 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
     }
 
-    .adv-left { padding-top: 0.3rem; }
-
-    .adv-headline {
-      font-size: clamp(1.4rem, 2.2vw, 2.4rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      white-space: nowrap;
-      color: #a8dcc8;
+    .lineup-head {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 4rem;
+      align-items: end;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(110,216,180,0.1);
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
     }
-    .adv-headline.active { opacity: 1; transform: translateY(0); }
+    .lineup-head.active { opacity: 1; transform: translateY(0); }
 
-    .adv-subheadline {
+    .lineup-headline {
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: #a8dcc8;
+    }
+
+    .lineup-subheadline {
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(168,220,200,0.4);
+      margin-top: 0.5rem;
+    }
+
+    .lineup-desc {
+      font-size: clamp(0.88rem, 1.3vw, 1rem);
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(168,220,200,0.52);
+    }
+
+    /* Cards — horizontal layout */
+    .lineup-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .lineup-card {
+      border: 1px solid rgba(110,216,180,0.12);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.02);
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .lineup-card.active { opacity: 1; transform: translateY(0); }
+    .lineup-card:nth-child(1) { transition-delay: 0.05s; }
+    .lineup-card:nth-child(2) { transition-delay: 0.18s; }
+
+    /* Top half: product photo + info — horizontal */
+    .lineup-card-top {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+    }
+
+    .lineup-card-img-wrap {
+      background: #060f0a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      border-right: 1px solid rgba(110,216,180,0.08);
+      min-height: 200px;
+    }
+
+    .lineup-product-img {
+      width: 100%;
+      max-width: 180px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .lineup-card-info {
+      padding: 2rem 2.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .lineup-card-model {
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(110,216,180,0.45);
+    }
+
+    .lineup-card-name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #b8e8d8;
+      letter-spacing: -0.02em;
+    }
+
+    .lineup-card-desc {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(168,220,200,0.52);
+      max-width: 480px;
+    }
+
+    .lineup-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .lineup-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      padding: 4px 12px;
+      border: 1px solid rgba(110,216,180,0.2);
+      border-radius: 20px;
+      color: rgba(110,216,180,0.55);
+    }
+
+    .lineup-specs {
+      display: flex;
+      gap: 2rem;
+      padding-top: 0.6rem;
+      border-top: 1px solid rgba(110,216,180,0.08);
+      flex-wrap: wrap;
+    }
+
+    .lineup-spec { display: flex; flex-direction: column; gap: 3px; }
+
+    .lineup-spec-l {
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(110,216,180,0.3);
+    }
+
+    .lineup-spec-v {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: rgba(168,220,200,0.7);
+    }
+
+    /* Bottom half: technical drawing */
+    .lineup-card-drawing {
+      border-top: 1px solid rgba(110,216,180,0.08);
+      background: #040e09;
+      padding: 1.2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .lineup-drawing-label {
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(110,216,180,0.25);
+    }
+
+    .lineup-drawing-img {
+      width: 100%;
+      max-height: 220px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    /* ══════════════════════════════════════════
+       SECTION 05 — APPLICATIONS
+       bg: #18302a (Deep Green)
+    ══════════════════════════════════════════ */
+    .appl-section {
+      scroll-snap-align: start;
+      min-height: 100vh;
+      background: #18302a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .appl-section-num {
+      position: absolute;
+      top: 2.5rem; left: 3rem;
+      font-size: 0.65rem; font-weight: 400;
+      letter-spacing: 0.22em;
+      color: rgba(110,216,180,0.2);
+    }
+
+    .appl-inner {
+      width: 100%;
+      max-width: 1300px;
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      align-items: start;
+      padding: 4rem 3rem;
+    }
+
+    .appl-left { padding-right: 4rem; }
+
+    .appl-headline {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #b8e8d8;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .appl-headline.active { opacity: 1; transform: translateY(0); }
+
+    .appl-tag {
       font-size: 1rem;
       font-weight: 400;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(168,220,200,0.45);
+      color: rgba(184,232,216,0.4);
       margin-top: 0.6rem;
+      margin-bottom: 1.4rem;
+      display: block;
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s, transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s;
     }
-    .adv-subheadline.active { opacity: 1; transform: translateY(0); }
+    .appl-tag.active { opacity: 1; transform: translateY(0); }
 
-    .adv-body {
+    .appl-body {
       font-size: clamp(0.88rem, 1.3vw, 1rem);
       font-weight: 300;
       line-height: 1.9;
-      color: rgba(168,220,200,0.58);
-      border-top: 1px solid rgba(168,220,200,0.1);
-      padding-top: 1.6rem;
-      margin-bottom: 2.5rem;
+      color: rgba(184,232,216,0.55);
+      margin-bottom: 2rem;
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1) 0.15s, transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.15s;
     }
-    .adv-body.active { opacity: 1; transform: translateY(0); }
+    .appl-body.active { opacity: 1; transform: translateY(0); }
 
-    .adv-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      border: 1.5px solid rgba(110,216,180,0.4);
-      border-radius: 4px;
-      font-size: 0.85rem;
+    .appl-insight {
+      border-left: 2px solid rgba(110,216,180,0.5);
+      padding-left: 1.2rem;
+      font-size: clamp(0.88rem, 1.3vw, 1rem);
+      font-style: italic;
       font-weight: 500;
-      color: #a8dcc8;
-      text-decoration: none;
-      background: transparent;
-      cursor: pointer;
+      color: #6ed8b4;
+      line-height: 1.6;
       opacity: 0;
       transform: translateY(20px);
-      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1) 0.25s,
-                  transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.25s,
-                  border-color 0.2s, box-shadow 0.2s;
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1) 0.25s, transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.25s;
     }
-    .adv-btn.active {
-      opacity: 1;
-      transform: translateY(0);
-      animation: btnPulseGreen 2s ease-in-out infinite 0.7s;
-    }
-    .adv-btn:hover { border-color: #6ed8b4; animation: none; box-shadow: 0 0 0 4px rgba(110,216,180,0.15); }
+    .appl-insight.active { opacity: 1; transform: translateY(0); }
 
-    .adv-btn-text {
-      position: relative;
-      display: inline-flex;
-      flex-direction: column;
-      height: 1.2em;
-      overflow: hidden;
-      vertical-align: middle;
-    }
-    .adv-btn-text span {
+    .appl-insight-label {
       display: block;
-      line-height: 1.2em;
-      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
-      white-space: nowrap;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(110,216,180,0.4);
+      font-style: normal;
+      margin-bottom: 0.5rem;
     }
-    .adv-btn-text span:last-child {
+
+    .appl-divider {
+      background: rgba(184,232,216,0.1);
+      width: 1px;
+      align-self: stretch;
+    }
+
+    .appl-right { padding-left: 4rem; }
+
+    .appl-field-tag {
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(184,232,216,0.35);
+      margin-bottom: 0.4rem;
+      display: block;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1) 0.05s, transform 0.65s cubic-bezier(0.22,1,0.36,1) 0.05s;
+    }
+    .appl-field-tag.active { opacity: 1; transform: translateY(0); }
+
+    .appl-field-item {
+      border-top: 1px solid rgba(184,232,216,0.1);
+      padding: 1.3rem 0;
+      display: grid;
+      grid-template-columns: 2.4rem 1fr;
+      gap: 0.8rem;
+      align-items: start;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+    .appl-field-item.active { opacity: 1; transform: translateY(0); }
+    .appl-field-item:nth-child(2) { transition-delay: 0.08s; }
+    .appl-field-item:nth-child(3) { transition-delay: 0.16s; }
+    .appl-field-item:nth-child(4) { transition-delay: 0.24s; }
+
+    .appl-field-icon {
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
       color: #6ed8b4;
-      position: absolute;
-      top: 100%; left: 0;
+      opacity: 0.7;
+      margin-top: 0.1rem;
     }
-    .adv-btn:hover .adv-btn-text span:first-child { transform: translateY(-100%); }
-    .adv-btn:hover .adv-btn-text span:last-child  { transform: translateY(-100%); }
 
-    .adv-btn-arrow {
-      font-size: 0.9rem;
-      opacity: 0.5;
-      transition: transform 0.3s ease, opacity 0.3s ease, color 0.3s ease;
+    .appl-field-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #b8e8d8;
+      margin-bottom: 0.3rem;
     }
-    .adv-btn:hover .adv-btn-arrow { transform: translate(2px, -2px); opacity: 1; color: #6ed8b4; }
 
-    @keyframes btnPulseGreen {
-      0%, 100% { border-color: rgba(110,216,180,0.4); box-shadow: 0 0 0 0 rgba(110,216,180,0); }
-      50%       { border-color: rgba(110,216,180,1);   box-shadow: 0 0 0 4px rgba(110,216,180,0.12); }
+    .appl-field-body {
+      font-size: 0.85rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: rgba(184,232,216,0.5);
     }
 
     /* ── FOOTER ── */
@@ -1000,23 +1414,31 @@
       .def-left-wrap { text-align: left; }
       .def-right { padding-left: 0; }
 
-      .wwd-inner { grid-template-columns: 1fr; gap: 2rem; padding: 5rem 1.5rem 4rem; }
-      .wwd-section-num { left: 1.5rem; top: 2rem; }
-      .wwd-headline { white-space: normal; }
-      .wwd-cards { grid-template-columns: repeat(2, 1fr); column-gap: 1.5rem; }
-      .wwd-card { padding: 1.2rem 0; gap: 0; }
-      .wwd-card-header { flex-direction: row; align-items: center; gap: 0.75rem; margin-bottom: 0.6rem; }
-      .wwd-icon { width: 24px; height: 24px; }
+      .why-section-num { left: 1.5rem; top: 2rem; }
+      .why-inner { padding: 5rem 1.5rem 4rem; }
+      .why-top { grid-template-columns: 1fr; gap: 1.5rem; }
+      .why-reason-cards { grid-template-columns: 1fr; }
+      .why-reason-card { padding: 1.2rem 0 !important; border-right: none !important; }
+      .why-reason-card:not(:first-child) { padding-left: 0 !important; }
+      .why-strength-items { grid-template-columns: 1fr; gap: 1.2rem; }
 
-      .app-section-num { left: 1.5rem; }
-      .app-inner { grid-template-columns: 1fr; padding: 5rem 1.5rem 4rem; gap: 2.5rem; }
-      .app-divider { display: none; }
-      .app-left { padding-right: 0; border-bottom: 1px solid rgba(26,40,32,0.1); padding-bottom: 2rem; }
-      .app-right { padding-left: 0; }
+      .arm-section-num { left: 1.5rem; }
+      .arm-inner { grid-template-columns: 1fr; padding: 5rem 1.5rem 4rem; gap: 2.5rem; }
+      .arm-divider { display: none; }
+      .arm-left { padding-right: 0; border-bottom: 1px solid rgba(26,40,32,0.1); padding-bottom: 2rem; }
+      .arm-right { padding-left: 0; }
 
-      .adv-inner { grid-template-columns: 1fr; gap: 2rem; padding: 5rem 1.5rem 4rem; }
-      .adv-section-num { left: 1.5rem; top: 2rem; }
-      .adv-headline { white-space: normal; }
+      .lineup-section-num { left: 1.5rem; top: 2rem; }
+      .lineup-inner { padding: 5rem 1.5rem 4rem; }
+      .lineup-head { grid-template-columns: 1fr; gap: 1rem; }
+      .lineup-card-top { grid-template-columns: 1fr; }
+      .lineup-card-img-wrap { border-right: none; border-bottom: 1px solid rgba(110,216,180,0.08); min-height: 160px; }
+
+      .appl-section-num { left: 1.5rem; }
+      .appl-inner { grid-template-columns: 1fr; padding: 5rem 1.5rem 4rem; gap: 2.5rem; }
+      .appl-divider { display: none; }
+      .appl-left { padding-right: 0; border-bottom: 1px solid rgba(184,232,216,0.1); padding-bottom: 2rem; }
+      .appl-right { padding-left: 0; }
 
       .site-footer { padding: 2.5rem 1.5rem 0; }
       .footer-top { flex-direction: column; gap: 2rem; }
@@ -1029,8 +1451,8 @@
     }
 
     @media (max-width: 600px) {
-      .wwd-cards { grid-template-columns: 1fr; }
       .footer-nav { flex-direction: column; gap: 1.5rem; }
+      .lineup-specs { gap: 1rem; }
     }
   </style>
 </head>
@@ -1101,154 +1523,328 @@
   </div>
 </section>
 
-<!-- ══ SECTION 02 — WHAT WE DO ══ -->
-<section class="wwd-section" id="wwd-section">
-  <span class="wwd-section-num">02</span>
-  <div class="wwd-inner">
+<!-- ══ SECTION 02 — WHY PALM VEIN ══ -->
+<section class="why-section" id="why-section">
+  <span class="why-section-num">02</span>
+  <div class="why-inner">
 
-    <div class="wwd-left">
-      <h2 class="wwd-headline">What we do.</h2>
-      <p class="wwd-subheadline">End-to-end<br>Biometrics</p>
+    <div class="why-top">
+      <div class="why-top-left">
+        <h2 class="why-headline">Why Palm Vein?</h2>
+        <p class="why-subheadline">장정맥 인증의 강점</p>
+      </div>
+      <div class="why-top-right">
+        <div class="why-reason-cards">
+          <div class="why-reason-card">
+            <div class="why-reason-num">1</div>
+            <div class="why-reason-title">최고 수준의 보안성</div>
+            <p class="why-reason-body">복제가 불가능한 체내 정맥 패턴을 활용하여 위조 및 변조를 원천 차단합니다.</p>
+          </div>
+          <div class="why-reason-card">
+            <div class="why-reason-num">2</div>
+            <div class="why-reason-title">비접촉 위생 솔루션</div>
+            <p class="why-reason-body">기기에 손을 댈 필요가 없는 비접촉 방식으로 감염병 확산 방지 및 위생적인 환경을 제공합니다.</p>
+          </div>
+          <div class="why-reason-card">
+            <div class="why-reason-num">3</div>
+            <div class="why-reason-title">범용성</div>
+            <p class="why-reason-body">지문 마모, 건조함, 조명 변화 등 외부 환경에 영향을 받지 않고 정확하게 인식합니다.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="wwd-cards">
+    <div class="why-divider"></div>
 
-      <div class="wwd-card">
-        <div class="wwd-card-header">
-          <svg class="wwd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2C8.5 2 5 5 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-4-3.5-7-7-7z"/><circle cx="12" cy="9" r="2.5"/>
-          </svg>
-          <div class="wwd-card-title">Consulting</div>
+    <div class="why-strength-wrap">
+      <span class="why-strength-tag">장정맥 인증의 강점</span>
+      <div class="why-strength-items">
+        <div class="why-strength-item">
+          <div class="why-strength-circle">①</div>
+          <div>
+            <div class="why-strength-title">복제 불가능한 '체내 정보' 활용</div>
+            <p class="why-strength-body">지문이나 얼굴은 외부에 노출되어 있어 위변조의 위험이 크지만, 장정맥은 피부 아래에 있는 고유한 혈관 패턴을 사용합니다. 살아있는 사람의 혈류가 있어야만 인식이 가능하여 도용이 원천적으로 불가능합니다.</p>
+          </div>
         </div>
-        <p class="wwd-card-body">보안 환경 분석과 요구사항 정의를 통해 최적의 생체인식 도입 전략을 수립합니다.</p>
+        <div class="why-strength-item">
+          <div class="why-strength-circle">②</div>
+          <div>
+            <div class="why-strength-title">100%에 수렴하는 사용 가능성 (Usability)</div>
+            <p class="why-strength-body">지문이 닳아 없어졌거나 손이 건조한 사용자, 성장에 따라 얼굴 형태가 변하는 경우에도 장정맥 패턴은 변하지 않습니다. 누구나, 평생토록 정확한 인증이 가능합니다.</p>
+          </div>
+        </div>
+        <div class="why-strength-item">
+          <div class="why-strength-circle">③</div>
+          <div>
+            <div class="why-strength-title">가장 위생적인 '비접촉' 솔루션 (Hygiene)</div>
+            <p class="why-strength-body">손을 기기에 직접 대지 않고 15cm~35cm 거리에서 스캔하는 방식입니다. 다수가 이용하는 시설에서 감염병 확산 우려가 없으며, 기기 오염으로 인한 인식률 저하 문제가 없습니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="why-divider"></div>
+
+    <div class="why-table-wrap">
+      <span class="why-table-tag">생체인식 기술 비교</span>
+      <div class="why-table-scroll">
+        <table class="why-table">
+          <thead>
+            <tr>
+              <th>구분</th>
+              <th class="why-th-highlight">장정맥 (Palm Vein)</th>
+              <th>얼굴 (Face)</th>
+              <th>지문 (Fingerprint)</th>
+              <th>홍채 (Iris)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="why-td-label">보안성</td>
+              <td class="why-td-highlight why-td-strong">매우 높음</td>
+              <td>중간</td>
+              <td>중간</td>
+              <td>매우 높음</td>
+            </tr>
+            <tr>
+              <td class="why-td-label">위조 방지</td>
+              <td class="why-td-highlight why-td-strong">매우 높음<br><span class="why-td-sub">(체내 정보)</span></td>
+              <td>낮음<br><span class="why-td-sub">(사진/영상)</span></td>
+              <td>낮음<br><span class="why-td-sub">(실리콘 등)</span></td>
+              <td>매우 높음</td>
+            </tr>
+            <tr>
+              <td class="why-td-label">인식 속도</td>
+              <td class="why-td-highlight why-td-strong">높음 (0.3초)</td>
+              <td>높음</td>
+              <td>높음</td>
+              <td>느림</td>
+            </tr>
+            <tr>
+              <td class="why-td-label">정확성</td>
+              <td class="why-td-highlight why-td-strong">매우 높음</td>
+              <td>중간</td>
+              <td>중간</td>
+              <td>매우 높음</td>
+            </tr>
+            <tr>
+              <td class="why-td-label">비접촉 여부</td>
+              <td class="why-td-highlight why-td-strong">○ (완전 비접촉)</td>
+              <td>○</td>
+              <td>✕ (접촉 필수)</td>
+              <td>△ (거리 제약)</td>
+            </tr>
+            <tr>
+              <td class="why-td-label">인식 대상</td>
+              <td class="why-td-highlight">손금, 내부 혈관 패턴</td>
+              <td>외부 형태</td>
+              <td>피부 표면 패턴</td>
+              <td>안구 홍채 패턴</td>
+            </tr>
+            <tr>
+              <td class="why-td-label">환경 제약</td>
+              <td class="why-td-highlight why-td-strong">거의 없음</td>
+              <td>조명, 마스크, 각도</td>
+              <td>습기, 건조, 마모</td>
+              <td>안경, 렌즈, 조명</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ SECTION 03 — ARMATURA ══ -->
+<section class="arm-section" id="arm-section">
+  <span class="arm-section-num">03</span>
+  <div class="arm-inner">
+
+    <div class="arm-left">
+      <h2 class="arm-headline">Armatura만의<br>차별점</h2>
+      <span class="arm-tag">Beyond Simple Vein Auth</span>
+      <p class="arm-body">단순 정맥뿐만 아니라 손바닥 표면의 지형과 선까지 동시에 분석하여 오인식률을 제로에 가깝게 낮췄습니다. 850nm NIR(근적외선) LED와 HDR CMOS 센서를 통해 어두운 곳이나 밝은 곳에서도 일관된 성능을 보장합니다.</p>
+      <div class="arm-insight">
+        <span class="arm-insight-label">Key Advantage</span>
+        Multimodal recognition means near-zero false acceptance.
+      </div>
+    </div>
+
+    <div class="arm-divider"></div>
+
+    <div class="arm-right">
+      <span class="arm-prin-tag">3-in-1 멀티모달 인식 기술</span>
+      <p class="arm-modal-desc">단순 정맥 인식을 넘어 손바닥 표면 + 손금 + 장정맥을 동시에 스캔하는 멀티모달(Multimodal) 기술 적용.</p>
+
+      <div class="arm-modal-badges">
+        <span class="arm-badge">손바닥 표면</span>
+        <span class="arm-badge-plus">+</span>
+        <span class="arm-badge">손금</span>
+        <span class="arm-badge-plus">+</span>
+        <span class="arm-badge arm-badge-accent">장정맥</span>
       </div>
 
-      <div class="wwd-card">
-        <div class="wwd-card-header">
-          <svg class="wwd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
-            <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
-          </svg>
-          <div class="wwd-card-title">System Design</div>
+      <div class="arm-specs">
+        <div class="arm-spec-item">
+          <span class="arm-spec-num">01</span>
+          <div>
+            <div class="arm-spec-title">초고속 인증</div>
+            <p class="arm-spec-body">0.3초 이내의 빠른 인식 속도.</p>
+          </div>
         </div>
-        <p class="wwd-card-body">출입통제, 근태관리, 금융 인증 등 용도에 맞는 생체인식 시스템 아키텍처를 설계합니다.</p>
+        <div class="arm-spec-item">
+          <span class="arm-spec-num">02</span>
+          <div>
+            <div class="arm-spec-title">넓은 인식 범위</div>
+            <p class="arm-spec-body">15cm ~ 35cm 사이의 광범위한 인식 거리.</p>
+          </div>
+        </div>
+        <div class="arm-spec-item">
+          <span class="arm-spec-num">03</span>
+          <div>
+            <div class="arm-spec-title">강력한 하드웨어</div>
+            <p class="arm-spec-body">1/2.7" HDR CMOS 센서 및 850nm NIR LED 탑재.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ SECTION 04 — LINE-UP ══ -->
+<section class="lineup-section" id="lineup-section">
+  <span class="lineup-section-num">04</span>
+  <div class="lineup-inner">
+
+    <div class="lineup-head">
+      <div>
+        <h2 class="lineup-headline">Line-up</h2>
+        <p class="lineup-subheadline">Product Series</p>
+      </div>
+      <p class="lineup-desc">정맥 인증 기반의 두 가지 제품 라인.<br>설치 환경에 따라 모듈형 또는 독립형으로 선택할 수 있습니다.</p>
+    </div>
+
+    <div class="lineup-cards">
+
+      <!-- PVM-10 -->
+      <div class="lineup-card">
+        <div class="lineup-card-top">
+          <div class="lineup-card-img-wrap">
+            <img src="images/products/AMT-PVM-10.png" alt="PVM-10 Module" class="lineup-product-img"/>
+          </div>
+          <div class="lineup-card-info">
+            <div class="lineup-card-model">Module · PVM-10</div>
+            <div class="lineup-card-name">매립형 모듈</div>
+            <p class="lineup-card-desc">키오스크, 출입통제기, 의료기기 등 다양한 기기에 매립하여 설치하기 적합한 컴팩트 사이즈 센서 모듈.</p>
+            <div class="lineup-tags">
+              <span class="lineup-tag">Embedded</span>
+              <span class="lineup-tag">Kiosk</span>
+              <span class="lineup-tag">Medical</span>
+              <span class="lineup-tag">Access Control</span>
+            </div>
+            <div class="lineup-specs">
+              <div class="lineup-spec"><span class="lineup-spec-l">Type</span><span class="lineup-spec-v">Module</span></div>
+              <div class="lineup-spec"><span class="lineup-spec-l">Form</span><span class="lineup-spec-v">Embedded</span></div>
+              <div class="lineup-spec"><span class="lineup-spec-l">Size</span><span class="lineup-spec-v">45 × 45mm</span></div>
+              <div class="lineup-spec"><span class="lineup-spec-l">Interface</span><span class="lineup-spec-v">USB 2.0</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="lineup-card-drawing">
+          <span class="lineup-drawing-label">Technical Drawing</span>
+          <img src="images/products/PVM-10.png" alt="PVM-10 Drawing" class="lineup-drawing-img" style="display:none;"/>
+          <img src="images/products/PVM-10.png" alt="PVM-10 Technical Drawing" class="lineup-drawing-img"/>
+        </div>
       </div>
 
-      <div class="wwd-card">
-        <div class="wwd-card-header">
-          <svg class="wwd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
-          </svg>
-          <div class="wwd-card-title">Implementation</div>
+      <!-- PVR-10 -->
+      <div class="lineup-card">
+        <div class="lineup-card-top">
+          <div class="lineup-card-img-wrap">
+            <img src="images/products/AMT-PVR-10.png" alt="PVR-10 Reader" class="lineup-product-img"/>
+          </div>
+          <div class="lineup-card-info">
+            <div class="lineup-card-model">Reader · PVR-10</div>
+            <div class="lineup-card-name">독립형 리더기</div>
+            <p class="lineup-card-desc">세련된 외관으로 오피스 출입통제, 근태 관리 등 노트북 및 데스크탑 사용에 최적화된 완제품 리더기.</p>
+            <div class="lineup-tags">
+              <span class="lineup-tag">Standalone</span>
+              <span class="lineup-tag">Office</span>
+              <span class="lineup-tag">Desktop</span>
+              <span class="lineup-tag">Attendance</span>
+            </div>
+            <div class="lineup-specs">
+              <div class="lineup-spec"><span class="lineup-spec-l">Type</span><span class="lineup-spec-v">Reader</span></div>
+              <div class="lineup-spec"><span class="lineup-spec-l">Form</span><span class="lineup-spec-v">Standalone</span></div>
+              <div class="lineup-spec"><span class="lineup-spec-l">Size</span><span class="lineup-spec-v">ø 83mm</span></div>
+              <div class="lineup-spec"><span class="lineup-spec-l">Interface</span><span class="lineup-spec-v">USB 2.0</span></div>
+            </div>
+          </div>
         </div>
-        <p class="wwd-card-body">하드웨어 설치부터 소프트웨어 연동까지 현장 중심의 구축을 진행합니다.</p>
+        <div class="lineup-card-drawing">
+          <span class="lineup-drawing-label">Technical Drawing</span>
+          <img src="images/products/PVR-10.png" alt="PVR-10 Technical Drawing" class="lineup-drawing-img"/>
+        </div>
       </div>
 
-      <div class="wwd-card">
-        <div class="wwd-card-header">
-          <svg class="wwd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 05 — APPLICATIONS ══ -->
+<section class="appl-section" id="appl-section">
+  <span class="appl-section-num">05</span>
+  <div class="appl-inner">
+
+    <div class="appl-left">
+      <h2 class="appl-headline">적용 분야</h2>
+      <span class="appl-tag">Zero-Trust Security</span>
+      <p class="appl-body">'제로 트러스트(Zero-Trust)' 보안 체계가 중요해짐에 따라, 금융, 의료, 공공기관 등 높은 보안 수준이 요구되는 시장에서 장정맥 인증은 선택이 아닌 필수입니다.</p>
+      <div class="appl-insight">
+        <span class="appl-insight-label">Key Insight</span>
+        In zero-trust environments, palm vein is no longer optional — it's essential.
+      </div>
+    </div>
+
+    <div class="appl-divider"></div>
+
+    <div class="appl-right">
+      <span class="appl-field-tag">주요 적용처</span>
+      <div class="appl-field-item">
+        <div class="appl-field-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+            <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-4 0v2"/><line x1="12" y1="12" x2="12" y2="16"/>
+          </svg>
+        </div>
+        <div>
+          <div class="appl-field-title">금융 / 결제</div>
+          <p class="appl-field-body">카드 없는 생체 결제 시스템 및 본인 인증.</p>
+        </div>
+      </div>
+      <div class="appl-field-item">
+        <div class="appl-field-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <div>
+          <div class="appl-field-title">의료 / 공공</div>
+          <p class="appl-field-body">환자 식별 및 국가 중요 시설 출입 통제.</p>
+        </div>
+      </div>
+      <div class="appl-field-item">
+        <div class="appl-field-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           </svg>
-          <div class="wwd-card-title">Security Integration</div>
         </div>
-        <p class="wwd-card-body">기존 보안 인프라와 연계하여 생체인식이 전체 보안 체계의 일부로 작동하도록 통합합니다.</p>
-      </div>
-
-      <div class="wwd-card">
-        <div class="wwd-card-header">
-          <svg class="wwd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-          </svg>
-          <div class="wwd-card-title">Operation & Support</div>
-        </div>
-        <p class="wwd-card-body">시스템 모니터링, 유지보수, 장애 대응을 통해 지속적인 운영 안정성을 보장합니다.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══ SECTION 03 — APPROACH ══ -->
-<section class="app-section" id="app-section">
-  <span class="app-section-num">03</span>
-  <div class="app-inner">
-
-    <div class="app-left">
-      <h2 class="app-headline" id="app-headline">Our Approach</h2>
-      <span class="app-tag" id="app-tag">Identity Defines Security.</span>
-      <p class="app-body" id="app-body">생체인식의 신뢰도는 알고리즘 하나가 아니라
-      등록 방식, 조명 환경, 하드웨어 품질, 시스템 연동 구조 전반에 의해 결정됩니다.
-      LeadingPoint는 현장 환경을 면밀히 분석하여 오인식률을 최소화하고
-      실사용 조건에서도 안정적으로 작동하는 생체인식 시스템을 구현합니다.</p>
-      <div class="app-insight" id="app-insight">
-        <span class="app-insight-label">Key Insight</span>
-        Accuracy in the field depends on environment, not just algorithm.
-      </div>
-    </div>
-
-    <div class="app-divider"></div>
-
-    <div class="app-right">
-      <span class="app-prin-tag" id="app-prin-tag">Design Principles</span>
-
-      <div class="app-prin-item">
-        <span class="app-prin-num">01</span>
         <div>
-          <div class="app-prin-title">Environment-First Design</div>
-          <p class="app-prin-body">실제 운용 환경의 조도, 온도, 사용 패턴을 기반으로 시스템을 설계합니다.</p>
+          <div class="appl-field-title">기업 보안</div>
+          <p class="appl-field-body">기업 기밀 구역 출입 및 PC 로그인 보안 강화.</p>
         </div>
       </div>
-
-      <div class="app-prin-item">
-        <span class="app-prin-num">02</span>
-        <div>
-          <div class="app-prin-title">Zero-Spoof Architecture</div>
-          <p class="app-prin-body">정맥 패턴의 위변조 불가능성을 시스템 전반의 보안 전제로 삼습니다.</p>
-        </div>
-      </div>
-
-      <div class="app-prin-item">
-        <span class="app-prin-num">03</span>
-        <div>
-          <div class="app-prin-title">Seamless Integration</div>
-          <p class="app-prin-body">기존 출입통제, ERP, 근태 시스템과 자연스럽게 연동되는 구조를 구현합니다.</p>
-        </div>
-      </div>
-
-      <div class="app-prin-item">
-        <span class="app-prin-num">04</span>
-        <div>
-          <div class="app-prin-title">Low FAR / FRR Tuning</div>
-          <p class="app-prin-body">오인식률과 거부율의 균형을 현장 요구사항에 맞게 정밀 조정합니다.</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══ SECTION 04 — ADVANCED ══ -->
-<section class="adv-section" id="adv-section">
-  <span class="adv-section-num">04</span>
-  <div class="adv-inner">
-
-    <div class="adv-left">
-      <h2 class="adv-headline">Vein Auth</h2>
-      <p class="adv-subheadline">Next-Generation<br>Biometric Security</p>
-    </div>
-
-    <div class="adv-right">
-      <p class="adv-body">보안 요구 수준이 높아지면서 생체인식 기술은 지문, 얼굴 인식을 넘어
-      위변조가 구조적으로 불가능한 정맥 인증으로 진화하고 있습니다.<br><br>
-      LeadingPoint는 근적외선 정맥 패턴 인식 기술을 기반으로
-      비접촉, 고정밀, 고보안 환경에 최적화된 인증 솔루션을 제공합니다.</p>
-      <a href="#" class="adv-btn">
-        <span class="adv-btn-text">
-          <span>Finger Vein Authentication</span>
-          <span>Finger Vein Authentication</span>
-        </span>
-        <span class="adv-btn-arrow">↗</span>
-      </a>
     </div>
 
   </div>
@@ -1455,39 +2051,38 @@
   /* ── SCROLL REVEAL ── */
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.target.id === 'def-section') {
-        const targets = entry.target.querySelectorAll('.def-left-wrap, .def-body-block');
-        targets.forEach(el => entry.isIntersecting ? el.classList.add('active') : el.classList.remove('active'));
+      const t = entry.target;
+      const on = entry.isIntersecting;
+
+      if (t.id === 'def-section') {
+        t.querySelectorAll('.def-left-wrap, .def-body-block').forEach(el => el.classList.toggle('active', on));
       }
-      if (entry.target.id === 'wwd-section') {
-        const headline = entry.target.querySelector('.wwd-headline');
-        const sub = entry.target.querySelector('.wwd-subheadline');
-        const cards = entry.target.querySelectorAll('.wwd-card');
-        if (entry.isIntersecting) {
-          if (headline) headline.classList.add('active');
-          if (sub) sub.classList.add('active');
-          cards.forEach(c => c.classList.add('active'));
-        } else {
-          if (headline) headline.classList.remove('active');
-          if (sub) sub.classList.remove('active');
-          cards.forEach(c => c.classList.remove('active'));
-        }
+
+      if (t.id === 'why-section') {
+        t.querySelectorAll('.why-headline, .why-subheadline').forEach(el => el.classList.toggle('active', on));
+        t.querySelectorAll('.why-reason-card, .why-strength-item').forEach(el => el.classList.toggle('active', on));
+        t.querySelectorAll('.why-strength-tag, .why-table-tag').forEach(el => el.classList.toggle('active', on));
+        t.querySelectorAll('.why-table').forEach(el => el.classList.toggle('active', on));
       }
-      if (entry.target.id === 'app-section') {
-        const els = entry.target.querySelectorAll('.app-tag, .app-headline, .app-body, .app-insight, .app-prin-tag, .app-prin-item');
-        els.forEach(el => entry.isIntersecting ? el.classList.add('active') : el.classList.remove('active'));
+
+      if (t.id === 'arm-section') {
+        t.querySelectorAll('.arm-headline, .arm-tag, .arm-body, .arm-insight, .arm-prin-tag, .arm-modal-desc, .arm-modal-badges, .arm-spec-item').forEach(el => el.classList.toggle('active', on));
       }
-      if (entry.target.id === 'adv-section') {
-        const els = entry.target.querySelectorAll('.adv-headline, .adv-subheadline, .adv-body, .adv-btn');
-        els.forEach(el => entry.isIntersecting ? el.classList.add('active') : el.classList.remove('active'));
+
+      if (t.id === 'lineup-section') {
+        t.querySelectorAll('.lineup-head, .lineup-card').forEach(el => el.classList.toggle('active', on));
+      }
+
+      if (t.id === 'appl-section') {
+        t.querySelectorAll('.appl-headline, .appl-tag, .appl-body, .appl-insight, .appl-field-tag, .appl-field-item').forEach(el => el.classList.toggle('active', on));
       }
     });
   }, {
     root: document.getElementById('scroll-container'),
-    threshold: 0.15
+    threshold: 0.1
   });
 
-  ['def-section', 'wwd-section', 'app-section', 'adv-section'].forEach(id => {
+  ['def-section', 'why-section', 'arm-section', 'lineup-section', 'appl-section'].forEach(id => {
     const el = document.getElementById(id);
     if (el) revealObserver.observe(el);
   });
