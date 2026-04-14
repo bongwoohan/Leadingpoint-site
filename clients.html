@@ -340,17 +340,15 @@
       .footer-divider { margin: 0 -1.5rem; }
     }
 
-    /* 1000px 이하: 6열 */
-    @media (max-width: 1000px) {
-      .logo-grid { grid-template-columns: repeat(6, 1fr) !important; }
-    }
+    /* 기본(640px 초과): 항상 6열 — 인라인 grid-template-columns override */
+    .logo-grid { grid-template-columns: repeat(6, 1fr) !important; }
 
-    /* 640px 이하: 4열, 로고 가로 꽉 차게 */
+    /* 640px 이하 ~ 400px 초과: 4열 */
     @media (max-width: 640px) {
       .logo-grid { grid-template-columns: repeat(4, 1fr) !important; }
-      .logo-cell, .logo-cell-empty { min-height: 70px; padding: 0.8rem 0.6rem; }
+      .logo-cell, .logo-cell-empty { min-height: 70px; padding: 0.8rem 0.5rem; }
       .logo-img-wrap { height: auto; min-height: 50px; }
-      .logo-bw, .logo-color { max-width: 90%; max-height: none; width: 90%; height: auto; }
+      .logo-bw, .logo-color { max-width: 100%; max-height: none; width: 100%; height: auto; }
       .grid-wrap { padding: 1.5rem 1rem; align-items: flex-start; overflow-y: auto; }
       .tab-panels { position: static; }
       .tab-panel { position: static; opacity: 1; transform: none; pointer-events: all; display: none; }
@@ -361,7 +359,6 @@
     /* 400px 이하: 3열 */
     @media (max-width: 400px) {
       .logo-grid { grid-template-columns: repeat(3, 1fr) !important; }
-      .logo-bw, .logo-color { max-width: 92%; width: 92%; }
     }
 
     @media (min-width: 1101px) { #menu-overlay { display: none; } }
