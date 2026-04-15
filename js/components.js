@@ -42,6 +42,13 @@
       ovBusinessActive: true,
       footActiveId:    'foot-cloud',
     },
+    'technology': {
+      navActiveId:     'nav-tech',
+      ovActiveId:      'ov-tech',
+      ovBusinessOpen:  true,
+      ovBusinessActive: true,
+      footActiveId:    'foot-tech',
+    },
     'biometrics': {
       navActiveId:     'nav-bio',
       ovActiveId:      'ov-bio',
