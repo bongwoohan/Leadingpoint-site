@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -8,6 +8,7 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* ── 기존 company.html의 색상 그대로 ── */
     :root {
       --bg:           #dceadc;
       --bg-raised:    #e8f2e8;
@@ -17,6 +18,7 @@
       --text:         #1a1a1a;
       --muted:        rgba(26,26,26,0.38);
       --border:       rgba(0,0,0,0.07);
+      --accent:       #f0956e;
     }
 
     html { height: 100%; }
@@ -30,7 +32,6 @@
       overflow: hidden;
     }
 
-    /* ── SCROLL CONTAINER ── */
     #scroll-container {
       height: 100vh;
       overflow-y: scroll;
@@ -38,7 +39,6 @@
       scroll-behavior: smooth;
     }
 
-    /* ── PAGE ── */
     #page {
       opacity: 0;
       transition: opacity 0.9s ease;
@@ -48,7 +48,6 @@
     }
     #page.visible { opacity: 1; }
 
-    /* ── HERO SNAP ── */
     #hero-snap {
       scroll-snap-align: start;
       height: 100vh;
@@ -57,217 +56,71 @@
       overflow: hidden;
     }
 
-    /* ── NAV WRAP (공통 헤더에서 주입) ── */
-    #nav-wrap {
-      position: relative;
-      z-index: 5;
-      flex-shrink: 0;
-      background: transparent;
-    }
+    /* ── NAV (공통 헤더 주입용) ── */
+    #nav-wrap { position: relative; z-index: 5; flex-shrink: 0; background: transparent; }
 
     .nav-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      padding: 1.6rem 3rem 1.2rem;
-      background: transparent;
+      display: flex; align-items: flex-start; justify-content: space-between;
+      padding: 1.6rem 3rem 1.2rem; background: transparent;
     }
-
-    .nav-logo {
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      flex-shrink: 0;
-      min-width: 0;
-      padding-top: 0.15rem;
-    }
+    .nav-logo { text-decoration: none; display: flex; align-items: center; flex-shrink: 0; min-width: 0; padding-top: 0.15rem; }
     .nav-logo img { height: 26px; width: auto; display: block; max-width: 200px; }
-
-    .nav-main-links {
-      display: flex;
-      gap: 4rem;
-      list-style: none;
-      align-items: flex-start;
-    }
-
+    .nav-main-links { display: flex; gap: 4rem; list-style: none; align-items: flex-start; }
     .nav-col { display: flex; flex-direction: column; }
-
     .nav-col-title {
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      cursor: pointer;
-      padding: 0.5rem 0;
-      transition: color 0.2s;
-      user-select: none;
-      border-top: 1px solid rgba(0,0,0,0.08);
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); cursor: pointer; padding: 0.5rem 0; transition: color 0.2s;
+      user-select: none; border-top: 1px solid rgba(0,0,0,0.08);
+      display: flex; align-items: center; gap: 0.35rem;
     }
-    .nav-col-title:hover { color: var(--text); }
-    .nav-col-title.open { color: var(--text); }
-
-    .nav-col-arrow {
-      display: inline-block;
-      font-size: 0.6rem;
-      color: rgba(26,26,26,0.35);
-      transition: transform 0.35s ease;
-      line-height: 1;
-      margin-top: 1px;
-    }
+    .nav-col-title:hover, .nav-col-title.open { color: var(--text); }
+    .nav-col-arrow { display: inline-block; font-size: 0.6rem; color: rgba(26,26,26,0.35); transition: transform 0.35s ease; line-height: 1; margin-top: 1px; }
     .nav-col-title.open .nav-col-arrow { transform: rotate(180deg); }
-
-    .nav-home-link {
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      padding: 0.5rem 0;
-      border-top: 1px solid rgba(0,0,0,0.08);
-      transition: color 0.2s;
-      display: inline-block;
-    }
+    .nav-home-link { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding: 0.5rem 0; border-top: 1px solid rgba(0,0,0,0.08); transition: color 0.2s; display: inline-block; }
     .nav-home-link:hover { color: var(--text); }
-    .nav-home-link.active { color: #f0956e; }
-
-    .nav-submenu {
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      max-height: 0;
-      transition: max-height 0.6s cubic-bezier(0.16,1,0.3,1);
-    }
+    .nav-home-link.active { color: var(--accent); }
+    .nav-submenu { display: flex; flex-direction: column; overflow: hidden; max-height: 0; transition: max-height 0.6s cubic-bezier(0.16,1,0.3,1); }
     .nav-submenu.open { max-height: 200px; }
-
-    .nav-submenu a {
-      font-size: 0.88rem;
-      font-weight: 400;
-      letter-spacing: 0.02em;
-      color: rgba(26,26,26,0.55);
-      text-decoration: none;
-      padding: 0.55rem 0;
-      border-top: 1px solid rgba(0,0,0,0.07);
-      opacity: 0;
-      transform: translateY(-6px);
-      transition: opacity 0.35s ease, transform 0.35s ease, color 0.2s;
-    }
+    .nav-submenu a { font-size: 0.88rem; font-weight: 400; letter-spacing: 0.02em; color: rgba(26,26,26,0.55); text-decoration: none; padding: 0.55rem 0; border-top: 1px solid rgba(0,0,0,0.07); opacity: 0; transform: translateY(-6px); transition: opacity 0.35s ease, transform 0.35s ease, color 0.2s; }
     .nav-submenu.open a { opacity: 1; transform: translateY(0); }
     .nav-submenu a:hover { color: var(--text); }
-    .nav-submenu a.active { color: #f0956e; }
-
-    .nav-divider {
-      height: 1px;
-      background: rgba(0,0,0,0.08);
-      margin: 0 3rem;
-    }
+    .nav-submenu a.active { color: var(--accent); }
+    .nav-divider { height: 1px; background: rgba(0,0,0,0.08); margin: 0 3rem; }
 
     /* ── HAMBURGER ── */
-    .nav-menu-btn {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      background: none; border: none; cursor: pointer;
-      padding: 4px; width: 32px; height: 32px; flex-shrink: 0;
-    }
-    .nav-menu-btn span {
-      display: block; width: 100%; height: 1.5px;
-      background: var(--text); border-radius: 2px;
-      transition: transform 0.35s ease, opacity 0.35s ease, width 0.35s ease;
-      transform-origin: left center;
-    }
+    .nav-menu-btn { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; width: 32px; height: 32px; flex-shrink: 0; }
+    .nav-menu-btn span { display: block; width: 100%; height: 1.5px; background: var(--text); border-radius: 2px; transition: transform 0.35s ease, opacity 0.35s ease, width 0.35s ease; transform-origin: left center; }
     .nav-menu-btn.open span:nth-child(1) { transform: rotate(38deg) translateY(-1px); }
     .nav-menu-btn.open span:nth-child(2) { opacity: 0; width: 0; }
     .nav-menu-btn.open span:nth-child(3) { transform: rotate(-38deg) translateY(1px); }
 
     /* ── OVERLAY MENU ── */
-    #menu-overlay {
-      position: fixed; inset: 0;
-      background: var(--bg-raised);
-      z-index: 500;
-      display: flex; flex-direction: column;
-      padding: 2rem 1.5rem;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.4s ease;
-    }
+    #menu-overlay { position: fixed; inset: 0; background: var(--bg-raised); z-index: 500; display: flex; flex-direction: column; padding: 2rem 1.5rem; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
     #menu-overlay.open { opacity: 1; pointer-events: all; }
-
-    .overlay-top {
-      display: flex; align-items: center; justify-content: space-between;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 2.5rem;
-    }
+    .overlay-top { display: flex; align-items: center; justify-content: space-between; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
     .overlay-logo { text-decoration: none; display: flex; align-items: center; }
     .overlay-logo img { height: 22px; width: auto; }
-
-    .overlay-close {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.7rem; font-weight: 500;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--muted); background: none; border: none; cursor: pointer;
-      transition: color 0.2s;
-    }
+    .overlay-close { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); background: none; border: none; cursor: pointer; transition: color 0.2s; }
     .overlay-close:hover { color: var(--text); }
-
     .overlay-links { list-style: none; }
     .overlay-links li { border-bottom: 1px solid var(--border); }
-
-    .overlay-item-top {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1rem 0;
-      cursor: pointer;
-      user-select: none;
-      transform: translateX(-20px); opacity: 0;
-      transition: transform 0.4s ease, opacity 0.4s ease;
-    }
+    .overlay-item-top { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; cursor: pointer; user-select: none; transform: translateX(-20px); opacity: 0; transition: transform 0.4s ease, opacity 0.4s ease; }
     #menu-overlay.open .overlay-item-top { transform: translateX(0); opacity: 1; }
     .overlay-links li:nth-child(1) .overlay-item-top { transition-delay: 0.05s; }
     .overlay-links li:nth-child(2) .overlay-item-top { transition-delay: 0.10s; }
     .overlay-links li:nth-child(3) .overlay-item-top { transition-delay: 0.15s; }
-
-    .overlay-item-label {
-      font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em;
-      color: #1a1a1a; text-decoration: none;
-      transition: color 0.2s;
-    }
+    .overlay-item-label { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em; color: #1a1a1a; text-decoration: none; transition: color 0.2s; }
     a.overlay-item-label { display: block; width: 100%; }
     a.overlay-item-label:hover { color: rgba(0,0,0,0.3); }
-    .overlay-item-label.active { color: #f0956e; }
-
-    .overlay-item-arrow {
-      font-size: 0.75rem;
-      color: rgba(26,26,26,0.35);
-      transition: transform 0.35s ease;
-      line-height: 1;
-      flex-shrink: 0;
-    }
+    .overlay-item-label.active { color: var(--accent); }
+    .overlay-item-arrow { font-size: 0.75rem; color: rgba(26,26,26,0.35); transition: transform 0.35s ease; line-height: 1; flex-shrink: 0; }
     .overlay-item-top.open .overlay-item-arrow { transform: rotate(180deg); }
-
-    .overlay-submenu {
-      display: flex; flex-direction: column;
-      overflow: hidden; max-height: 0;
-      transition: max-height 0.5s cubic-bezier(0.16,1,0.3,1);
-    }
+    .overlay-submenu { display: flex; flex-direction: column; overflow: hidden; max-height: 0; transition: max-height 0.5s cubic-bezier(0.16,1,0.3,1); }
     .overlay-submenu.open { max-height: 300px; }
-    .overlay-submenu a {
-      font-size: 1rem; font-weight: 400;
-      letter-spacing: -0.01em;
-      color: rgba(26,26,26,0.5); text-decoration: none;
-      padding: 0.75rem 0 0.75rem 0.5rem;
-      border-top: 1px solid rgba(0,0,0,0.06);
-      display: flex; align-items: center; justify-content: space-between;
-      opacity: 0; transform: translateY(-6px);
-      transition: opacity 0.3s ease, transform 0.3s ease, color 0.2s;
-    }
+    .overlay-submenu a { font-size: 1rem; font-weight: 400; letter-spacing: -0.01em; color: rgba(26,26,26,0.5); text-decoration: none; padding: 0.75rem 0 0.75rem 0.5rem; border-top: 1px solid rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: space-between; opacity: 0; transform: translateY(-6px); transition: opacity 0.3s ease, transform 0.3s ease, color 0.2s; }
     .overlay-submenu.open a { opacity: 1; transform: translateY(0); }
     .overlay-submenu a:hover { color: #1a1a1a; }
-    .overlay-submenu a.active { color: #f0956e; }
+    .overlay-submenu a.active { color: var(--accent); }
     .overlay-arrow { font-size: 0.8rem; opacity: 0.3; }
 
     /* ── HERO ── */
@@ -276,79 +129,53 @@
       min-height: 0;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding: 0 3rem 3rem;
+      justify-content: center;
+      align-items: center;
+      padding: 0 3rem;
       position: relative;
-      background: var(--bg);
+      background: var(--bg);   /* 기존 초록 계열 그대로 */
       overflow: hidden;
     }
 
     #hero-dot-canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 0;
     }
 
     .hero-scroll {
-      position: absolute;
-      right: 3rem;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.7rem;
-      z-index: 1;
+      position: absolute; right: 3rem; top: 50%; transform: translateY(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.7rem; z-index: 1;
     }
-    .scroll-label {
-      font-size: 0.62rem;
-      font-weight: 400;
-      letter-spacing: 0.2em;
-      color: var(--muted);
-      text-transform: uppercase;
-      writing-mode: vertical-rl;
-    }
-    .scroll-track {
-      width: 3px; height: 70px;
-      border-radius: 3px;
-      background: var(--bg-deep);
-      box-shadow:
-        inset 2px 2px 4px var(--shadow-dark),
-        inset -1px -1px 3px var(--shadow-light);
-      overflow: hidden;
-      position: relative;
-    }
-    .scroll-thumb {
-      position: absolute;
-      top: -100%; left: 0;
-      width: 100%; height: 40%;
-      background: rgba(0,0,0,0.15);
-      border-radius: 3px;
-      animation: scrollDown 2s ease-in-out infinite;
-    }
-    @keyframes scrollDown {
-      0%   { top: -40%; }
-      100% { top: 140%; }
-    }
+    .scroll-label { font-size: 0.62rem; font-weight: 400; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; writing-mode: vertical-rl; }
+    .scroll-track { width: 3px; height: 70px; border-radius: 3px; background: var(--bg-deep); box-shadow: inset 2px 2px 4px var(--shadow-dark), inset -1px -1px 3px var(--shadow-light); overflow: hidden; position: relative; }
+    .scroll-thumb { position: absolute; top: -100%; left: 0; width: 100%; height: 40%; background: rgba(0,0,0,0.15); border-radius: 3px; animation: scrollDown 2s ease-in-out infinite; }
+    @keyframes scrollDown { 0% { top: -40%; } 100% { top: 140%; } }
 
-    /* ── TITLE ── */
-    .hero-title {
-      font-size: clamp(4.5rem, 12vw, 13rem);
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      line-height: 0.85;
+    /* ── HERO TITLE: 한 줄, 중앙 ── */
+    .hero-title-wrap {
       position: relative;
       z-index: 2;
+      text-align: center;
+      white-space: nowrap;   /* 줄바꿈 절대 방지 */
     }
 
-    .title-line { display: block; }
+    .hero-title {
+      font-size: clamp(3rem, 9.5vw, 11rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+      white-space: nowrap;
+    }
+
+    /* 두 title-line이 inline으로 붙어서 한 줄 */
+    .title-line { display: inline; }
+
+    /* CONTACT 와 US 사이 공백 */
+    .title-word-gap { display: inline-block; width: 0.28em; }
 
     .title-line-inner {
-      display: block;
-      color: #c8dcc8;
+      display: inline;
+      color: #c8dcc8;   /* 기존 색 */
       text-shadow:
         -4px -4px  8px  rgba(255,255,255,0.95),
         -10px -10px 20px rgba(255,255,255,0.8),
@@ -362,86 +189,178 @@
       display: inline-block;
       opacity: 0;
       transform: translateY(60%);
-      transition:
-        opacity   0.45s ease,
-        transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.16,1,0.3,1);
     }
-    .char-span.up {
+    .char-span.up { opacity: 1; transform: translateY(0); }
+
+    /* ══════════════════════════════════════════
+       CONTACT SECTION
+    ══════════════════════════════════════════ */
+    .contact-section {
+      scroll-snap-align: start;
+      height: 100vh;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Get In Touch — 고정 상단, 스크롤 안됨 */
+    .contact-header {
+      flex-shrink: 0;
+      text-align: center;
+      padding: 3.2rem 3rem 1.8rem;
+    }
+
+    .contact-header-title {
+      font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #1a2332;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+    .contact-header-title.active { opacity: 1; transform: translateY(0); }
+
+    .contact-header-bar {
+      display: inline-block;
+      width: 32px; height: 2px;
+      background: var(--accent);
+      margin-top: 0.9rem;
+      opacity: 0;
+      transition: opacity 0.5s ease 0.18s;
+    }
+    .contact-header-bar.active { opacity: 1; }
+
+    /* 지도 영역 — 남은 공간 전부 차지 */
+    .map-area {
+      flex: 1;
+      min-height: 0;
+      position: relative;
+    }
+
+    .map-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* 지도 위에 겹치는 카드 */
+    .contact-card {
+      position: absolute;
+      /* 카드 위쪽이 지도 안에, 아래쪽이 지도 아래로 나옴 */
+      bottom: -90px;
+      left: 50%;
+      transform: translateX(-50%) translateY(24px);
+      width: min(900px, calc(100% - 4rem));
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      box-shadow: 0 20px 60px rgba(0,20,0,0.14), 0 4px 16px rgba(0,20,0,0.08);
+      z-index: 10;
+      opacity: 0;
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s,
+                  transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s;
+    }
+    .contact-card.active {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateX(-50%) translateY(0);
     }
+
+    /* 폼 패널 */
+    .form-panel {
+      background: #fff;
+      padding: 2.2rem 2.4rem 2rem;
+      border-top: 3px solid var(--accent);
+    }
+
+    .panel-eyebrow {
+      font-size: 0.58rem; font-weight: 500; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(26,35,50,0.32);
+      margin-bottom: 0.2rem; display: block;
+    }
+    .panel-title {
+      font-size: 1.1rem; font-weight: 700; letter-spacing: -0.01em;
+      color: #1a2332; margin-bottom: 0.2rem;
+    }
+    .panel-rule { display: block; width: 26px; height: 2px; background: var(--accent); margin-bottom: 1.6rem; opacity: 0.55; }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 1.6rem; }
+
+    .form-field { display: flex; flex-direction: column; margin-bottom: 1.2rem; }
+    .form-field.full { grid-column: 1 / -1; }
+
+    .form-field-label { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(26,35,50,0.28); margin-bottom: 0.4rem; }
+
+    .form-input,
+    .form-textarea {
+      background: transparent;
+      border: none;
+      border-bottom: 1.5px solid rgba(26,35,50,0.13);
+      padding: 0.3rem 0 0.38rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.87rem; font-weight: 400; color: #1a2332;
+      outline: none; width: 100%; resize: none;
+      transition: border-color 0.2s;
+    }
+    .form-input::placeholder, .form-textarea::placeholder { color: rgba(26,35,50,0.18); font-weight: 300; }
+    .form-input:focus, .form-textarea:focus { border-bottom-color: var(--accent); }
+    .form-textarea { height: 60px; line-height: 1.7; }
+
+    .form-submit { display: flex; justify-content: flex-end; margin-top: 0.5rem; }
+
+    .submit-btn {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.6rem 1.5rem;
+      background: #1a2332; color: #e8e6e1;
+      font-family: 'DM Sans', sans-serif; font-size: 0.76rem; font-weight: 500;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      border: none; border-radius: 3px; cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .submit-btn:hover { background: var(--accent); transform: translateY(-1px); }
+    .submit-btn-arrow { font-size: 0.9rem; transition: transform 0.2s; }
+    .submit-btn:hover .submit-btn-arrow { transform: translate(2px,-2px); }
+
+    /* 정보 패널 */
+    .info-panel {
+      background: #1a2332;
+      padding: 2.2rem 2.4rem;
+      display: flex; flex-direction: column;
+    }
+
+    .info-eyebrow { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(232,230,225,0.28); margin-bottom: 0.2rem; display: block; }
+    .info-panel-title { font-size: 1.1rem; font-weight: 700; color: #e8e6e1; margin-bottom: 0.2rem; }
+    .info-panel-rule { display: block; width: 26px; height: 2px; background: var(--accent); margin-bottom: 1.6rem; opacity: 0.55; }
+
+    .info-items { display: flex; flex-direction: column; gap: 1.05rem; }
+
+    .info-item { display: flex; align-items: flex-start; gap: 0.85rem; }
+
+    .info-icon { width: 30px; height: 30px; background: rgba(255,255,255,0.06); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.06rem; }
+    .info-icon svg { width: 13px; height: 13px; stroke: var(--accent); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    .info-item-label { font-size: 0.56rem; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; color: rgba(232,230,225,0.28); display: block; margin-bottom: 0.12rem; }
+    .info-item-value { font-size: 0.84rem; font-weight: 300; color: rgba(232,230,225,0.7); line-height: 1.5; }
+
+    /* 카드 아래 흰 여백 */
+    .contact-footer-gap { flex-shrink: 0; height: 100px; background: #fff; }
 
     /* ── FOOTER ── */
-    .site-footer {
-      background: #2a2a2a;
-      padding: 3rem 3rem 0;
-      scroll-snap-align: start;
-      flex-shrink: 0;
-    }
-
-    .footer-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      padding-bottom: 2.5rem;
-    }
-
-    .footer-logo img {
-      height: 48px;
-      width: auto;
-      display: block;
-      opacity: 0.85;
-    }
-
-    .footer-nav {
-      display: flex;
-      gap: 4rem;
-      list-style: none;
-    }
-
+    .site-footer { background: #2a2a2a; padding: 3rem 3rem 0; scroll-snap-align: start; flex-shrink: 0; }
+    .footer-top { display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 2.5rem; }
+    .footer-logo img { height: 48px; width: auto; display: block; opacity: 0.85; }
+    .footer-nav { display: flex; gap: 4rem; list-style: none; }
     .footer-col { display: flex; flex-direction: column; }
-
-    .footer-col-title {
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.85);
-      padding-bottom: 0.9rem;
-      border-bottom: 1px solid rgba(255,255,255,0.12);
-      margin-bottom: 0.6rem;
-    }
-
-    .footer-link {
-      font-size: 0.82rem;
-      font-weight: 400;
-      color: rgba(255,255,255,0.38);
-      text-decoration: none;
-      padding: 0.4rem 0;
-      letter-spacing: 0.02em;
-      transition: color 0.2s;
-    }
+    .footer-col-title { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.85); padding-bottom: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.12); margin-bottom: 0.6rem; }
+    .footer-link { font-size: 0.82rem; font-weight: 400; color: rgba(255,255,255,0.32); text-decoration: none; padding: 0.4rem 0; letter-spacing: 0.02em; transition: color 0.2s; }
     .footer-link:hover { color: rgba(255,255,255,0.75); }
-    .footer-link.active { color: #f0956e; }
-
-    .footer-divider {
-      height: 1px;
-      background: rgba(255,255,255,0.1);
-      margin: 0 -3rem;
-    }
-
-    .footer-bottom {
-      display: flex;
-      justify-content: flex-end;
-      padding: 1.2rem 0;
-    }
-
-    .footer-copy {
-      font-size: 0.72rem;
-      font-weight: 300;
-      letter-spacing: 0.08em;
-      color: rgba(255,255,255,0.28);
-    }
+    .footer-link.active { color: var(--accent); }
+    .footer-divider { height: 1px; background: rgba(255,255,255,0.1); margin: 0 -3rem; }
+    .footer-bottom { display: flex; justify-content: flex-end; padding: 1.2rem 0; }
+    .footer-copy { font-size: 0.72rem; font-weight: 300; letter-spacing: 0.08em; color: rgba(255,255,255,0.28); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1100px) {
@@ -450,12 +369,15 @@
       .nav-menu-btn { display: flex; }
       .nav-divider { margin: 0 1.5rem; }
       .hero-scroll { display: none; }
-      .hero { padding: 0 1.5rem 2rem; }
-      .hero-title { font-size: clamp(3.8rem, 17vw, 6rem); }
+      .hero { padding: 0 1.5rem; }
+      .hero-title { font-size: clamp(2.6rem, 8.5vw, 7rem); }
     }
+    @media (min-width: 1101px) { #menu-overlay { display: none; } }
 
-    @media (min-width: 1101px) {
-      #menu-overlay { display: none; }
+    @media (max-width: 780px) {
+      .contact-card { grid-template-columns: 1fr; bottom: -200px; width: calc(100% - 2rem); }
+      .contact-footer-gap { height: 220px; }
+      .form-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 1100px) {
@@ -464,10 +386,7 @@
       .footer-nav { gap: 2.5rem; }
       .footer-divider { margin: 0 -1.5rem; }
     }
-
-    @media (max-width: 600px) {
-      .footer-nav { flex-direction: column; gap: 1.5rem; }
-    }
+    @media (max-width: 600px) { .footer-nav { flex-direction: column; gap: 1.5rem; } }
   </style>
 </head>
 <body data-page="company" data-logo="images/logo/LP-LOGO-dark-transparent.png">
@@ -477,64 +396,234 @@
 
 <!-- ── HERO SNAP ── -->
 <div id="hero-snap">
-
   <div id="site-header"></div>
 
-  <!-- HERO -->
   <section class="hero">
     <canvas id="hero-dot-canvas"></canvas>
+
     <div class="hero-scroll" style="z-index:1;">
       <span class="scroll-label">Scroll</span>
       <div class="scroll-track"><div class="scroll-thumb"></div></div>
     </div>
+
+    <!-- CONTACT US — 한 줄, 정중앙 -->
     <div class="hero-title-wrap" style="position:relative;z-index:2;">
       <h1 class="hero-title">
-        <span class="title-line"><span class="title-line-inner" id="line1">CONTACT</span></span>
-        <span class="title-line"><span class="title-line-inner" id="line2">US</span></span>
+        <span class="title-line"><span class="title-line-inner" id="line1">CONTACT</span></span><span class="title-word-gap"></span><span class="title-line"><span class="title-line-inner" id="line2">US</span></span>
       </h1>
     </div>
   </section>
-
 </div><!-- /#hero-snap -->
 
+<!-- ── CONTACT SECTION ── -->
+<section class="contact-section" id="contact-section">
+
+  <!-- Get In Touch — 위에 고정 -->
+  <div class="contact-header">
+    <h2 class="contact-header-title" id="contact-title">Get In Touch</h2>
+    <span class="contact-header-bar" id="contact-bar"></span>
+  </div>
+
+  <!-- 지도 + 겹치는 카드 -->
+  <div class="map-area">
+
+    <!--
+      카카오맵 embed iframe
+      ──────────────────────────────────────────────────────────────
+      • API 키 불필요. 실제 도메인(http/https)에서 정상 표시됩니다.
+      • 로컬(file://)에서는 보안 정책으로 지도가 안 보일 수 있습니다.
+
+      다른 방법 — 네이버 지도 embed (역시 API 키 불필요):
+        <iframe src="https://map.naver.com/v5/entry/place/여의도 기계진흥회관신관?c=15,0,0,0,dh"
+                class="map-frame" allowfullscreen loading="lazy"></iframe>
+
+      카카오맵에서 직접 embed 코드를 복사하려면:
+        map.kakao.com → 주소 검색 → 공유하기 → HTML 코드 복사
+      ──────────────────────────────────────────────────────────────
+    -->
+    <iframe
+      class="map-frame"
+      src="https://map.kakao.com/link/map/기계진흥회관신관,37.526748,126.922274/embed"
+      allowfullscreen
+      loading="lazy"
+      title="LeadingPoint 위치"
+    ></iframe>
+
+    <!-- 지도 위 겹치는 카드 -->
+    <div class="contact-card" id="contact-card">
+
+      <!-- 왼쪽: 메시지 보내기 폼 -->
+      <div class="form-panel">
+        <span class="panel-eyebrow">Send a Message</span>
+        <div class="panel-title">메시지 보내기</div>
+        <span class="panel-rule"></span>
+
+        <form id="contact-form" action="#" method="POST">
+          <div class="form-grid">
+
+            <div class="form-field">
+              <label class="form-field-label" for="f-name">이름</label>
+              <input class="form-input" type="text" id="f-name" name="name" placeholder="홍길동"/>
+            </div>
+
+            <div class="form-field">
+              <label class="form-field-label" for="f-email">이메일</label>
+              <input class="form-input" type="email" id="f-email" name="email" placeholder="hong@example.com"/>
+            </div>
+
+            <div class="form-field full">
+              <label class="form-field-label" for="f-subject">제목</label>
+              <input class="form-input" type="text" id="f-subject" name="subject" placeholder="문의 제목을 입력하세요"/>
+            </div>
+
+            <div class="form-field full">
+              <label class="form-field-label" for="f-message">메시지</label>
+              <textarea class="form-textarea" id="f-message" name="message" placeholder="문의 내용을 자유롭게 입력하세요"></textarea>
+            </div>
+
+          </div>
+          <div class="form-submit">
+            <button type="submit" class="submit-btn">
+              전송하기 <span class="submit-btn-arrow">↗</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- 오른쪽: 연락처 정보 -->
+      <div class="info-panel">
+        <span class="info-eyebrow">Contact Information</span>
+        <div class="info-panel-title">연락처 정보</div>
+        <span class="info-panel-rule"></span>
+
+        <div class="info-items">
+
+          <div class="info-item">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div>
+              <span class="info-item-label">Address</span>
+              <div class="info-item-value">서울시 영등포구 국회대로76길 22, 8층<br>기계진흥회관 신관, 여의도동</div>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .86h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 15.92z"/>
+              </svg>
+            </div>
+            <div>
+              <span class="info-item-label">Phone</span>
+              <div class="info-item-value">02.711.4080</div>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                <line x1="8" y1="21" x2="16" y2="21"/>
+                <line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </div>
+            <div>
+              <span class="info-item-label">Fax</span>
+              <div class="info-item-value">02.711.6080</div>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div>
+              <span class="info-item-label">Email</span>
+              <div class="info-item-value">info@leadingpoint.co.kr</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /.contact-card -->
+  </div><!-- /.map-area -->
+
+  <!-- 카드 아래 흰 여백 -->
+  <div class="contact-footer-gap"></div>
+
+</section>
+
+<div style="height:1px;background:rgba(0,0,0,0.06);"></div>
 <div id="site-footer"></div>
 
 </div><!-- /#page -->
 </div><!-- /#scroll-container -->
 
 <script>
-  /* ── SUBMENU + WHEEL 연동 (disaster-recovery.html과 동일한 로직) ── */
-  const subState = { business: false, company: false };
-  let subOpen = false;
-  let scrollLocked = false;
-  const scrollContainer = document.getElementById('scroll-container');
-
-  function getScrollY() {
-    return scrollContainer ? scrollContainer.scrollTop : window.scrollY;
+  /* ── MENU FUNCTIONS ── */
+  function toggleMenu() {
+    const overlay = document.getElementById('menu-overlay');
+    overlay.classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('open');
+    if (!overlay.classList.contains('open')) {
+      document.querySelectorAll('.overlay-submenu').forEach(s => s.classList.remove('open'));
+      document.querySelectorAll('.overlay-item-top').forEach(t => t.classList.remove('open'));
+    }
   }
 
+  function toggleOverlaySub(id, topEl) {
+    const sub = document.getElementById(id);
+    const isOpen = sub.classList.contains('open');
+    document.querySelectorAll('.overlay-submenu').forEach(s => s.classList.remove('open'));
+    document.querySelectorAll('.overlay-item-top').forEach(t => t.classList.remove('open'));
+    if (!isOpen) { sub.classList.add('open'); topEl.classList.add('open'); }
+  }
+
+  const subState = { business: false, company: false };
+
+  function toggleSub(name) {
+    const isOpen = subState[name];
+    Object.keys(subState).forEach(k => {
+      subState[k] = false;
+      const sub = document.getElementById('sub-' + k); if (sub) sub.classList.remove('open');
+      const t = document.getElementById('title-' + k); if (t) t.classList.remove('open');
+    });
+    if (!isOpen) {
+      subState[name] = true;
+      const sub = document.getElementById('sub-' + name); if (sub) sub.classList.add('open');
+      const t = document.getElementById('title-' + name); if (t) t.classList.add('open');
+    }
+  }
+
+  /* ── WHEEL / SCROLL ── */
+  let subOpen = false, scrollLocked = false;
+  const scrollContainer = document.getElementById('scroll-container');
+
+  function getScrollY() { return scrollContainer ? scrollContainer.scrollTop : window.scrollY; }
+
   function openAllSubs() {
-    ['business', 'company'].forEach(k => {
+    ['business','company'].forEach(k => {
       subState[k] = true;
-      const sub = document.getElementById('sub-' + k);
-      if (sub) sub.classList.add('open');
-      const title = document.getElementById('title-' + k);
-      if (title) title.classList.add('open');
+      const sub = document.getElementById('sub-'+k); if(sub) sub.classList.add('open');
+      const t = document.getElementById('title-'+k); if(t) t.classList.add('open');
     });
     const hero = document.querySelector('.hero');
-    if (hero) {
-      hero.style.transition = 'transform 0.8s cubic-bezier(0.16,1,0.3,1)';
-      hero.style.transform = 'translateY(18px)';
-    }
+    if (hero) { hero.style.transition='transform 0.8s cubic-bezier(0.16,1,0.3,1)'; hero.style.transform='translateY(18px)'; }
   }
 
   function closeAllSubs() {
     Object.keys(subState).forEach(k => {
       subState[k] = false;
-      const sub = document.getElementById('sub-' + k);
-      if (sub) sub.classList.remove('open');
-      const title = document.getElementById('title-' + k);
-      if (title) title.classList.remove('open');
+      const sub = document.getElementById('sub-'+k); if(sub) sub.classList.remove('open');
+      const t = document.getElementById('title-'+k); if(t) t.classList.remove('open');
     });
     const hero = document.querySelector('.hero');
     if (hero) hero.style.transform = 'translateY(0)';
@@ -542,132 +631,130 @@
 
   if (scrollContainer) {
     scrollContainer.addEventListener('scroll', () => {
-      if (scrollContainer.scrollTop > 80 && subOpen) {
-        subOpen = false;
-        closeAllSubs();
-      }
+      if (scrollContainer.scrollTop > 80 && subOpen) { subOpen = false; closeAllSubs(); }
     }, { passive: true });
   }
 
   function onWheel(e) {
     const delta = e.deltaY || 0;
     if (delta > 0 && getScrollY() < 50 && !subOpen) {
-      e.preventDefault();
-      e.stopPropagation();
-      subOpen = true;
-      scrollLocked = true;
-      openAllSubs();
-      setTimeout(() => { scrollLocked = false; }, 700);
-      return;
+      e.preventDefault(); e.stopPropagation();
+      subOpen = true; scrollLocked = true; openAllSubs();
+      setTimeout(() => { scrollLocked = false; }, 700); return;
     }
-    if (scrollLocked) {
-      e.preventDefault();
-      e.stopPropagation();
-      return;
-    }
-    if (delta < 0 && subOpen && getScrollY() < 50) {
-      subOpen = false;
-      closeAllSubs();
-    }
+    if (scrollLocked) { e.preventDefault(); e.stopPropagation(); return; }
+    if (delta < 0 && subOpen && getScrollY() < 50) { subOpen = false; closeAllSubs(); }
   }
 
   function registerWheelListeners() {
-    if (scrollContainer) {
-      scrollContainer.addEventListener('wheel', onWheel, { passive: false });
-    }
+    if (scrollContainer) scrollContainer.addEventListener('wheel', onWheel, { passive: false });
     window.addEventListener('wheel', onWheel, { passive: false });
   }
+  if (document.readyState === 'complete') registerWheelListeners();
+  else window.addEventListener('load', registerWheelListeners);
 
-  if (document.readyState === 'complete') {
-    registerWheelListeners();
-  } else {
-    window.addEventListener('load', registerWheelListeners);
-  }
-
-  /* ── DOT GRID ── */
-  (function () {
+  /* ── DOT GRID (기존 검정 점 그대로) ── */
+  (function() {
     const canvas = document.getElementById('hero-dot-canvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    const SPACING   = 28;
-    const DOT_R     = 1;
-    const ALPHA_MIN = 0.03;
-    const ALPHA_MAX = 0.22;
-    const CYCLE     = 3200;
+    const SPACING=28, DOT_R=1, ALPHA_MIN=0.03, ALPHA_MAX=0.22, CYCLE=3200;
     let animId;
 
     function resize() {
-      const dpr  = window.devicePixelRatio || 1;
+      const dpr = window.devicePixelRatio||1;
       const rect = canvas.parentElement.getBoundingClientRect();
-      canvas.width  = rect.width  * dpr;
-      canvas.height = rect.height * dpr;
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.scale(dpr, dpr);
+      canvas.width=rect.width*dpr; canvas.height=rect.height*dpr;
+      ctx.setTransform(1,0,0,1,0,0); ctx.scale(dpr,dpr);
     }
 
     function draw(ts) {
-      const dpr = window.devicePixelRatio || 1;
-      const W   = canvas.width  / dpr;
-      const H   = canvas.height / dpr;
-      ctx.clearRect(0, 0, W, H);
-      const t = (Math.sin((ts / CYCLE) * Math.PI * 2 - Math.PI / 2) + 1) / 2;
-      for (let x = SPACING / 2; x < W; x += SPACING) {
-        for (let y = SPACING / 2; y < H; y += SPACING) {
-          const nx   = x / W - 0.5;
-          const ny   = y / H - 0.5;
-          const dist = Math.min(1, Math.sqrt(nx * nx + ny * ny) * 2.2);
-          const phase = t < 0.5
-            ? dist * t * 2
-            : dist * (1 - (t - 0.5) * 2) + (1 - dist) * (t - 0.5) * 2;
-          const alpha = ALPHA_MIN + (ALPHA_MAX - ALPHA_MIN) * phase;
-          ctx.beginPath();
-          ctx.arc(x, y, DOT_R, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(0,0,0,${alpha.toFixed(3)})`;
-          ctx.fill();
+      const dpr=window.devicePixelRatio||1;
+      const W=canvas.width/dpr, H=canvas.height/dpr;
+      ctx.clearRect(0,0,W,H);
+      const t=(Math.sin((ts/CYCLE)*Math.PI*2-Math.PI/2)+1)/2;
+      for (let x=SPACING/2; x<W; x+=SPACING) {
+        for (let y=SPACING/2; y<H; y+=SPACING) {
+          const nx=x/W-0.5, ny=y/H-0.5;
+          const dist=Math.min(1,Math.sqrt(nx*nx+ny*ny)*2.2);
+          const phase=t<0.5?dist*t*2:dist*(1-(t-0.5)*2)+(1-dist)*(t-0.5)*2;
+          const alpha=ALPHA_MIN+(ALPHA_MAX-ALPHA_MIN)*phase;
+          ctx.beginPath(); ctx.arc(x,y,DOT_R,0,Math.PI*2);
+          ctx.fillStyle=`rgba(0,0,0,${alpha.toFixed(3)})`; ctx.fill();
         }
       }
-      animId = requestAnimationFrame(draw);
+      animId=requestAnimationFrame(draw);
     }
 
     resize();
-    window.addEventListener('resize', () => {
-      cancelAnimationFrame(animId);
-      resize();
-      animId = requestAnimationFrame(draw);
-    });
-    animId = requestAnimationFrame(draw);
+    window.addEventListener('resize',()=>{ cancelAnimationFrame(animId); resize(); animId=requestAnimationFrame(draw); });
+    animId=requestAnimationFrame(draw);
   })();
 
   /* ── TITLE ANIMATION ── */
   function buildTitle() {
-    const STAGGER = 0.11;
+    const STAGGER = 0.10;
     let idx = 0;
-    ['line1', 'line2'].forEach((id, lineIdx) => {
-      const inner = document.getElementById(id);
-      if (!inner) return;
-      const text  = inner.textContent;
-      inner.textContent = '';
-      inner.style.visibility = 'visible';
-      if (lineIdx === 1) idx += 0.5;
-      text.split('').forEach(ch => {
-        const s = document.createElement('span');
-        s.className = 'char-span';
-        s.textContent = ch;
-        s.style.transitionDelay = (idx * STAGGER).toFixed(2) + 's';
-        inner.appendChild(s);
-        idx++;
-      });
+    // line1: CONTACT
+    const inner1 = document.getElementById('line1');
+    inner1.textContent = '';
+    inner1.style.visibility = 'visible';
+    'CONTACT'.split('').forEach(ch => {
+      const s = document.createElement('span');
+      s.className = 'char-span';
+      s.textContent = ch;
+      s.style.transitionDelay = (idx * STAGGER).toFixed(2) + 's';
+      inner1.appendChild(s);
+      idx++;
+    });
+    idx += 0.4; // 단어 사이 짧은 갭
+    // line2: US
+    const inner2 = document.getElementById('line2');
+    inner2.textContent = '';
+    inner2.style.visibility = 'visible';
+    'US'.split('').forEach(ch => {
+      const s = document.createElement('span');
+      s.className = 'char-span';
+      s.textContent = ch;
+      s.style.transitionDelay = (idx * STAGGER).toFixed(2) + 's';
+      inner2.appendChild(s);
+      idx++;
     });
     requestAnimationFrame(() => requestAnimationFrame(() => {
       document.querySelectorAll('.char-span').forEach(s => s.classList.add('up'));
     }));
   }
 
-  /* ── PAGE REVEAL ── */
   window.addEventListener('load', () => {
     document.getElementById('page').classList.add('visible');
     setTimeout(buildTitle, 80);
   });
+
+  /* ── CONTACT SECTION REVEAL ── */
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      ['contact-title','contact-bar','contact-card'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) entry.isIntersecting ? el.classList.add('active') : el.classList.remove('active');
+      });
+    });
+  }, { root: scrollContainer, threshold: 0.08 });
+
+  const cs = document.getElementById('contact-section');
+  if (cs) revealObs.observe(cs);
+
+  /* ── FORM SUBMIT (placeholder — 다음 단계에서 실제 전송 연결) ── */
+  const form = document.getElementById('contact-form');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('.submit-btn');
+      const orig = btn.innerHTML;
+      btn.innerHTML = '전송 완료 ✓';
+      btn.style.background = '#3a7a5e';
+      setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; this.reset(); }, 3000);
+    });
+  }
 </script>
 <script src="js/components.js"></script>
 </body>
