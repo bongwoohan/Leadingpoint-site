@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LeadingPoint – Disaster Recovery</title>
+  <title>LeadingPoint – Technology Solutions</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -373,8 +373,9 @@
     /* ── HERO BODY ── */
     .hero-body {
       display: flex;
-      align-items: flex-end;
-      gap: 2.5rem;
+      flex-direction: column; /* 가로 배열에서 세로 배열로 변경 */
+      align-items: flex-start; /* 왼쪽 정렬 */
+      gap: 1.5rem; /* 타이틀과 슬로건 사이 간격 */
     }
 
     .hero-title-wrap {
@@ -396,7 +397,7 @@
       font-weight: 600;
       letter-spacing: -0.01em;
       line-height: 1.2;
-      color: #fff2cf;
+      color: #EDF6FD;
       margin-bottom: 0.7rem;
       opacity: 0;
       transform: translateY(10px);
@@ -507,7 +508,7 @@
       font-size: clamp(0.95rem, 1.5vw, 1.15rem);
       font-weight: 300;
       line-height: 1.9;
-      color: rgba(26,35,50,0.6);
+      color: rgba(26,35,50,0.85);
     }
 
     .def-left-wrap {
@@ -658,7 +659,7 @@
       font-size: 0.88rem;
       font-weight: 300;
       line-height: 1.85;
-      color: rgba(200,216,240,0.52);
+      color: rgba(200,216,240,0.9);
     }
 
     @media (max-width: 1100px) {
@@ -751,7 +752,7 @@
       font-size: clamp(0.88rem, 1.3vw, 1rem);
       font-weight: 300;
       line-height: 1.9;
-      color: rgba(26,35,50,0.58);
+      color: rgba(26,35,50,0.85);
       margin-bottom: 2rem;
       opacity: 0;
       transform: translateY(20px);
@@ -846,7 +847,7 @@
       font-size: 0.85rem;
       font-weight: 300;
       line-height: 1.8;
-      color: rgba(26,35,50,0.55);
+      color: rgba(26,35,50,0.85);
     }
 
     @media (max-width: 1100px) {
@@ -1038,7 +1039,7 @@
       font-size: clamp(0.88rem, 1.3vw, 1rem);
       font-weight: 300;
       line-height: 1.9;
-      color: rgba(200,216,240,0.58);
+      color: rgba(200,216,240,0.9);
       border-top: 1px solid rgba(200,216,240,0.1);
       padding-top: 1.6rem;
       margin-bottom: 2.5rem;
@@ -1118,6 +1119,385 @@
       .adv-section-num { left: 1.5rem; top: 2rem; }
       .adv-headline { white-space: normal; font-size: clamp(1.4rem, 5vw, 2rem); }
     }
+
+    /* ══════════════════════════════════════════
+       PARTNERS OVERVIEW SECTION
+    ══════════════════════════════════════════ */
+    .partners-section {
+      scroll-snap-align: start;
+      min-height: 100vh;
+      background: #F5F0E8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .partners-section-num {
+      position: absolute;
+      top: 2.5rem;
+      left: 3rem;
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      color: rgba(26,35,50,0.18);
+      text-transform: uppercase;
+    }
+
+    .partners-inner {
+      width: 100%;
+      max-width: 1300px;
+      padding: 5rem 3rem;
+    }
+
+    .partners-header {
+      display: grid;
+      grid-template-columns: 4fr 6fr;
+      align-items: end;
+      gap: 0;
+      margin-bottom: 4rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(26,35,50,0.1);
+    }
+
+    .partners-tag {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(26,35,50,0.35);
+      display: block;
+      margin-bottom: 0.7rem;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .partners-tag.active { opacity: 1; transform: translateY(0); }
+
+    .partners-headline {
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      color: #1a2332;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1) 0.08s, transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.08s;
+    }
+    .partners-headline.active { opacity: 1; transform: translateY(0); }
+
+    .partners-desc {
+      font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(26,35,50,0.55);
+      padding-left: 3rem;
+      border-left: 1px solid rgba(26,35,50,0.1);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1) 0.16s, transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.16s;
+    }
+    .partners-desc.active { opacity: 1; transform: translateY(0); }
+
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .partner-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 2.5rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      box-shadow: 0 2px 12px rgba(26,35,50,0.07), 0 1px 3px rgba(26,35,50,0.05);
+      border: 1px solid rgba(26,35,50,0.06);
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1), box-shadow 0.25s ease;
+      cursor: default;
+    }
+    .partner-card.active { opacity: 1; transform: translateY(0); }
+    .partner-card:nth-child(1) { transition-delay: 0.08s; }
+    .partner-card:nth-child(2) { transition-delay: 0.16s; }
+    .partner-card:nth-child(3) { transition-delay: 0.24s; }
+    .partner-card:nth-child(4) { transition-delay: 0.32s; }
+    .partner-card:hover { box-shadow: 0 8px 32px rgba(26,35,50,0.12), 0 2px 8px rgba(26,35,50,0.08); transform: translateY(-4px); }
+    .partner-card.active:hover { transform: translateY(-4px); }
+
+    .partner-logo-wrap {
+      height: 36px;
+      display: flex;
+      align-items: center;
+    }
+    .partner-logo-wrap img {
+      height: 28px;
+      width: auto;
+      max-width: 140px;
+      object-fit: contain;
+      object-position: left center;
+      display: block;
+    }
+
+    .partner-accent {
+      display: block;
+      width: 28px;
+      height: 2px;
+      border-radius: 2px;
+      margin-top: 0.2rem;
+    }
+
+    .partner-tagline {
+      font-size: 0.78rem;
+      font-weight: 400;
+      line-height: 1.65;
+      color: rgba(26,35,50,0.5);
+    }
+
+    .partner-product-count {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(26,35,50,0.28);
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(26,35,50,0.07);
+    }
+
+    @media (max-width: 1100px) {
+      .partners-inner { padding: 5rem 1.5rem 4rem; }
+      .partners-section-num { left: 1.5rem; }
+      .partners-header { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+      .partners-desc { padding-left: 0; border-left: none; border-top: 1px solid rgba(26,35,50,0.1); padding-top: 1.5rem; }
+      .partners-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .partners-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ══════════════════════════════════════════
+       VENDOR SECTION BASE
+    ══════════════════════════════════════════ */
+    .vendor-section {
+      scroll-snap-align: start;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vendor-section-num {
+      position: absolute;
+      top: 2.5rem;
+      left: 3rem;
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .vendor-inner {
+      width: 100%;
+      max-width: 1300px;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      align-items: start;
+      gap: 5rem;
+      padding: 5rem 3rem 4rem;
+    }
+
+    /* LEFT PANEL */
+    .vendor-left {
+      position: sticky;
+      top: 0;
+      padding-top: 0.5rem;
+    }
+
+    .vendor-logo-wrap {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .vendor-logo-wrap.active { opacity: 1; transform: translateY(0); }
+
+    .vendor-logo-wrap img {
+      height: 60px;
+      width: auto;
+      max-width: 180px;
+      object-fit: contain;
+      object-position: left center;
+      display: block;
+    }
+
+    .vendor-brand-line {
+      display: block;
+      width: 32px;
+      height: 2.5px;
+      border-radius: 2px;
+      margin-bottom: 1.6rem;
+      opacity: 0;
+      transition: opacity 0.5s ease 0.1s;
+    }
+    .vendor-brand-line.active { opacity: 1; }
+
+    .vendor-headline {
+      font-size: clamp(1.5rem, 2.2vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1) 0.12s, transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.12s;
+    }
+    .vendor-headline.active { opacity: 1; transform: translateY(0); }
+
+    .vendor-body {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.85;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1) 0.2s, transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.2s;
+    }
+    .vendor-body.active { opacity: 1; transform: translateY(0); }
+
+    /* RIGHT PANEL — product list */
+    .vendor-products {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .product-row {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      align-items: center;
+      gap: 2.5rem;
+      padding: 1.8rem 0;
+      border-top: 1px solid;
+      opacity: 0;
+      transform: translateX(20px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+    .product-row.active { opacity: 1; transform: translateX(0); }
+    .product-row:nth-child(1) { transition-delay: 0.08s; }
+    .product-row:nth-child(2) { transition-delay: 0.18s; }
+    .product-row:nth-child(3) { transition-delay: 0.28s; }
+
+    .product-img-card {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 110px;
+      box-shadow: 0 2px 10px rgba(26,35,50,0.08), 0 1px 3px rgba(26,35,50,0.05);
+      border: 1px solid rgba(26,35,50,0.07);
+      transition: box-shadow 0.25s ease, transform 0.25s ease;
+      flex-shrink: 0;
+    }
+    .product-row:hover .product-img-card {
+      box-shadow: 0 6px 22px rgba(26,35,50,0.13);
+      transform: scale(1.02);
+    }
+
+    .product-img-card img {
+      max-width: 100%;
+      max-height: 75px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .product-info { display: flex; flex-direction: column; gap: 0.35rem; }
+
+    .product-name {
+      font-size: clamp(1rem, 1.6vw, 1.25rem);
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+    }
+
+    .product-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      line-height: 1.75;
+      margin-top: 0.15rem;
+    }
+
+    /* ── DELL section ── */
+    .vendor-dell { background: #EEF2F7; }
+    .vendor-dell .vendor-section-num { color: rgba(26,35,50,0.18); }
+    .vendor-dell .vendor-headline { color: #1a2332; }
+    .vendor-dell .vendor-body { color: rgba(26,35,50,0.52); }
+    .vendor-dell .product-row { border-top-color: rgba(26,35,50,0.08); }
+    .vendor-dell .product-name { color: #1a2332; }
+    .vendor-dell .product-desc { color: rgba(26,35,50,0.5); }
+    .vendor-dell .vendor-brand-line { background: #007DB8; }
+
+    /* ── HPE section ── */
+    .vendor-hpe { background: #F0F7F4; }
+    .vendor-hpe .vendor-section-num { color: rgba(26,35,50,0.18); }
+    .vendor-hpe .vendor-headline { color: #1a2332; }
+    .vendor-hpe .vendor-body { color: rgba(26,35,50,0.52); }
+    .vendor-hpe .product-row { border-top-color: rgba(26,35,50,0.08); }
+    .vendor-hpe .product-name { color: #1a2332; }
+    .vendor-hpe .product-desc { color: rgba(26,35,50,0.5); }
+    .vendor-hpe .vendor-brand-line { background: #00B388; }
+
+    /* ── HITACHI section ── */
+    .vendor-hitachi { background: #F5F1EE; }
+    .vendor-hitachi .vendor-section-num { color: rgba(26,35,50,0.18); }
+    .vendor-hitachi .vendor-headline { color: #1a2332; }
+    .vendor-hitachi .vendor-body { color: rgba(26,35,50,0.52); }
+    .vendor-hitachi .product-row { border-top-color: rgba(26,35,50,0.08); }
+    .vendor-hitachi .product-name { color: #1a2332; }
+    .vendor-hitachi .product-desc { color: rgba(26,35,50,0.5); }
+    .vendor-hitachi .vendor-brand-line { background: #E60026; }
+
+    /* ── PURE STORAGE section ── */
+    .vendor-pure { background: #EDF6FD; }
+    .vendor-pure .vendor-section-num { color: rgba(26,35,50,0.18); }
+    .vendor-pure .vendor-headline { color: #1a2332; }
+    .vendor-pure .vendor-body { color: rgba(26,35,50,0.52); }
+    .vendor-pure .product-row { border-top-color: rgba(26,35,50,0.08); }
+    .vendor-pure .product-name { color: #1a2332; }
+    .vendor-pure .product-desc { color: rgba(26,35,50,0.5); }
+    .vendor-pure .vendor-brand-line { background: #FF6B2B; }
+
+    /* Hitachi logo (dark background logo → filter for light bg) */
+    .vendor-hitachi .vendor-logo-wrap img {
+      filter: brightness(0) saturate(100%);
+    }
+
+    @media (max-width: 1100px) {
+      .vendor-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 5rem 1.5rem 4rem;
+      }
+      .vendor-section-num { left: 1.5rem; }
+      .vendor-left { position: static; }
+      .product-row { grid-template-columns: 160px 1fr; gap: 1.5rem; }
+      .product-img-card { height: 90px; }
+    }
+    @media (max-width: 600px) {
+      .product-row { grid-template-columns: 120px 1fr; gap: 1rem; }
+      .product-img-card { height: 75px; padding: 0.8rem 1rem; }
+    }
   </style>
 </head>
 <body data-page="technology" data-logo="images/logo/LP-LOGO-transparent.png">
@@ -1145,8 +1525,8 @@
         </h1>
       </div>
       <div class="hero-slogan-right">
-        <p class="slogan-main" id="slogan-main"></p>
-        <p class="slogan-sub" id="slogan-sub"></p>
+        <p class="slogan-main" id="slogan-main">Enterprise Hardware,<br>Trusted Partners.</p>
+        <p class="slogan-sub" id="slogan-sub">Dell Technologies · HPE · Hitachi Vantara · Pure Storage</p>
       </div>
     </div>
     <div class="hero-bottom" style="position:relative;z-index:1;">
@@ -1156,20 +1536,242 @@
 
 </div><!-- /#hero-snap -->
 
-<!-- ── DEFINITION SECTION ── -->
-<section class="def-section" id="def-section">
+<!-- ── PARTNERS OVERVIEW SECTION ── -->
+<section class="partners-section" id="def-section">
+  <span class="partners-section-num">01 — Partners</span>
+  <div class="partners-inner">
+    <div class="partners-header">
+      <div>
+        <span class="partners-tag" id="ptag">Hardware Partners</span>
+        <h2 class="partners-headline" id="pheadline">Enterprise Hardwares<br>from the World's<br>Leading Vendors.</h2>
+      </div>
+      <p class="partners-desc" id="pdesc">
+        LeadingPoint는 Dell Technologies, HPE, Hitachi Vantara, Pure Storage 등 글로벌 최상위 스토리지 벤더와의 공식 파트너십을 통해 기업 핵심 인프라에 최적화된 하드웨어 솔루션을 공급합니다. 미션 크리티컬 환경부터 대규모 파일 워크로드까지, 고객의 비즈니스 요구에 정확히 맞는 제품을 제안하고 구축합니다.
+      </p>
+    </div>
+    <div class="partners-grid">
+      <!-- Dell -->
+      <div class="partner-card" id="pcard-dell">
+        <div class="partner-logo-wrap">
+          <img src="images/partners/delltechnologies.png" alt="Dell Technologies">
+        </div>
+        <span class="partner-accent" style="background:#007DB8;"></span>
+        <p class="partner-tagline">Mission-critical storage for enterprise-scale performance.</p>
+        <span class="partner-product-count">PowerMax · PowerStore · PowerScale</span>
+      </div>
+      <!-- HPE -->
+      <div class="partner-card" id="pcard-hpe">
+        <div class="partner-logo-wrap">
+          <img src="images/partners/hpe.png" alt="HPE">
+        </div>
+        <span class="partner-accent" style="background:#00B388;"></span>
+        <p class="partner-tagline">Intelligent enterprise storage for critical business workloads.</p>
+        <span class="partner-product-count">Alletra 9000 · Alletra 6000 · MSA</span>
+      </div>
+      <!-- Hitachi Vantara -->
+      <div class="partner-card" id="pcard-hitachi">
+        <div class="partner-logo-wrap">
+          <img src="images/logo/Hitachivantara.png" alt="Hitachi Vantara" style="filter:brightness(0) saturate(100%);">
+        </div>
+        <span class="partner-accent" style="background:#E60026;"></span>
+        <p class="partner-tagline">Built for resilience, availability, and enterprise trust.</p>
+        <span class="partner-product-count">VSP One Block · VSP One File · VSP 5000</span>
+      </div>
+      <!-- Pure Storage -->
+      <div class="partner-card" id="pcard-pure">
+        <div class="partner-logo-wrap">
+          <img src="images/partners/purestorage.png" alt="Pure Storage">
+        </div>
+        <span class="partner-accent" style="background:#FF6B2B;"></span>
+        <p class="partner-tagline">All-flash simplicity for modern enterprise workloads.</p>
+        <span class="partner-product-count">FlashArray//XL · FlashArray//X · FlashBlade</span>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ── WHAT WE DO SECTION ── -->
-<section class="wwd-section" id="wwd-section">
+<!-- ── DELL TECHNOLOGIES SECTION ── -->
+<section class="vendor-section vendor-dell" id="wwd-section">
+  <span class="vendor-section-num">02 — Dell Technologies</span>
+  <div class="vendor-inner">
+    <!-- LEFT -->
+    <div class="vendor-left">
+      <div class="vendor-logo-wrap" id="dell-logo">
+        <img src="images/partners/delltechnologies.png" alt="Dell Technologies">
+      </div>
+      <span class="vendor-brand-line" id="dell-line"></span>
+      <h2 class="vendor-headline" id="dell-headline">Mission-Critical Storage for Enterprise-Scale Performance.</h2>
+      <p class="vendor-body" id="dell-body">Dell Technologies의 엔터프라이즈 스토리지 포트폴리오는 미션 크리티컬 환경부터 대규모 파일 워크로드까지 폭넓게 지원합니다. 뛰어난 성능, 확장성, 단순화된 관리를 통해 기업의 디지털 트랜스포메이션을 가속화합니다.</p>
+    </div>
+    <!-- RIGHT -->
+    <div class="vendor-products" id="dell-products">
+      <div class="product-row">
+        <div class="product-img-card">
+          <img src="images/products/powermax.png" alt="Dell PowerMax">
+        </div>
+        <div class="product-info">
+          <span class="product-name">PowerMax</span>
+          <span class="product-desc">미션 크리티컬을 위한 초고성능 올-NVMe 스토리지. 업계 최고 수준의 IOPS와 초저지연으로 가장 까다로운 엔터프라이즈 워크로드를 처리합니다.</span>
+        </div>
+      </div>
+      <div class="product-row">
+        <div class="product-img-card">
+          <img src="images/products/powerstore.png" alt="Dell PowerStore">
+        </div>
+        <div class="product-info">
+          <span class="product-name">PowerStore</span>
+          <span class="product-desc">확장성과 단순함을 갖춘 엔터프라이즈 스토리지. 지능형 자동화와 컨테이너 기반 아키텍처로 운영 복잡성을 획기적으로 낮춥니다.</span>
+        </div>
+      </div>
+      <div class="product-row">
+        <div class="product-img-card">
+          <img src="images/products/powerscale.png" alt="Dell PowerScale">
+        </div>
+        <div class="product-info">
+          <span class="product-name">PowerScale</span>
+          <span class="product-desc">대규모 파일 데이터를 위한 스케일아웃 스토리지. AI·분석·미디어 워크로드에 최적화된 OneFS 기반의 고성능 NAS 플랫폼입니다.</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ── APPROACH SECTION ── -->
-<section class="app-section" id="app-section">
+<!-- ── HPE SECTION ── -->
+<section class="vendor-section vendor-hpe" id="app-section">
+  <span class="vendor-section-num">03 — Hewlett Packard Enterprise</span>
+  <div class="vendor-inner">
+    <!-- LEFT -->
+    <div class="vendor-left">
+      <div class="vendor-logo-wrap" id="hpe-logo">
+        <img src="images/partners/hpe.png" alt="HPE">
+      </div>
+      <span class="vendor-brand-line" id="hpe-line"></span>
+      <h2 class="vendor-headline" id="hpe-headline">Intelligent Enterprise Storage for Critical Business Workloads.</h2>
+      <p class="vendor-body" id="hpe-body">HPE의 스토리지 솔루션은 클라우드 기반 관리와 AI 기반 인텔리전스를 결합하여 온프레미스 인프라를 서비스처럼 운영할 수 있게 합니다. HPE GreenLake 플랫폼과 긴밀하게 통합되어 유연한 소비 모델을 지원합니다.</p>
+    </div>
+    <!-- RIGHT -->
+    <div class="vendor-products" id="hpe-products">
+      <div class="product-row">
+        <div class="product-img-card">
+          <img src="images/products/alletra9000.png" alt="HPE Alletra 9000">
+        </div>
+        <div class="product-info">
+          <span class="product-name">Alletra 9000</span>
+          <span class="product-desc">핵심 업무용 초저지연 하이엔드 스토리지. 100% NVMe 아키텍처와 99.9999% 가용성을 보장하며, 클라우드 중심의 관리 경험을 제공합니다.</span>
+        </div>
+      </div>
+      <div class="product-row">
+        <div class="product-img-card">
+          <img src="images/products/alletra6000.png" alt="HPE Alletra 6000">
+        </div>
+        <div class="product-info">
+          <span class="product-name">Alletra 6000</span>
+          <span class="product-desc">비즈니스 크리티컬 환경에 맞춘 지능형 스토리지. 예측 가능한 성능과 자동화된 데이터 최적화로 운영 효율을 극대화합니다.</span>
+        </div>
+      </div>
+      <div class="product-row">
+        <div class="product-img-card">
+          <img src="images/products/MSA.png" alt="HPE MSA">
+        </div>
+        <div class="product-info">
+          <span class="product-name">MSA</span>
+          <span class="product-desc">실용적이고 합리적인 엔터프라이즈 SAN. 중소규모 환경에 적합한 엔트리 레벨 솔루션으로 간편한 설치와 운영을 지원합니다.</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ── ADVANCED DR SECTION ── -->
-<section class="adv-section" id="adv-section">
+<!-- ── HITACHI VANTARA SECTION ── -->
+<section class="vendor-section vendor-hitachi" id="adv-section">
+  <span class="vendor-section-num">04 — Hitachi Vantara</span>
+  <div class="vendor-inner">
+    <!-- LEFT -->
+    <div class="vendor-left">
+      <div class="vendor-logo-wrap" id="hitachi-logo">
+        <img src="images/logo/Hitachivantara.png" alt="Hitachi Vantara">
+      </div>
+      <span class="vendor-brand-line" id="hitachi-line"></span>
+      <h2 class="vendor-headline" id="hitachi-headline">Built for Resilience, Availability, and Enterprise Trust.</h2>
+      <p class="vendor-body" id="hitachi-body">Hitachi Vantara는 수십 년간 쌓아온 스토리지 기술력을 바탕으로 최고 수준의 안정성과 가용성을 제공합니다. 금융, 의료, 공공 등 가장 엄격한 컴플라이언스가 요구되는 환경에서도 신뢰할 수 있는 인프라를 구현합니다.</p>
+    </div>
+    <!-- RIGHT -->
+    <div class="vendor-products" id="hitachi-products">
+      <div class="product-row">
+        <div class="product-img-card">
+          <img src="images/products/VSPoneblock.png" alt="VSP One Block">
+        </div>
+        <div class="product-info">
+          <span class="product-name">VSP One Block</span>
+          <span class="product-desc">안정성과 성능을 강화한 블록 스토리지. 엔터프라이즈 등급의 데이터 보호와 인라인 압축·중복제거를 통해 스토리지 효율을 극대화합니다.</span>
+        </div>
+      </div>
+      <div class="product-row">
+        <div class="product-img-card">
+          <img src="images/products/VSPonefile.png" alt="VSP One File">
+        </div>
+        <div class="product-info">
+          <span class="product-name">VSP One File</span>
+          <span class="product-desc">블록과 파일을 아우르는 통합 플랫폼. 단일 시스템에서 블록 및 파일 프로토콜을 동시 지원하여 인프라 복잡도를 크게 줄입니다.</span>
+        </div>
+      </div>
+      <div class="product-row">
+        <div class="product-img-card">
+          <img src="images/products/VSP5000.png" alt="VSP 5000 Series">
+        </div>
+        <div class="product-info">
+          <span class="product-name">VSP 5000 Series</span>
+          <span class="product-desc">대규모 업무를 위한 하이엔드 스토리지. 최고 수준의 IOPS와 99.9999% 가용성으로 미션 크리티컬 워크로드의 연속성을 보장합니다.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PURE STORAGE SECTION ── -->
+<section class="vendor-section vendor-pure" id="pure-section">
+  <span class="vendor-section-num">05 — Pure Storage</span>
+  <div class="vendor-inner">
+    <!-- LEFT -->
+    <div class="vendor-left">
+      <div class="vendor-logo-wrap" id="pure-logo">
+        <img src="images/partners/purestorage.png" alt="Pure Storage">
+      </div>
+      <span class="vendor-brand-line" id="pure-line"></span>
+      <h2 class="vendor-headline" id="pure-headline">All-Flash Simplicity for Modern Enterprise Workloads.</h2>
+      <p class="vendor-body" id="pure-body">Pure Storage는 100% 올-플래시 아키텍처를 기반으로 복잡한 스토리지 운영을 근본적으로 단순화합니다. Evergreen 구독 모델로 중단 없는 업그레이드를 보장하며, 업계 최고 수준의 에너지 효율로 운영 비용을 절감합니다.</p>
+    </div>
+    <!-- RIGHT -->
+    <div class="vendor-products" id="pure-products">
+      <div class="product-row">
+        <div class="product-img-card">
+          <img src="images/products/flasharrayxl.png" alt="FlashArray//XL">
+        </div>
+        <div class="product-info">
+          <span class="product-name">FlashArray//XL</span>
+          <span class="product-desc">대규모 환경용 최상위 올-NVMe. 업계 최저 지연시간과 최고 밀도로 가장 집중적인 엔터프라이즈 워크로드를 처리합니다.</span>
+        </div>
+      </div>
+      <div class="product-row">
+        <div class="product-img-card">
+          <img src="images/products/flasharrayx.png" alt="FlashArray//X">
+        </div>
+        <div class="product-info">
+          <span class="product-name">FlashArray//X</span>
+          <span class="product-desc">빠르고 단순한 엔터프라이즈 SAN. 일관된 초저지연 성능과 Purity 운영체제 기반의 직관적인 관리로 스토리지 운영을 혁신합니다.</span>
+        </div>
+      </div>
+      <div class="product-row">
+        <div class="product-img-card">
+          <img src="images/products/flashblade.png" alt="FlashBlade">
+        </div>
+        <div class="product-info">
+          <span class="product-name">FlashBlade</span>
+          <span class="product-desc">파일과 비정형 데이터에 강한 고성능 플랫폼. AI·ML·분석 워크로드에 최적화된 통합 파일 및 오브젝트 스토리지입니다.</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <div style="height:1px;background:rgba(200,216,240,0.12);"></div>
@@ -1407,49 +2009,44 @@
   /* ── SCROLL REVEAL ── */
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
+
+      /* ── PARTNERS OVERVIEW ── */
       if (entry.target.id === 'def-section') {
-        const targets = entry.target.querySelectorAll('.def-left-wrap, .def-body-block');
-        targets.forEach(el => entry.isIntersecting ? el.classList.add('active') : el.classList.remove('active'));
+        const els = entry.target.querySelectorAll(
+          '.partners-tag, .partners-headline, .partners-desc, .partner-card'
+        );
+        els.forEach(el => entry.isIntersecting ? el.classList.add('active') : el.classList.remove('active'));
       }
-      if (entry.target.id === 'wwd-section') {
-        const headline = entry.target.querySelector('.wwd-headline');
-        const subheadline = entry.target.querySelector('.wwd-subheadline');
-        const cards = entry.target.querySelectorAll('.wwd-card');
-        if (entry.isIntersecting) {
-          if (headline) headline.classList.add('active');
-          if (subheadline) subheadline.classList.add('active');
-          cards.forEach(c => c.classList.add('active'));
-        } else {
-          if (headline) headline.classList.remove('active');
-          if (subheadline) subheadline.classList.remove('active');
-          cards.forEach(c => c.classList.remove('active'));
+
+      /* ── VENDOR SECTIONS (wwd=Dell, app=HPE, adv=Hitachi, pure=Pure) ── */
+      ['wwd-section','app-section','adv-section','pure-section'].forEach(secId => {
+        if (entry.target.id === secId) {
+          const logoWrap    = entry.target.querySelector('.vendor-logo-wrap');
+          const brandLine   = entry.target.querySelector('.vendor-brand-line');
+          const headline    = entry.target.querySelector('.vendor-headline');
+          const body        = entry.target.querySelector('.vendor-body');
+          const productRows = entry.target.querySelectorAll('.product-row');
+          [logoWrap, brandLine, headline, body].forEach(el => {
+            if (!el) return;
+            if (entry.isIntersecting) el.classList.add('active');
+            else el.classList.remove('active');
+          });
+          productRows.forEach(el => {
+            if (entry.isIntersecting) el.classList.add('active');
+            else el.classList.remove('active');
+          });
         }
-      }
-      if (entry.target.id === 'app-section') {
-        const els = entry.target.querySelectorAll('.app-tag, .app-headline, .app-body, .app-insight, .app-prin-tag, .app-prin-item');
-        els.forEach(el => entry.isIntersecting ? el.classList.add('active') : el.classList.remove('active'));
-      }
-      if (entry.target.id === 'adv-section') {
-        const els = entry.target.querySelectorAll('.adv-headline, .adv-subheadline, .adv-body, .adv-btn');
-        els.forEach(el => entry.isIntersecting ? el.classList.add('active') : el.classList.remove('active'));
-      }
+      });
     });
   }, {
     root: document.getElementById('scroll-container'),
-    threshold: 0.15
+    threshold: 0.12
   });
 
-  const defSection = document.getElementById('def-section');
-  if (defSection) revealObserver.observe(defSection);
-
-  const wwdSection = document.getElementById('wwd-section');
-  if (wwdSection) revealObserver.observe(wwdSection);
-
-  const appSection = document.getElementById('app-section');
-  if (appSection) revealObserver.observe(appSection);
-
-  const advSection = document.getElementById('adv-section');
-  if (advSection) revealObserver.observe(advSection);
+  ['def-section','wwd-section','app-section','adv-section','pure-section'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) revealObserver.observe(el);
+  });
 </script>
   <script src="js/components.js"></script>
 </body>
