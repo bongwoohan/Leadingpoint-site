@@ -413,6 +413,24 @@
       .footer-divider { margin: 0 -1.5rem; }
     }
     @media (max-width: 600px) { .footer-nav { flex-direction: column; gap: 1.5rem; } }
+    
+    @media (max-width: 768px) {
+  /* ... 기존 코드들 ... */
+
+  /* 모바일에서 CONTACT US를 한 줄로, 더 크게 설정 */
+  .hero-title { 
+    /* 12vw는 화면 폭의 12% 크기로 글자를 맞춘다는 뜻입니다. */
+    font-size: clamp(3.2rem, 15vw, 7rem) !important; 
+    letter-spacing: -0.05em; /* 글자 간격을 좀 더 좁혀서 한 줄 유지를 돕습니다 */
+  }
+
+  /* 단어 사이(CONTACT와 US 사이) 간격을 모바일에 맞춰 최적화 */
+  .title-word-gap { 
+    width: 0.15em; 
+  }
+
+  /* ... 기존 코드들 ... */
+}
   </style>
 </head>
 <body data-page="company" data-logo="images/logo/LP-LOGO-dark-transparent.png">
