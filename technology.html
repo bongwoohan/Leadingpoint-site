@@ -440,7 +440,7 @@
     .def-section {
       scroll-snap-align: start;
       height: 100vh;
-      background: #f0ede8;
+      background: #FAF3DD;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -550,7 +550,7 @@
     .wwd-section {
       scroll-snap-align: start;
       min-height: 100vh;
-      background: #1e2d42;
+      background: #EDF6FD;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -686,7 +686,7 @@
     .app-section {
       scroll-snap-align: start;
       min-height: 100vh;
-      background: #e8edf2;
+      background: #F2E0A6;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -941,9 +941,22 @@
       .nav-divider { margin: 0 1.5rem; }
       .hero-scroll { display: none; }
       .hero { padding: 0 1.5rem 2rem; }
-      .hero-title { font-size: clamp(3.8rem, 17vw, 6rem); }
+      .hero-title { font-size: clamp(3rem, 14vw, 5.5rem); line-height: 1; }
       .hero-body { flex-direction: column; gap: 1.2rem; align-items: flex-start; }
       .hero-slogan-right { padding-left: 0; padding-top: 0 !important; padding-bottom: 0; }
+      /* 단어가 절대 잘리지 않도록 설정 */
+      .title-line-inner {
+        white-space: nowrap;
+        word-break: keep-all;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: clamp(2.2rem, 11vw, 3.2rem); }
+    }
+
+    @media (max-width: 360px) {
+      .hero-title { font-size: 10vw; }
     }
 
     @media (min-width: 1101px) {
@@ -965,7 +978,7 @@
     .adv-section {
       scroll-snap-align: start;
       min-height: 100vh;
-      background: #111720;
+      background: #E2DFE1;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1145,174 +1158,18 @@
 
 <!-- ── DEFINITION SECTION ── -->
 <section class="def-section" id="def-section">
-  <span class="def-section-num">01</span>
-  <div class="def-inner">
-
-    <div class="def-left">
-      <div class="def-left-wrap">
-        <h2 class="def-headline">Dell Technologies<br>---</h2>
-      </div>
-    </div>
-
-    <div class="def-right">
-      <div class="def-body-block delay-1">
-        <p class="def-body">   </p>
-      </div>
-      <div class="def-body-block delay-2">
-        <p class="def-body">   </p>
-      </div>
-    </div>
-
-  </div>
 </section>
 
 <!-- ── WHAT WE DO SECTION ── -->
 <section class="wwd-section" id="wwd-section">
-  <span class="wwd-section-num">02</span>
-  <div class="wwd-inner">
-
-    <div class="wwd-left">
-      <h2 class="wwd-headline">What we do.</h2>
-      <p class="wwd-subheadline">End-to-end DR</p>
-    </div>
-
-    <div class="wwd-cards">
-
-      <div class="wwd-card">
-        <div class="wwd-card-header">
-          <svg class="wwd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
-          </svg>
-          <div class="wwd-card-title">Consulting</div>
-        </div>
-        <p class="wwd-card-body">재난복구 전략 수립 및 요구사항 분석을 통해 환경에 최적화된 DR 방향을 정의합니다.</p>
-      </div>
-
-      <div class="wwd-card">
-        <div class="wwd-card-header">
-          <svg class="wwd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
-            <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
-          </svg>
-          <div class="wwd-card-title">Design</div>
-        </div>
-        <p class="wwd-card-body">시스템 구조와 데이터 흐름을 고려하여 안정적인 DR 아키텍처를 설계합니다.</p>
-      </div>
-
-      <div class="wwd-card">
-        <div class="wwd-card-header">
-          <svg class="wwd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
-          </svg>
-          <div class="wwd-card-title">Implementation</div>
-        </div>
-        <p class="wwd-card-body">검증된 인프라와 솔루션을 기반으로 DR 시스템을 구축하고 적용합니다.</p>
-      </div>
-
-      <div class="wwd-card">
-        <div class="wwd-card-header">
-          <svg class="wwd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-          </svg>
-          <div class="wwd-card-title">Operation</div>
-        </div>
-        <p class="wwd-card-body">상시 모니터링과 운영을 통해 지속적인 안정성과 가용성을 유지합니다.</p>
-      </div>
-
-      <div class="wwd-card">
-        <div class="wwd-card-header">
-          <svg class="wwd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          </svg>
-          <div class="wwd-card-title">Drill &amp; Training</div>
-        </div>
-        <p class="wwd-card-body">정기적인 복구훈련과 점검을 통해 실제 장애 상황에서도 대응 가능한 체계를 유지합니다.</p>
-      </div>
-
-    </div>
-  </div>
 </section>
 
 <!-- ── APPROACH SECTION ── -->
 <section class="app-section" id="app-section">
-  <span class="app-section-num">03</span>
-  <div class="app-inner">
-
-    <!-- 좌측 -->
-    <div class="app-left">
-      <h2 class="app-headline" id="app-headline">Our Approach</h2>
-      <span class="app-tag" id="app-tag">Architecture Defines Recovery.</span>
-      <p class="app-body" id="app-body">재난복구의 성능은 단순한 장비나 이중화 구성이 아니라 전체 시스템 아키텍처에 의해 결정됩니다. 비즈니스 요구사항을 기반으로 애플리케이션, 데이터, 인프라, 네트워크까지 유기적으로 연결된 구조를 설계해야만 실제 장애 상황에서도 안정적인 복구가 가능합니다.</p>
-      <div class="app-insight" id="app-insight">
-        <span class="app-insight-label">Key Insight</span>
-        Recovery performance is determined by architecture, not redundancy.
-      </div>
-    </div>
-
-    <div class="app-divider"></div>
-
-    <!-- 우측 -->
-    <div class="app-right">
-      <span class="app-prin-tag" id="app-prin-tag">Design Principles</span>
-
-      <div class="app-prin-item">
-        <span class="app-prin-num">01</span>
-        <div>
-          <div class="app-prin-title">Recovery-Driven Design</div>
-          <p class="app-prin-body">RTO와 RPO 요구사항을 기준으로 전체 시스템을 설계합니다.</p>
-        </div>
-      </div>
-
-      <div class="app-prin-item">
-        <span class="app-prin-num">02</span>
-        <div>
-          <div class="app-prin-title">Data-Centric Architecture</div>
-          <p class="app-prin-body">데이터 흐름과 동기화 구조를 중심으로 병목 없는 환경을 구현합니다.</p>
-        </div>
-      </div>
-
-      <div class="app-prin-item">
-        <span class="app-prin-num">03</span>
-        <div>
-          <div class="app-prin-title">Failure-Aware Engineering</div>
-          <p class="app-prin-body">장애 발생을 전제로 실제 환경에서 동작하는 구조를 설계합니다.</p>
-        </div>
-      </div>
-
-      <div class="app-prin-item">
-        <span class="app-prin-num">04</span>
-        <div>
-          <div class="app-prin-title">End-to-End Integration</div>
-          <p class="app-prin-body">개별 시스템이 아닌 서비스 단위의 통합 DR을 구현합니다.</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
 </section>
 
 <!-- ── ADVANCED DR SECTION ── -->
 <section class="adv-section" id="adv-section">
-  <span class="adv-section-num">04</span>
-  <div class="adv-inner">
-
-    <div class="adv-left">
-      <h2 class="adv-headline">Advanced DR</h2>
-      <p class="adv-subheadline">Next-Generation<br>Disaster Recovery</p>
-    </div>
-
-    <div class="adv-right">
-      <p class="adv-body">서비스 연속성에 대한 요구 수준이 높아지면서 재난복구 아키텍처는 단순한 대기(Standby) 구조를 넘어 실시간 데이터 처리와 고가용성을 중심으로 진화하고 있습니다.<br><br>LeadingPoint는 이러한 변화에 대응하여 Active-Active NAS DR 아키텍처를 통해 서비스 중단을 최소화하고 빠른 복구가 가능한 환경을 제공합니다.</p>
-      <a href="active-active-nas-dr.html" class="adv-btn">
-        <span class="adv-btn-text">
-          <span>Active-Active NAS DR</span>
-          <span>Active-Active NAS DR</span>
-        </span>
-        <span class="adv-btn-arrow">↗</span>
-      </a>
-    </div>
-
-  </div>
 </section>
 
 <div style="height:1px;background:rgba(200,216,240,0.12);"></div>
@@ -1454,10 +1311,10 @@
     const ctx = canvas.getContext('2d');
     const SPACING   = 28;
     const DOT_R     = 1;
-    const ALPHA_MIN = 0.04;
-    const ALPHA_MAX = 0.26;
+    const ALPHA_MIN = 0.06;
+    const ALPHA_MAX = 0.55;
     const CYCLE     = 3200;
-    const DR = 255, DG = 191, DB = 70;   /* brand amber */
+    const DR = 230, DG = 57, DB = 70;   /* brand red #E63946 */
     let animId;
 
     function resize() {
