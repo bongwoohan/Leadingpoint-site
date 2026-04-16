@@ -342,7 +342,6 @@
       line-height: 0.85;
       position: relative;
       z-index: 2;
-      white-space: nowrap;
     }
 
     .title-line { display: block; }
@@ -582,7 +581,7 @@
     }
 
     .why-reason-card {
-      border-top: none;
+      border-top: 1px solid rgba(184,232,216,0.15);
       padding: 1.4rem 1.6rem 1.4rem 0;
       opacity: 0;
       transform: translateY(20px);
@@ -592,7 +591,7 @@
     .why-reason-card:nth-child(1) { transition-delay: 0.05s; }
     .why-reason-card:nth-child(2) { transition-delay: 0.15s; }
     .why-reason-card:nth-child(3) { transition-delay: 0.25s; }
-    .why-reason-card:not(:last-child) { padding-right: 1.6rem; border-right: none; }
+    .why-reason-card:not(:last-child) { padding-right: 1.6rem; border-right: 1px solid rgba(184,232,216,0.1); }
     .why-reason-card:not(:first-child) { padding-left: 1.6rem; }
 
     .why-reason-num {
@@ -601,18 +600,6 @@
       letter-spacing: 0.1em;
       color: #6ed8b4;
       margin-bottom: 0.6rem;
-      display: none;
-    }
-
-    .why-reason-icon {
-      width: 32px;
-      height: 32px;
-      margin-bottom: 0.7rem;
-      color: #6ed8b4;
-      opacity: 0.7;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     .why-reason-title {
@@ -709,12 +696,10 @@
     }
     .why-table-tag.active { opacity: 1; transform: translateY(0); }
 
-    .why-table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .why-table-scroll { overflow-x: auto; }
 
     .why-table {
       width: 100%;
-      min-width: 0;
-      table-layout: fixed;
       border-collapse: collapse;
       font-size: 0.82rem;
       opacity: 0;
@@ -732,6 +717,7 @@
       text-transform: uppercase;
       color: rgba(184,232,216,0.5);
       border-bottom: 1px solid rgba(184,232,216,0.15);
+      white-space: nowrap;
     }
 
     .why-th-highlight {
@@ -1158,14 +1144,14 @@
       color: rgba(168,220,200,0.7);
     }
 
+    /* Bottom half: technical drawing */
     .lineup-card-drawing {
       border-top: 1px solid rgba(110,216,180,0.08);
       background: #040e09;
-      padding: 1.8rem 2rem;
+      padding: 1.2rem 2rem;
       display: flex;
       flex-direction: column;
       gap: 0.6rem;
-      align-items: center;
     }
 
     .lineup-drawing-label {
@@ -1174,15 +1160,13 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: rgba(110,216,180,0.25);
-      align-self: flex-start;
     }
 
     .lineup-drawing-img {
       width: 100%;
-      max-width: 680px;
-      max-height: 280px;
+      max-height: 220px;
       object-fit: contain;
-      object-position: center center;
+      object-position: left center;
     }
 
     /* ══════════════════════════════════════════
@@ -1420,7 +1404,7 @@
       .nav-divider { margin: 0 1.5rem; }
       .hero-scroll { display: none; }
       .hero { padding: 0 1.5rem 2rem; }
-      .hero-title { font-size: clamp(1.8rem, 11vw, 6rem); white-space: nowrap; overflow: visible; }
+      .hero-title { font-size: clamp(3.8rem, 17vw, 6rem); }
       .hero-body { flex-direction: column; gap: 1.2rem; align-items: flex-start; }
       .hero-slogan-right { padding-left: 0; padding-top: 0 !important; padding-bottom: 0; }
 
@@ -1437,8 +1421,6 @@
       .why-reason-card { padding: 1.2rem 0 !important; border-right: none !important; }
       .why-reason-card:not(:first-child) { padding-left: 0 !important; }
       .why-strength-items { grid-template-columns: 1fr; gap: 1.2rem; }
-      .why-table { font-size: 0.72rem; }
-      .why-table th, .why-table td { padding: 0.55rem 0.5rem; }
 
       .arm-section-num { left: 1.5rem; }
       .arm-inner { grid-template-columns: 1fr; padding: 5rem 1.5rem 4rem; gap: 2.5rem; }
@@ -1494,8 +1476,8 @@
     <div class="hero-body" style="position:relative;z-index:2;">
       <div class="hero-title-wrap">
         <h1 class="hero-title">
-          <span class="title-line"><span class="title-line-inner" id="line1">BIOMETRICS</span></span>
-          <span class="title-line" style="display:none;"><span class="title-line-inner" id="line2"></span></span>
+          <span class="title-line"><span class="title-line-inner" id="line1">BIO</span></span>
+          <span class="title-line"><span class="title-line-inner" id="line2">METRICS</span></span>
         </h1>
       </div>
       <div class="hero-slogan-right">
@@ -1554,32 +1536,17 @@
       <div class="why-top-right">
         <div class="why-reason-cards">
           <div class="why-reason-card">
-            <div class="why-reason-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="28" height="28">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-            </div>
+            <div class="why-reason-num">1</div>
             <div class="why-reason-title">최고 수준의 보안성</div>
             <p class="why-reason-body">복제가 불가능한 체내 정맥 패턴을 활용하여 위조 및 변조를 원천 차단합니다.</p>
           </div>
           <div class="why-reason-card">
-            <div class="why-reason-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="28" height="28">
-                <path d="M18 11V6a2 2 0 00-2-2v0a2 2 0 00-2 2v0M14 10V4a2 2 0 00-2-2v0a2 2 0 00-2 2v2M10 10.5V6a2 2 0 00-2-2v0a2 2 0 00-2 2v8"/>
-                <path d="M18 8a2 2 0 114 0v6a8 8 0 01-8 8H8a8 8 0 01-8-8v-1a2 2 0 114 0"/>
-              </svg>
-            </div>
+            <div class="why-reason-num">2</div>
             <div class="why-reason-title">비접촉 위생 솔루션</div>
             <p class="why-reason-body">기기에 손을 댈 필요가 없는 비접촉 방식으로 감염병 확산 방지 및 위생적인 환경을 제공합니다.</p>
           </div>
           <div class="why-reason-card">
-            <div class="why-reason-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="28" height="28">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="2" y1="12" x2="22" y2="12"/>
-                <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
-              </svg>
-            </div>
+            <div class="why-reason-num">3</div>
             <div class="why-reason-title">범용성</div>
             <p class="why-reason-body">지문 마모, 건조함, 조명 변화 등 외부 환경에 영향을 받지 않고 정확하게 인식합니다.</p>
           </div>
@@ -1589,7 +1556,7 @@
 
 
 
-    
+    <div class="why-divider"></div>
 
     <div class="why-table-wrap">
       <span class="why-table-tag">생체인식 기술 비교</span>
