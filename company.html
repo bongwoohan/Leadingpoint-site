@@ -6,14 +6,14 @@
   <title>LeadingPoint – Contact Us</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script>(function(){ emailjs.init({ publicKey: 'HfA9u6aM6mlhHy_vt' }); })();</script>
+  <script>(function(){ emailjs.init({ publicKey: 'YOUR_PUBLIC_KEY' }); })();</script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:           #dceadc;
-      --bg-raised:    #e8f2e8;
-      --bg-deep:      #ccdacc;
+      --bg:           #ffffff;
+      --bg-raised:    #f8f8f8;
+      --bg-deep:      #eeeeee;
       --shadow-light: rgba(255,255,255,0.9);
       --shadow-dark:  rgba(0,0,0,0.10);
       --text:         #1a1a1a;
@@ -36,7 +36,6 @@
     #scroll-container {
       height: 100vh;
       overflow-y: scroll;
-      scroll-snap-type: y mandatory;
       scroll-behavior: smooth;
     }
 
@@ -181,10 +180,8 @@
        CONTACT SECTION
     ════════════════════════════════════════ */
     .contact-section {
-      scroll-snap-align: start;
-      /* 섹션 높이: 화면 전체 + hero가 60vh이므로 나머지 40vh + 충분한 여백 */
       min-height: 100vh;
-      background: #fff;
+      background: var(--bg);
       display: flex;
       flex-direction: column;
       position: relative;
@@ -194,11 +191,11 @@
     .contact-header {
       flex-shrink: 0;
       text-align: center;
-      padding: 15rem 3rem 10rem;
+      padding: 6rem 3rem 5rem;
     }
 
     .contact-header-title {
-      font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
       font-weight: 700;
       letter-spacing: -0.03em;
       color: #1a2332;
@@ -243,13 +240,12 @@
       pointer-events: auto;
     }
 
-    /* 지도 위 스크롤 차단 오버레이 — 일반 스크롤은 페이지 이동, ctrl+wheel만 지도로 전달 */
-    .map-scroll-guard {
+    /* 지도 위 스크롤 차단 오버레이 — wheel은 페이지로, 클릭/드래그는 지도로 */
+    #map-scroll-overlay {
       position: absolute;
       inset: 0;
-      z-index: 5;
-      /* pointer-events: none이면 지도 클릭/드래그도 막히므로
-         JS로 wheel 이벤트만 제어 */
+      z-index: 10;
+      cursor: default;
     }
 
     /* ── 겹치는 카드
@@ -372,34 +368,24 @@
       .nav-main-links { display: none; }
       .nav-menu-btn { display: flex; }
       .nav-divider { margin: 0 1.5rem; }
-      .hero-scroll { display: none; }
-      .hero { padding: 0 1.5rem; }
     }
     @media (min-width: 1101px) { #menu-overlay { display: none; } }
 
     /* 모바일 */
     @media (max-width: 768px) {
-      #hero-snap {
-        height: 60vh;
-        min-height: 280px;
-      }
+      .contact-header { padding: 3rem 1.5rem 3rem; }
 
-      .contact-header { padding: 5rem 1.5rem 4rem; }
-
-      .map-area { height: 300px; }   /* 모바일 지도 높이 */
+      .map-area { height: 300px; }
 
       .contact-card {
-        top: calc(300px * 0.75);     /* 지도 300px의 75% = 225px */
+        top: calc(300px * 0.75);
         width: calc(100% - 2rem);
-        grid-template-columns: 1fr;  /* 모바일: 세로 배치 */
+        grid-template-columns: 1fr;
       }
 
-      /* 모바일 세로 배치에서 폼 + 정보 높이 합산해서 gap 재계산 */
       .contact-footer-gap { height: 900px; }
 
       .form-grid { grid-template-columns: 1fr; }
-
-      .hero-title { font-size: clamp(2.4rem, 8vw, 5rem); }
     }
 
     @media (max-width: 480px) {
@@ -440,25 +426,7 @@
 <div id="scroll-container">
 <div id="page">
 
-<!-- ── HERO (60vh) ── -->
-<div id="hero-snap">
-  <div id="site-header"></div>
-
-  <section class="hero">
-    <canvas id="hero-dot-canvas"></canvas>
-
-    <div class="hero-scroll" style="z-index:1;">
-      <span class="scroll-label">Scroll</span>
-      <div class="scroll-track"><div class="scroll-thumb"></div></div>
-    </div>
-
-    <div class="hero-title-wrap" style="position:relative;z-index:2;">
-      <h1 class="hero-title">
-        <span class="title-line"><span class="title-line-inner" id="line1">CONTACT</span></span><span class="title-word-gap"></span><span class="title-line"><span class="title-line-inner" id="line2">US</span></span>
-      </h1>
-    </div>
-  </section>
-</div>
+<div id="site-header"></div>
 
 <!-- ── CONTACT SECTION ── -->
 <section class="contact-section" id="contact-section">
@@ -470,6 +438,8 @@
 
   <!-- 지도 + 카드 -->
   <div class="map-area" id="map-area">
+    <!-- 지도 위 스크롤 차단 오버레이 -->
+    <div id="map-scroll-overlay"></div>
 
     <!-- 카카오맵 roughmap (공식 소스 생성 코드) -->
     <div id="daumRoughmapContainer1776221847140" class="root_daum_roughmap root_daum_roughmap_landing"></div>
@@ -645,21 +615,6 @@
 
   function onWheel(e) {
     const delta = e.deltaY || 0;
-    /* 지도 위에서 wheel 이벤트가 발생한 경우:
-       - ctrl 키 없으면 → 지도에 전달하지 않고 페이지 스크롤
-       - ctrl 키 있으면 → 기본 동작(지도 zoom) 허용 */
-    const mapArea = document.getElementById('map-area');
-    if (mapArea && mapArea.contains(e.target)) {
-      if (!e.ctrlKey) {
-        /* 지도 iframe으로 가는 wheel 차단 → 스크롤 컨테이너로 전달 */
-        e.preventDefault();
-        scrollContainer.scrollTop += delta;
-        return;
-      }
-      /* ctrl+wheel: 지도 zoom — 기본 동작 허용 */
-      return;
-    }
-
     if (delta > 0 && getScrollY() < 50 && !subOpen) {
       e.preventDefault(); e.stopPropagation();
       subOpen = true; scrollLocked = true; openAllSubs();
@@ -676,100 +631,36 @@
   if (document.readyState === 'complete') registerWheelListeners();
   else window.addEventListener('load', registerWheelListeners);
 
-  /* ── DOT GRID ── */
-  (function() {
-    const canvas = document.getElementById('hero-dot-canvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const SPACING=28, DOT_R=1, ALPHA_MIN=0.03, ALPHA_MAX=0.22, CYCLE=3200;
-    let animId;
-    function resize() {
-      const dpr=window.devicePixelRatio||1;
-      const rect=canvas.parentElement.getBoundingClientRect();
-      canvas.width=rect.width*dpr; canvas.height=rect.height*dpr;
-      ctx.setTransform(1,0,0,1,0,0); ctx.scale(dpr,dpr);
-    }
-    function draw(ts) {
-      const dpr=window.devicePixelRatio||1;
-      const W=canvas.width/dpr, H=canvas.height/dpr;
-      ctx.clearRect(0,0,W,H);
-      const t=(Math.sin((ts/CYCLE)*Math.PI*2-Math.PI/2)+1)/2;
-      for (let x=SPACING/2; x<W; x+=SPACING) {
-        for (let y=SPACING/2; y<H; y+=SPACING) {
-          const nx=x/W-0.5, ny=y/H-0.5;
-          const dist=Math.min(1,Math.sqrt(nx*nx+ny*ny)*2.2);
-          const phase=t<0.5?dist*t*2:dist*(1-(t-0.5)*2)+(1-dist)*(t-0.5)*2;
-          const alpha=ALPHA_MIN+(ALPHA_MAX-ALPHA_MIN)*phase;
-          ctx.beginPath(); ctx.arc(x,y,DOT_R,0,Math.PI*2);
-          ctx.fillStyle=`rgba(0,0,0,${alpha.toFixed(3)})`; ctx.fill();
-        }
-      }
-      animId=requestAnimationFrame(draw);
-    }
-    resize();
-    window.addEventListener('resize',()=>{ cancelAnimationFrame(animId); resize(); animId=requestAnimationFrame(draw); });
-    animId=requestAnimationFrame(draw);
-  })();
-
-  /* ── TITLE ANIMATION ── */
-  function buildTitle() {
-    const STAGGER=0.10; let idx=0;
-    const inner1=document.getElementById('line1');
-    inner1.textContent=''; inner1.style.visibility='visible';
-    'CONTACT'.split('').forEach(ch => {
-      const s=document.createElement('span'); s.className='char-span'; s.textContent=ch;
-      s.style.transitionDelay=(idx*STAGGER).toFixed(2)+'s'; inner1.appendChild(s); idx++;
-    });
-    idx+=0.4;
-    const inner2=document.getElementById('line2');
-    inner2.textContent=''; inner2.style.visibility='visible';
-    'US'.split('').forEach(ch => {
-      const s=document.createElement('span'); s.className='char-span'; s.textContent=ch;
-      s.style.transitionDelay=(idx*STAGGER).toFixed(2)+'s'; inner2.appendChild(s); idx++;
-    });
-    requestAnimationFrame(()=>requestAnimationFrame(()=>{
-      document.querySelectorAll('.char-span').forEach(s=>s.classList.add('up'));
-    }));
-  }
-
   window.addEventListener('load', () => {
     document.getElementById('page').classList.add('visible');
-    setTimeout(buildTitle, 80);
 
-    /* roughmap이 생성한 iframe에 wheel 이벤트 차단 적용 */
-    setTimeout(() => {
-      const mapArea = document.getElementById('map-area');
-      if (!mapArea) return;
-      const iframes = mapArea.querySelectorAll('iframe');
-      iframes.forEach(iframe => {
-        /* iframe 위에 투명 오버레이 div 덮기 — ctrl 없는 wheel은 페이지로 전달 */
-        const guard = document.createElement('div');
-        guard.style.cssText = 'position:absolute;inset:0;z-index:4;cursor:grab;';
-        guard.addEventListener('wheel', (e) => {
-          if (!e.ctrlKey) {
-            e.preventDefault();
-            scrollContainer.scrollTop += e.deltaY;
-          }
-        }, { passive: false });
-        /* 드래그는 iframe으로 전달하기 위해 pointerdown에서 잠시 hide */
-        guard.addEventListener('pointerdown', () => { guard.style.pointerEvents='none'; });
-        document.addEventListener('pointerup', () => { guard.style.pointerEvents='auto'; }, { once: false });
-        mapArea.appendChild(guard);
+    /* 지도 오버레이 wheel → 페이지 스크롤로 전달 */
+    const mapOverlay = document.getElementById('map-scroll-overlay');
+    if (mapOverlay) {
+      mapOverlay.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        scrollContainer.scrollTop += e.deltaY;
+      }, { passive: false });
+
+      /* 드래그는 지도로 전달 — pointerdown 시 잠시 overlay 비활성화 */
+      mapOverlay.addEventListener('pointerdown', () => {
+        mapOverlay.style.pointerEvents = 'none';
       });
-    }, 2000); /* roughmap 로드 완료 대기 */
+      document.addEventListener('pointerup', () => {
+        mapOverlay.style.pointerEvents = 'auto';
+      });
+    }
   });
 
-  /* ── CONTACT SECTION REVEAL ── */
-  const revealObs = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+  /* ── CONTACT SECTION REVEAL — hero 없이 페이지 로드 즉시 표시 ── */
+  window.addEventListener('load', () => {
+    setTimeout(() => {
       ['contact-title','contact-bar','contact-card'].forEach(id => {
-        const el=document.getElementById(id);
-        if (el) entry.isIntersecting ? el.classList.add('active') : el.classList.remove('active');
+        const el = document.getElementById(id);
+        if (el) el.classList.add('active');
       });
-    });
-  }, { root: scrollContainer, threshold: 0.05 });
-  const cs=document.getElementById('contact-section');
-  if (cs) revealObs.observe(cs);
+    }, 200);
+  });
 
   /* ── FORM SUBMIT — EmailJS ── */
   const form = document.getElementById('contact-form');
