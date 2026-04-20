@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>LeadingPoint – Contact Us</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>(function(){ emailjs.init({ publicKey: 'HfA9u6aM6mlhHy_vt' }); })();</script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -494,11 +496,11 @@
           <div class="form-grid">
             <div class="form-field">
               <label class="form-field-label" for="f-name">이름</label>
-              <input class="form-input" type="text" id="f-name" name="name" placeholder="홍길동"/>
+              <input class="form-input" type="text" id="f-name" name="from_name" placeholder="홍길동"/>
             </div>
             <div class="form-field">
               <label class="form-field-label" for="f-email">이메일</label>
-              <input class="form-input" type="email" id="f-email" name="email" placeholder="hong@example.com"/>
+              <input class="form-input" type="email" id="f-email" name="reply_to" placeholder="hong@example.com"/>
             </div>
             <div class="form-field full">
               <label class="form-field-label" for="f-subject">제목</label>
@@ -769,15 +771,40 @@
   const cs=document.getElementById('contact-section');
   if (cs) revealObs.observe(cs);
 
-  /* ── FORM SUBMIT ── */
-  const form=document.getElementById('contact-form');
+  /* ── FORM SUBMIT — EmailJS ── */
+  const form = document.getElementById('contact-form');
   if (form) {
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-      const btn=this.querySelector('.submit-btn');
-      const orig=btn.innerHTML;
-      btn.innerHTML='전송 완료 ✓'; btn.style.background='#3a7a5e';
-      setTimeout(()=>{ btn.innerHTML=orig; btn.style.background=''; this.reset(); }, 3000);
+
+      const btn  = this.querySelector('.submit-btn');
+      const orig = btn.innerHTML;
+
+      /* 전송 중 상태 */
+      btn.disabled = true;
+      btn.innerHTML = '전송 중... <span class="submit-btn-arrow">↻</span>';
+
+      emailjs.sendForm('service_4lynpyj', 'template_xacyp59', this)
+        .then(() => {
+          btn.innerHTML = '전송 완료 ✓';
+          btn.style.background = '#3a7a5e';
+          this.reset();
+          setTimeout(() => {
+            btn.innerHTML = orig;
+            btn.style.background = '';
+            btn.disabled = false;
+          }, 3000);
+        })
+        .catch((err) => {
+          console.error('EmailJS error:', err);
+          btn.innerHTML = '전송 실패 — 다시 시도해주세요';
+          btn.style.background = '#c0392b';
+          setTimeout(() => {
+            btn.innerHTML = orig;
+            btn.style.background = '';
+            btn.disabled = false;
+          }, 3000);
+        });
     });
   }
 
