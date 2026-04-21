@@ -15,67 +15,76 @@
   /* ── 페이지별 설정 맵 ── */
   const PAGE_CONFIG = {
     'home': {
-      navActiveId:     'nav-home-link',   // nav에서 active 처리할 링크 id
-      ovActiveId:      'ov-home-link',    // 오버레이에서 active 처리할 id
-      ovBusinessOpen:  false,             // 오버레이에서 Business 서브메뉴 기본 열림 여부
-      ovBusinessActive: false,            // 오버레이 Business 라벨 active 여부
-      footActiveId:    null,              // 푸터 active 링크 id
+      navActiveId:      'nav-home-link',   // nav에서 active 처리할 링크 id
+      ovActiveId:       'ov-home-link',    // 오버레이에서 active 처리할 id
+      ovBusinessOpen:   false,             // 오버레이에서 Business 서브메뉴 기본 열림 여부
+      ovBusinessActive: false,             // 오버레이 Business 라벨 active 여부
+      footActiveId:     null,              // 푸터 active 링크 id
+      bttTheme:         'light',           // Back-to-Top 버튼 테마 (light | dark)
     },
     'disaster-recovery': {
-      navActiveId:     'nav-dr',
-      ovActiveId:      'ov-dr',
-      ovBusinessOpen:  true,
+      navActiveId:      'nav-dr',
+      ovActiveId:       'ov-dr',
+      ovBusinessOpen:   true,
       ovBusinessActive: true,
-      footActiveId:    'foot-dr',
+      footActiveId:     'foot-dr',
+      bttTheme:         'dark',
     },
     'active-active-nas-dr': {
-      navActiveId:     'nav-nas-dr',
-      ovActiveId:      'ov-nas-dr',
-      ovBusinessOpen:  true,
+      navActiveId:      'nav-nas-dr',
+      ovActiveId:       'ov-nas-dr',
+      ovBusinessOpen:   true,
       ovBusinessActive: true,
-      footActiveId:    'foot-nas-dr',
+      footActiveId:     'foot-nas-dr',
+      bttTheme:         'dark',
     },
     'cloud': {
-      navActiveId:     'nav-cloud',
-      ovActiveId:      'ov-cloud',
-      ovBusinessOpen:  true,
+      navActiveId:      'nav-cloud',
+      ovActiveId:       'ov-cloud',
+      ovBusinessOpen:   true,
       ovBusinessActive: true,
-      footActiveId:    'foot-cloud',
+      footActiveId:     'foot-cloud',
+      bttTheme:         'dark',
     },
     'technology': {
-      navActiveId:     'nav-tech',
-      ovActiveId:      'ov-tech',
-      ovBusinessOpen:  true,
+      navActiveId:      'nav-tech',
+      ovActiveId:       'ov-tech',
+      ovBusinessOpen:   true,
       ovBusinessActive: true,
-      footActiveId:    'foot-tech',
+      footActiveId:     'foot-tech',
+      bttTheme:         'dark',
     },
     'biometrics': {
-      navActiveId:     'nav-bio',
-      ovActiveId:      'ov-bio',
-      ovBusinessOpen:  true,
+      navActiveId:      'nav-bio',
+      ovActiveId:       'ov-bio',
+      ovBusinessOpen:   true,
       ovBusinessActive: true,
-      footActiveId:    'foot-bio',
+      footActiveId:     'foot-bio',
+      bttTheme:         'dark',
     },
     'partners': {
-      navActiveId:     'nav-partners',
-      ovActiveId:      'ov-partners',
-      ovBusinessOpen:  false,
+      navActiveId:      'nav-partners',
+      ovActiveId:       'ov-partners',
+      ovBusinessOpen:   false,
       ovBusinessActive: false,
-      footActiveId:    'foot-partners',
+      footActiveId:     'foot-partners',
+      bttTheme:         'light',
     },
     'clients': {
-      navActiveId:     'nav-clients',
-      ovActiveId:      'ov-clients',
-      ovBusinessOpen:  false,
+      navActiveId:      'nav-clients',
+      ovActiveId:       'ov-clients',
+      ovBusinessOpen:   false,
       ovBusinessActive: false,
-      footActiveId:    'foot-clients',
+      footActiveId:     'foot-clients',
+      bttTheme:         'light',
     },
     'company': {
-      navActiveId:     'nav-contact',
-      ovActiveId:      'ov-contact',
-      ovBusinessOpen:  false,
+      navActiveId:      'nav-contact',
+      ovActiveId:       'ov-contact',
+      ovBusinessOpen:   false,
       ovBusinessActive: false,
-      footActiveId:    'foot-contact',
+      footActiveId:     'foot-contact',
+      bttTheme:         'light',
     },
   };
 
@@ -142,6 +151,141 @@
     }
   }
 
+  /* ── Back to Top 버튼 ── */
+  function initBackToTop(pageKey) {
+    const scrollContainer = document.getElementById('scroll-container');
+    if (!scrollContainer) return;
+
+    const cfg   = PAGE_CONFIG[pageKey] || {};
+    const theme = cfg.bttTheme || 'dark'; /* 'light' | 'dark' */
+
+    /* 스타일 주입 (한 번만) */
+    if (!document.getElementById('btt-style')) {
+      const style = document.createElement('style');
+      style.id = 'btt-style';
+      style.textContent = `
+        #back-to-top {
+          position: fixed;
+          bottom: 2.2rem;
+          right: 2.2rem;
+          z-index: 900;
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          border: none;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0;
+          transform: translateY(14px) scale(0.88);
+          pointer-events: none;
+          transition:
+            opacity   0.4s cubic-bezier(0.16,1,0.3,1),
+            transform 0.4s cubic-bezier(0.16,1,0.3,1),
+            box-shadow 0.25s ease,
+            color 0.25s ease;
+        }
+
+        /* 다크 테마 — disaster-recovery, cloud, biometrics 등 어두운 배경 페이지 */
+        #back-to-top.btt-dark {
+          background: #1f2b3d;
+          box-shadow:
+            -3px -3px 8px  rgba(255,255,255,0.06),
+             3px  3px 8px  rgba(0,0,0,0.55),
+             0 0 0 1px rgba(255,255,255,0.05);
+          color: rgba(200,216,240,0.65);
+        }
+        #back-to-top.btt-dark:hover {
+          color: #f0956e;
+          box-shadow:
+            -3px -3px 8px  rgba(255,255,255,0.06),
+             3px  3px 8px  rgba(0,0,0,0.55),
+             0 0 0 1px rgba(240,149,110,0.35),
+             0 0 0 6px rgba(240,149,110,0.10);
+        }
+
+        /* 라이트 테마 — home, partners, clients, company 밝은 배경 페이지 */
+        #back-to-top.btt-light {
+          background: #ebebeb;
+          box-shadow:
+            -4px -4px 10px rgba(255,255,255,0.90),
+             4px  4px 10px rgba(0,0,0,0.12),
+             0 0 0 1px rgba(0,0,0,0.04);
+          color: rgba(26,26,26,0.45);
+        }
+        #back-to-top.btt-light:hover {
+          color: #f0956e;
+          box-shadow:
+            -4px -4px 10px rgba(255,255,255,0.90),
+             4px  4px 10px rgba(0,0,0,0.12),
+             0 0 0 1px rgba(240,149,110,0.40),
+             0 0 0 6px rgba(240,149,110,0.12);
+        }
+
+        /* 표시 상태 */
+        #back-to-top.btt-visible {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+          pointer-events: all;
+        }
+
+        /* 아이콘 */
+        #back-to-top svg {
+          width: 18px;
+          height: 18px;
+          transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+          flex-shrink: 0;
+        }
+        #back-to-top:hover svg {
+          transform: translateY(-2px);
+        }
+
+        /* 모바일: 살짝 작게, 위치 조정 */
+        @media (max-width: 640px) {
+          #back-to-top {
+            width: 42px;
+            height: 42px;
+            bottom: 1.5rem;
+            right: 1.5rem;
+          }
+          #back-to-top svg {
+            width: 16px;
+            height: 16px;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    /* 버튼 DOM 생성 */
+    const btn = document.createElement('button');
+    btn.id = 'back-to-top';
+    btn.setAttribute('aria-label', 'Back to top');
+    btn.classList.add('btt-' + theme);
+    btn.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"/>
+      </svg>
+    `;
+    document.body.appendChild(btn);
+
+    /* 스크롤 감지 — 200px 이상 내려가면 버튼 표시 */
+    scrollContainer.addEventListener('scroll', () => {
+      if (scrollContainer.scrollTop > 200) {
+        btn.classList.add('btt-visible');
+      } else {
+        btn.classList.remove('btt-visible');
+      }
+    }, { passive: true });
+
+    /* 클릭 → 최상단으로 부드럽게 이동 */
+    btn.addEventListener('click', () => {
+      scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
   /* ── 메인 로드 함수 ── */
   async function loadComponents() {
     const body    = document.body;
@@ -162,6 +306,9 @@
       footerWrap.innerHTML = await fetchHTML('components/footer.html');
       applyFooterConfig(pageKey);
     }
+
+    /* Back to Top 버튼 */
+    initBackToTop(pageKey);
   }
 
   /* ── 메뉴 JS 초기화 (헤더 삽입 후 실행) ── */
