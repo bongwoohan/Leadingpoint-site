@@ -280,7 +280,8 @@
     }
 
     /* hover → 흰 배경으로 → 컬러 로고 표시 */
-    .logo-cell:hover { background: #fff !important; z-index: 2; border-radius: 6px; }
+    .logo-cell:hover,
+    .logo-cell.is-auto-active { background: #fff !important; z-index: 2; border-radius: 6px; }
 
     /* ── LOGO IMAGES ── */
     .logo-img-wrap {
@@ -300,8 +301,10 @@
       position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
       opacity: 0; z-index: 2; transition: opacity 0.22s ease;
     }
-    .logo-cell:hover .logo-bw   { opacity: 0; }
-    .logo-cell:hover .logo-color { opacity: 1; }
+    .logo-cell:hover .logo-bw,
+    .logo-cell.is-auto-active .logo-bw   { opacity: 0; }
+    .logo-cell:hover .logo-color,
+    .logo-cell.is-auto-active .logo-color { opacity: 1; }
 
     /* filler */
     .logo-cell-empty {
@@ -538,6 +541,54 @@
 <script>
   /* ── TAB SWITCH ── */
   let currentTab = 'sec1';
+  let logoCycleTimer = null;
+  let logoCycleIndex = 0;
+
+  function clearAutoLogoState() {
+    document.querySelectorAll('.logo-cell.is-auto-active').forEach(cell => {
+      cell.classList.remove('is-auto-active');
+    });
+  }
+
+  function getActiveLogoCells() {
+    const activePanel = document.querySelector('.tab-panel.is-active');
+    return activePanel ? Array.from(activePanel.querySelectorAll('.logo-cell')) : [];
+  }
+
+  function showNextAutoLogo() {
+    const cells = getActiveLogoCells();
+    if (!cells.length) return;
+
+    clearAutoLogoState();
+    cells[logoCycleIndex % cells.length].classList.add('is-auto-active');
+    logoCycleIndex = (logoCycleIndex + 1) % cells.length;
+  }
+
+  function startLogoCycle(resetIndex = false) {
+    if (logoCycleTimer) {
+      clearInterval(logoCycleTimer);
+      logoCycleTimer = null;
+    }
+    if (resetIndex) logoCycleIndex = 0;
+    showNextAutoLogo();
+    logoCycleTimer = setInterval(showNextAutoLogo, 1400);
+  }
+
+  function bindLogoCycleHover() {
+    document.querySelectorAll('.logo-cell').forEach(cell => {
+      cell.addEventListener('mouseenter', () => {
+        if (logoCycleTimer) {
+          clearInterval(logoCycleTimer);
+          logoCycleTimer = null;
+        }
+        clearAutoLogoState();
+      });
+      cell.addEventListener('mouseleave', () => {
+        startLogoCycle(false);
+      });
+    });
+  }
+
   function switchTab(tab) {
     if (tab === currentTab) return;
     currentTab = tab;
@@ -547,7 +598,10 @@
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('is-active'));
     setTimeout(() => {
       const panel = document.getElementById('panel-' + tab);
-      if (panel) panel.classList.add('is-active');
+      if (panel) {
+        panel.classList.add('is-active');
+        startLogoCycle(true);
+      }
     }, 30);
   }
 
@@ -684,6 +738,8 @@
   window.addEventListener('load', () => {
     document.getElementById('page').classList.add('visible');
     setTimeout(buildTitle, 80);
+    bindLogoCycleHover();
+    startLogoCycle(true);
   });
 </script>
 <script src="js/components.js"></script>
