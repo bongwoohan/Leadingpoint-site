@@ -22,6 +22,10 @@
       --muted:        rgba(232,230,225,0.35);
       --border:       rgba(255,255,255,0.06);
       --active:       #6ed8b4;
+      --light-title:  #1a2820;
+      --light-body:   rgba(26,40,32,0.82);
+      --light-muted:  rgba(26,40,32,0.66);
+      --light-kicker: rgba(26,40,32,0.48);
     }
 
     html { height: 100%; }
@@ -507,10 +511,10 @@
     .def-body-block.active { opacity: 1; transform: translateY(0); }
 
     .def-body {
-      font-size: clamp(0.95rem, 1.5vw, 1.15rem);
-      font-weight: 300;
+      font-size: clamp(0.95rem, 1.35vw, 1.05rem);
+      font-weight: 400;
       line-height: 1.9;
-      color: rgba(26,40,32,0.6);
+      color: var(--light-body);
     }
 
     /* ══════════════════════════════════════════
@@ -713,7 +717,11 @@
     }
     .why-table-tag.active { opacity: 1; transform: translateY(0); }
 
-    .why-table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .why-table-scroll {
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
 
     .why-table {
       width: 100%;
@@ -824,11 +832,11 @@
     .arm-headline.active { opacity: 1; transform: translateY(0); }
 
     .arm-tag {
-      font-size: 1rem;
-      font-weight: 400;
-      letter-spacing: 0.08em;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(26,40,32,0.4);
+      color: var(--light-kicker);
       margin-top: 0.6rem;
       margin-bottom: 1.4rem;
       display: block;
@@ -839,10 +847,10 @@
     .arm-tag.active { opacity: 1; transform: translateY(0); }
 
     .arm-body {
-      font-size: clamp(0.88rem, 1.3vw, 1rem);
-      font-weight: 300;
+      font-size: clamp(0.95rem, 1.35vw, 1.05rem);
+      font-weight: 400;
       line-height: 1.9;
-      color: rgba(26,40,32,0.58);
+      color: var(--light-body);
       margin-bottom: 2rem;
       opacity: 0;
       transform: translateY(20px);
@@ -884,11 +892,11 @@
     .arm-right { padding-left: 4rem; }
 
     .arm-prin-tag {
-      font-size: 0.75rem;
-      font-weight: 400;
+      font-size: 0.82rem;
+      font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(26,40,32,0.4);
+      color: var(--light-kicker);
       margin-bottom: 0.6rem;
       display: block;
       opacity: 0;
@@ -898,10 +906,10 @@
     .arm-prin-tag.active { opacity: 1; transform: translateY(0); }
 
     .arm-modal-desc {
-      font-size: 0.88rem;
-      font-weight: 300;
+      font-size: 0.95rem;
+      font-weight: 400;
       line-height: 1.8;
-      color: rgba(26,40,32,0.55);
+      color: var(--light-body);
       margin-bottom: 1.4rem;
       opacity: 0;
       transform: translateY(16px);
@@ -928,7 +936,7 @@
       padding: 5px 14px;
       border: 1px solid rgba(26,40,32,0.2);
       border-radius: 20px;
-      color: rgba(26,40,32,0.6);
+      color: var(--light-muted);
     }
 
     .arm-badge-accent {
@@ -968,17 +976,17 @@
     }
 
     .arm-spec-title {
-      font-size: 0.85rem;
+      font-size: 0.95rem;
       font-weight: 700;
-      color: #1a2820;
+      color: var(--light-title);
       margin-bottom: 0.25rem;
     }
 
     .arm-spec-body {
-      font-size: 0.82rem;
-      font-weight: 300;
+      font-size: 0.9rem;
+      font-weight: 400;
       line-height: 1.75;
-      color: rgba(26,40,32,0.52);
+      color: var(--light-muted);
     }
 
     /* ══════════════════════════════════════════
@@ -1475,6 +1483,14 @@
     @media (max-width: 600px) {
       .footer-nav { flex-direction: column; gap: 1.5rem; }
       .lineup-specs { gap: 1rem; }
+    }
+    @media (min-width: 1101px) {
+      .def-body,
+      .arm-body,
+      .arm-modal-desc,
+      .arm-spec-body {
+        max-width: 62ch;
+      }
     }
   </style>
 </head>

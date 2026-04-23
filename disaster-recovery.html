@@ -21,6 +21,11 @@
       --white:        #e8e6e1;
       --muted:        rgba(232,230,225,0.35);
       --border:       rgba(255,255,255,0.06);
+      --light-title:  #1a2332;
+      --light-body:   rgba(26,35,50,0.82);
+      --light-muted:  rgba(26,35,50,0.64);
+      --light-kicker: rgba(26,35,50,0.48);
+      --light-number: rgba(26,35,50,0.24);
     }
 
     html { height: 100%; }
@@ -508,10 +513,10 @@
     }
 
     .def-body {
-      font-size: clamp(0.95rem, 1.5vw, 1.15rem);
-      font-weight: 300;
+      font-size: clamp(0.95rem, 1.35vw, 1.05rem);
+      font-weight: 400;
       line-height: 1.9;
-      color: rgba(26,35,50,0.6);
+      color: var(--light-body);
     }
 
     .def-left-wrap {
@@ -728,7 +733,7 @@
       font-weight: 700;
       letter-spacing: -0.02em;
       line-height: 1.2;
-      color: #1a2332;
+      color: var(--light-title);
       margin-bottom: 0;
       opacity: 0;
       transform: translateY(20px);
@@ -737,11 +742,11 @@
     .app-headline.active { opacity: 1; transform: translateY(0); }
 
     .app-tag {
-      font-size: 1rem;
-      font-weight: 400;
-      letter-spacing: 0.08em;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(26,35,50,0.4);
+      color: var(--light-kicker);
       margin-top: 0.6rem;
       margin-bottom: 1.4rem;
       display: block;
@@ -752,10 +757,10 @@
     .app-tag.active { opacity: 1; transform: translateY(0); }
 
     .app-body {
-      font-size: clamp(0.88rem, 1.3vw, 1rem);
-      font-weight: 300;
+      font-size: clamp(0.95rem, 1.35vw, 1.05rem);
+      font-weight: 400;
       line-height: 1.9;
-      color: rgba(26,35,50,0.58);
+      color: var(--light-body);
       margin-bottom: 2rem;
       opacity: 0;
       transform: translateY(20px);
@@ -801,11 +806,11 @@
     }
 
     .app-prin-tag {
-      font-size: 0.75rem;
-      font-weight: 400;
+      font-size: 0.82rem;
+      font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(26,35,50,0.4);
+      color: var(--light-kicker);
       margin-bottom: 0.4rem;
       display: block;
       opacity: 0;
@@ -839,18 +844,18 @@
     }
 
     .app-prin-title {
-      font-size: 0.85rem;
+      font-size: 0.95rem;
       font-weight: 700;
-      color: #1a2332;
+      color: var(--light-title);
       margin-bottom: 0.3rem;
       letter-spacing: 0.01em;
     }
 
     .app-prin-body {
-      font-size: 0.85rem;
-      font-weight: 300;
+      font-size: 0.9rem;
+      font-weight: 400;
       line-height: 1.8;
-      color: rgba(26,35,50,0.55);
+      color: var(--light-muted);
     }
 
     @media (max-width: 1100px) {
@@ -1026,10 +1031,10 @@
     .adv-subheadline.active { opacity: 1; transform: translateY(0); }
 
     .adv-body {
-      font-size: clamp(0.88rem, 1.3vw, 1rem);
-      font-weight: 300;
+      font-size: clamp(0.95rem, 1.35vw, 1.05rem);
+      font-weight: 400;
       line-height: 1.9;
-      color: rgba(200,216,240,0.58);
+      color: rgba(200,216,240,0.72);
       border-top: 1px solid rgba(200,216,240,0.1);
       padding-top: 1.6rem;
       margin-bottom: 2.5rem;
@@ -1108,6 +1113,15 @@
       }
       .adv-section-num { left: 1.5rem; top: 2rem; }
       .adv-headline { white-space: normal; font-size: clamp(1.4rem, 5vw, 2rem); }
+    }
+
+    @media (min-width: 1101px) {
+      .def-body,
+      .app-body,
+      .app-prin-body,
+      .adv-body {
+        max-width: 62ch;
+      }
     }
   </style>
 </head>

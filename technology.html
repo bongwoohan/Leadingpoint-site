@@ -21,6 +21,10 @@
       --white:        #f8f4ec;
       --muted:        rgba(248,244,236,0.52);
       --border:       rgba(255,255,255,0.12);
+      --light-title:  #1a2332;
+      --light-body:   rgba(26,35,50,0.82);
+      --light-muted:  rgba(26,35,50,0.66);
+      --light-kicker: rgba(26,35,50,0.48);
     }
 
     html { height: 100%; }
@@ -509,10 +513,10 @@
     }
 
     .def-body {
-      font-size: clamp(0.95rem, 1.5vw, 1.15rem);
-      font-weight: 300;
+      font-size: clamp(0.95rem, 1.35vw, 1.05rem);
+      font-weight: 400;
       line-height: 1.9;
-      color: rgba(26,35,50,0.85);
+      color: var(--light-body);
     }
 
     .def-left-wrap {
@@ -729,7 +733,7 @@
       font-weight: 700;
       letter-spacing: -0.02em;
       line-height: 1.2;
-      color: #1a2332;
+      color: var(--light-title);
       margin-bottom: 0;
       opacity: 0;
       transform: translateY(20px);
@@ -738,11 +742,11 @@
     .app-headline.active { opacity: 1; transform: translateY(0); }
 
     .app-tag {
-      font-size: 1rem;
-      font-weight: 400;
-      letter-spacing: 0.08em;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(26,35,50,0.4);
+      color: var(--light-kicker);
       margin-top: 0.6rem;
       margin-bottom: 1.4rem;
       display: block;
@@ -753,10 +757,10 @@
     .app-tag.active { opacity: 1; transform: translateY(0); }
 
     .app-body {
-      font-size: clamp(0.88rem, 1.3vw, 1rem);
-      font-weight: 300;
+      font-size: clamp(0.95rem, 1.35vw, 1.05rem);
+      font-weight: 400;
       line-height: 1.9;
-      color: rgba(26,35,50,0.85);
+      color: var(--light-body);
       margin-bottom: 2rem;
       opacity: 0;
       transform: translateY(20px);
@@ -802,11 +806,11 @@
     }
 
     .app-prin-tag {
-      font-size: 0.75rem;
-      font-weight: 400;
+      font-size: 0.82rem;
+      font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(26,35,50,0.4);
+      color: var(--light-kicker);
       margin-bottom: 0.4rem;
       display: block;
       opacity: 0;
@@ -840,18 +844,18 @@
     }
 
     .app-prin-title {
-      font-size: 0.85rem;
+      font-size: 0.95rem;
       font-weight: 700;
-      color: #1a2332;
+      color: var(--light-title);
       margin-bottom: 0.3rem;
       letter-spacing: 0.01em;
     }
 
     .app-prin-body {
-      font-size: 0.85rem;
-      font-weight: 300;
+      font-size: 0.9rem;
+      font-weight: 400;
       line-height: 1.8;
-      color: rgba(26,35,50,0.85);
+      color: var(--light-muted);
     }
 
     @media (max-width: 1100px) {
@@ -1180,11 +1184,11 @@
     .partners-tag.active { opacity: 1; transform: translateY(0); }
 
     .partners-headline {
-      font-size: clamp(1.8rem, 3vw, 3rem);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
       font-weight: 700;
       letter-spacing: -0.025em;
       line-height: 1.15;
-      color: #1a2332;
+      color: var(--light-title);
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1) 0.08s, transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.08s;
@@ -1192,10 +1196,10 @@
     .partners-headline.active { opacity: 1; transform: translateY(0); }
 
     .partners-desc {
-      font-size: clamp(0.9rem, 1.4vw, 1.05rem);
-      font-weight: 300;
+      font-size: clamp(0.95rem, 1.35vw, 1.05rem);
+      font-weight: 400;
       line-height: 1.85;
-      color: rgba(26,35,50,0.55);
+      color: var(--light-body);
       padding-left: 3rem;
       border-left: 1px solid rgba(26,35,50,0.1);
       opacity: 0;
@@ -1255,18 +1259,18 @@
     }
 
     .partner-tagline {
-      font-size: 0.78rem;
+      font-size: 0.9rem;
       font-weight: 400;
       line-height: 1.65;
-      color: rgba(26,35,50,0.5);
+      color: var(--light-muted);
     }
 
     .partner-product-count {
-      font-size: 0.68rem;
+      font-size: 0.75rem;
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(26,35,50,0.28);
+      color: var(--light-kicker);
       margin-top: auto;
       padding-top: 1rem;
       border-top: 1px solid rgba(26,35,50,0.07);
@@ -1355,7 +1359,7 @@
     .vendor-brand-line.active { opacity: 1; }
 
     .vendor-headline {
-      font-size: clamp(1.5rem, 2.2vw, 2rem);
+      font-size: clamp(1.7rem, 2.4vw, 2.35rem);
       font-weight: 700;
       letter-spacing: -0.02em;
       line-height: 1.25;
@@ -1367,8 +1371,8 @@
     .vendor-headline.active { opacity: 1; transform: translateY(0); }
 
     .vendor-body {
-      font-size: 0.88rem;
-      font-weight: 300;
+      font-size: 0.95rem;
+      font-weight: 400;
       line-height: 1.85;
       opacity: 0;
       transform: translateY(16px);
@@ -1431,15 +1435,15 @@
     .product-info { display: flex; flex-direction: column; gap: 0.35rem; }
 
     .product-name {
-      font-size: clamp(1rem, 1.6vw, 1.25rem);
+      font-size: clamp(1.05rem, 1.7vw, 1.3rem);
       font-weight: 700;
       letter-spacing: -0.015em;
       line-height: 1.2;
     }
 
     .product-desc {
-      font-size: 0.85rem;
-      font-weight: 300;
+      font-size: 0.9rem;
+      font-weight: 400;
       line-height: 1.75;
       margin-top: 0.15rem;
     }
@@ -1447,31 +1451,31 @@
     /* ── DELL section ── */
     .vendor-dell { background: #EEF2F7; }
     .vendor-dell .vendor-section-num { color: rgba(26,35,50,0.18); }
-    .vendor-dell .vendor-headline { color: #1a2332; }
-    .vendor-dell .vendor-body { color: rgba(26,35,50,0.52); }
+    .vendor-dell .vendor-headline { color: var(--light-title); }
+    .vendor-dell .vendor-body { color: var(--light-body); }
     .vendor-dell .product-row { border-top-color: rgba(26,35,50,0.08); }
-    .vendor-dell .product-name { color: #1a2332; }
-    .vendor-dell .product-desc { color: rgba(26,35,50,0.5); }
+    .vendor-dell .product-name { color: var(--light-title); }
+    .vendor-dell .product-desc { color: var(--light-muted); }
     .vendor-dell .vendor-brand-line { background: #007DB8; }
 
     /* ── HPE section ── */
     .vendor-hpe { background: #F0F7F4; }
     .vendor-hpe .vendor-section-num { color: rgba(26,35,50,0.18); }
-    .vendor-hpe .vendor-headline { color: #1a2332; }
-    .vendor-hpe .vendor-body { color: rgba(26,35,50,0.52); }
+    .vendor-hpe .vendor-headline { color: var(--light-title); }
+    .vendor-hpe .vendor-body { color: var(--light-body); }
     .vendor-hpe .product-row { border-top-color: rgba(26,35,50,0.08); }
-    .vendor-hpe .product-name { color: #1a2332; }
-    .vendor-hpe .product-desc { color: rgba(26,35,50,0.5); }
+    .vendor-hpe .product-name { color: var(--light-title); }
+    .vendor-hpe .product-desc { color: var(--light-muted); }
     .vendor-hpe .vendor-brand-line { background: #00B388; }
 
     /* ── FUJITSU section ── */
     .vendor-fujitsu { background: #F5F1EE; }
     .vendor-fujitsu .vendor-section-num { color: rgba(26,35,50,0.18); }
-    .vendor-fujitsu .vendor-headline { color: #1a2332; }
-    .vendor-fujitsu .vendor-body { color: rgba(26,35,50,0.52); }
+    .vendor-fujitsu .vendor-headline { color: var(--light-title); }
+    .vendor-fujitsu .vendor-body { color: var(--light-body); }
     .vendor-fujitsu .product-row { border-top-color: rgba(26,35,50,0.08); }
-    .vendor-fujitsu .product-name { color: #1a2332; }
-    .vendor-fujitsu .product-desc { color: rgba(26,35,50,0.5); }
+    .vendor-fujitsu .product-name { color: var(--light-title); }
+    .vendor-fujitsu .product-desc { color: var(--light-muted); }
     .vendor-fujitsu .vendor-brand-line { background: #FF0000; }
 
     /* Fujitsu logo → filter for light bg if needed */
@@ -1480,11 +1484,11 @@
     }
     .vendor-pure { background: #EDF6FD; }
     .vendor-pure .vendor-section-num { color: rgba(26,35,50,0.18); }
-    .vendor-pure .vendor-headline { color: #1a2332; }
-    .vendor-pure .vendor-body { color: rgba(26,35,50,0.52); }
+    .vendor-pure .vendor-headline { color: var(--light-title); }
+    .vendor-pure .vendor-body { color: var(--light-body); }
     .vendor-pure .product-row { border-top-color: rgba(26,35,50,0.08); }
-    .vendor-pure .product-name { color: #1a2332; }
-    .vendor-pure .product-desc { color: rgba(26,35,50,0.5); }
+    .vendor-pure .product-name { color: var(--light-title); }
+    .vendor-pure .product-desc { color: var(--light-muted); }
     .vendor-pure .vendor-brand-line { background: #FF6B2B; }
 
     @media (max-width: 1100px) {
@@ -1501,6 +1505,17 @@
     @media (max-width: 600px) {
       .product-row { grid-template-columns: 120px 1fr; gap: 1rem; }
       .product-img-card { height: 75px; padding: 0.8rem 1rem; }
+    }
+
+    @media (min-width: 1101px) {
+      .def-body,
+      .app-body,
+      .app-prin-body,
+      .partners-desc,
+      .vendor-body,
+      .product-desc {
+        max-width: 62ch;
+      }
     }
   </style>
 </head>

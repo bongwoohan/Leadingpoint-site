@@ -22,6 +22,7 @@
       --muted:        rgba(26,26,26,0.38);
       --border:       rgba(0,0,0,0.07);
       --accent:       #1a7a5e;
+      --light-title:  #ffffff;
     }
 
     html { height: 100%; }
@@ -224,8 +225,8 @@
       opacity: 0; transform: translateY(10px); transition: opacity 0.6s ease, transform 0.6s ease;
     }
     .slogan-sub {
-      font-size: clamp(1rem, 1.8vw, 1.3rem); font-weight: 300; line-height: 1.8;
-      color: rgba(26,80,60,0.45); opacity: 0; transform: translateY(10px);
+      font-size: clamp(1rem, 1.8vw, 1.3rem); font-weight: 400; line-height: 1.8;
+      color: rgba(26,80,60,0.6); opacity: 0; transform: translateY(10px);
       transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;
     }
     .slogan-main.up, .slogan-sub.up { opacity: 1; transform: translateY(0); }
@@ -280,8 +281,8 @@
     }
 
     .p-heading {
-      font-size: 1.875rem; font-weight: 700; letter-spacing: -0.01em;
-      line-height: 1.25; color: #fff;
+      font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; letter-spacing: -0.02em;
+      line-height: 1.2; color: var(--light-title);
       opacity: 0; transform: translateY(16px);
       transition: opacity 0.7s ease 0.08s, transform 0.7s ease 0.08s;
     }
@@ -373,7 +374,11 @@
       .footer-divider { margin: 0 -1.5rem; }
     }
 
-    @media (min-width: 1101px) { #menu-overlay { display: none; } }
+    @media (min-width: 1101px) {
+      #menu-overlay { display: none; }
+      .hero-slogan-right { max-width: 34rem; }
+      .partners-left { width: 240px; }
+    }
 
     @media (max-width: 600px) {
       .logo-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }

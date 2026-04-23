@@ -22,6 +22,10 @@
       --muted:        rgba(232,230,225,0.35);
       --border:       rgba(255,255,255,0.06);
       --accent:       #e05c5c;
+      --light-title:  #1a1015;
+      --light-body:   rgba(26,14,16,0.82);
+      --light-muted:  rgba(26,14,16,0.66);
+      --light-kicker: rgba(26,14,16,0.48);
     }
 
     html { height: 100%; }
@@ -526,17 +530,17 @@
     }
 
     .s1-tagline {
-      font-size: clamp(0.9rem, 1.3vw, 1.05rem);
-      font-weight: 300;
+      font-size: clamp(0.95rem, 1.35vw, 1.05rem);
+      font-weight: 400;
       line-height: 1.9;
-      color: rgba(26,14,16,0.55);
+      color: var(--light-body);
     }
 
     .s1-partner-text {
-      font-size: clamp(0.88rem, 1.2vw, 1rem);
-      font-weight: 300;
+      font-size: clamp(0.95rem, 1.3vw, 1.02rem);
+      font-weight: 400;
       line-height: 1.9;
-      color: rgba(26,14,16,0.55);
+      color: var(--light-body);
     }
 
     .s1-cards {
@@ -569,7 +573,7 @@
     }
 
     .s1-card-title {
-      font-size: 0.85rem;
+      font-size: 0.95rem;
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -584,10 +588,10 @@
     }
 
     .s1-card-items li {
-      font-size: 0.85rem;
-      font-weight: 300;
+      font-size: 0.9rem;
+      font-weight: 400;
       line-height: 1.7;
-      color: rgba(26,14,16,0.6);
+      color: var(--light-muted);
       padding-left: 1rem;
       position: relative;
     }
@@ -730,20 +734,20 @@
     }
 
     .s3-tag {
-      font-size: 0.78rem;
-      font-weight: 400;
+      font-size: 0.82rem;
+      font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(26,14,16,0.35);
+      color: var(--light-kicker);
       display: block;
       margin-bottom: 1.2rem;
     }
 
     .s3-body {
-      font-size: clamp(0.88rem, 1.3vw, 1rem);
-      font-weight: 300;
+      font-size: clamp(0.95rem, 1.35vw, 1.05rem);
+      font-weight: 400;
       line-height: 1.9;
-      color: rgba(26,14,16,0.58);
+      color: var(--light-body);
     }
 
     .s3-cards {
@@ -771,7 +775,7 @@
     .s3-card-icon { width: 32px; height: 32px; color: #a83030; }
 
     .s3-card-title {
-      font-size: 0.82rem;
+      font-size: 0.95rem;
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -779,10 +783,10 @@
     }
 
     .s3-card-body {
-      font-size: 0.85rem;
-      font-weight: 300;
+      font-size: 0.9rem;
+      font-weight: 400;
       line-height: 1.8;
-      color: rgba(26,14,16,0.55);
+      color: var(--light-muted);
     }
 
     .s3-badge-area {
@@ -923,7 +927,7 @@
     .s5-left { padding-top: 0.3rem; }
 
     .s5-headline {
-      font-size: clamp(1.4rem, 2.2vw, 2.4rem);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
       font-weight: 700;
       letter-spacing: -0.02em;
       line-height: 1.2;
@@ -931,11 +935,11 @@
     }
 
     .s5-tag {
-      font-size: 0.78rem;
-      font-weight: 400;
+      font-size: 0.82rem;
+      font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(26,14,16,0.35);
+      color: var(--light-kicker);
       margin-top: 0.5rem;
       display: block;
     }
@@ -943,10 +947,10 @@
     .s5-right { }
 
     .s5-intro {
-      font-size: clamp(0.88rem, 1.3vw, 1rem);
-      font-weight: 300;
+      font-size: clamp(0.95rem, 1.35vw, 1.05rem);
+      font-weight: 400;
       line-height: 1.9;
-      color: rgba(26,14,16,0.6);
+      color: var(--light-body);
       border-top: 1px solid rgba(26,14,16,0.1);
       padding-top: 1.4rem;
       margin-bottom: 2.5rem;
@@ -978,17 +982,17 @@
     .s5-benefit-icon { color: #a83030; flex-shrink: 0; margin-top: 2px; }
 
     .s5-benefit-title {
-      font-size: 0.85rem;
+      font-size: 0.95rem;
       font-weight: 700;
       color: #1a1015;
       margin-bottom: 0.2rem;
     }
 
     .s5-benefit-body {
-      font-size: 0.82rem;
-      font-weight: 300;
+      font-size: 0.9rem;
+      font-weight: 400;
       line-height: 1.75;
-      color: rgba(26,14,16,0.55);
+      color: var(--light-muted);
     }
 
     /* ── SECTION 6: S3 Object Lock ── */
@@ -1335,7 +1339,17 @@
       .s6-cards { grid-template-columns: 1fr; }
       .footer-nav { flex-direction: column; gap: 1.5rem; }
     }
-  </style>
+    @media (min-width: 1101px) {
+      .s1-tagline,
+      .s1-partner-text,
+      .s3-body,
+      .s3-card-body,
+      .s5-intro,
+      .s5-benefit-body {
+        max-width: 62ch;
+      }
+    }
+</style>
 </head>
 <body data-page="cloud" data-logo="images/logo/LP-LOGO-transparent.png">
 

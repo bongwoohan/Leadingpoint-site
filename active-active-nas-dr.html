@@ -22,6 +22,10 @@
       --muted:        rgba(200,228,248,0.35);
       --border:       rgba(255,255,255,0.07);
       --accent:       #5fc8f0;
+      --light-title:  #042c53;
+      --light-body:   rgba(26,35,50,0.82);
+      --light-muted:  rgba(26,35,50,0.64);
+      --light-kicker: rgba(24,95,165,0.54);
     }
 
     html { height: 100%; }
@@ -592,10 +596,10 @@
 
     .s1-eyebrow {
       font-size: 0.65rem;
-      font-weight: 400;
+      font-weight: 500;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(24,95,165,0.45);
+      color: var(--light-kicker);
     }
 
     .s1-title {
@@ -603,7 +607,7 @@
       font-weight: 700;
       letter-spacing: -0.02em;
       line-height: 1.2;
-      color: #042c53;
+      color: var(--light-title);
     }
 
     .s1-kpi {
@@ -657,10 +661,10 @@
     }
 
     .s1-body {
-      font-size: clamp(0.95rem, 1.5vw, 1.15rem);
-      font-weight: 300;
+      font-size: clamp(0.95rem, 1.35vw, 1.05rem);
+      font-weight: 400;
       line-height: 1.9;
-      color: rgba(26,35,50,0.6);
+      color: var(--light-body);
     }
 
     .s1-divider {
@@ -677,9 +681,9 @@
 
     .s1-chip {
       font-size: 0.72rem;
-      font-weight: 400;
+      font-weight: 500;
       letter-spacing: 0.02em;
-      color: rgba(26,35,50,0.55);
+      color: var(--light-muted);
       background: rgba(26,35,50,0.05);
       border: 0.5px solid rgba(26,35,50,0.15);
       padding: 5px 12px;
@@ -807,15 +811,15 @@
       font-weight: 700;
       letter-spacing: -0.02em;
       line-height: 1.2;
-      color: #1a2332;
+      color: var(--light-title);
       white-space: nowrap;
     }
 
     .s3-body {
-      font-size: clamp(0.88rem, 1.3vw, 1rem);
-      font-weight: 300;
+      font-size: clamp(0.95rem, 1.35vw, 1.05rem);
+      font-weight: 400;
       line-height: 1.9;
-      color: rgba(26,35,50,0.58);
+      color: var(--light-body);
     }
 
     .s3-divider-col {
@@ -847,17 +851,17 @@
     }
 
     .s3-feat-key {
-      font-size: 0.85rem;
+      font-size: 0.95rem;
       font-weight: 700;
       color: #042c53;
       letter-spacing: 0.01em;
     }
 
     .s3-feat-val {
-      font-size: 0.85rem;
-      font-weight: 300;
+      font-size: 0.9rem;
+      font-weight: 400;
       line-height: 1.8;
-      color: rgba(24,95,165,0.55);
+      color: rgba(24,95,165,0.72);
     }
 
     @media (max-width: 1100px) {
@@ -925,9 +929,9 @@
     }
 
     .s4-table td {
-      font-size: 0.88rem;
-      font-weight: 300;
-      color: rgba(200,216,240,0.55);
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: rgba(200,216,240,0.72);
       padding: 1.2rem 1rem;
       border-bottom: 1px solid rgba(200,216,240,0.07);
       vertical-align: top;
@@ -972,6 +976,13 @@
     @media (max-width: 600px) {
       .footer-nav { flex-direction: column; gap: 1.5rem; }
       .hero-slogan { margin-top: 1.4rem; }
+    }
+    @media (min-width: 1101px) {
+      .s1-body,
+      .s3-body,
+      .s3-feat-val {
+        max-width: 62ch;
+      }
     }
   </style>
 </head>
