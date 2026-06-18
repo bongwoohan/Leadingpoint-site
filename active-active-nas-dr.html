@@ -1013,7 +1013,7 @@
       </div>
       <div class="hero-slogan">
         <p class="slogan-main" id="slogan-main">DR 센터를 대기 자원에서 운영 자원으로</p>
-        <p class="slogan-sub" id="slogan-sub">변경된 블록만 전송하는 실시간 NAS 동기화</p>
+        <p class="slogan-sub" id="slogan-sub">변경된 데이타 Delta-Change만 전송하는 실시간 NAS 동기화</p>
       </div>
     </div>
 
@@ -1038,13 +1038,13 @@
         <div class="s1-kpi">
           <div class="s1-kpi-item">
             <span class="s1-kpi-key">RPO</span>
-            <span class="s1-kpi-val">&lt; 5s</span>
+            <span class="s1-kpi-val">Near-Zero</span>
             <span class="s1-kpi-desc">복구 목표 시점</span>
           </div>
           <div class="s1-kpi-sep"></div>
           <div class="s1-kpi-item">
             <span class="s1-kpi-key">RTO</span>
-            <span class="s1-kpi-val">수분</span>
+            <span class="s1-kpi-val">Near-Zero</span>
             <span class="s1-kpi-desc">복구 목표 시간</span>
           </div>
         </div>
@@ -1052,17 +1052,17 @@
     </div>
 
     <div class="s1-right">
-      <p class="s1-body">기존 DR은 데이터를 복제해 두고, 장애가 발생했을 때 복구하는 방식이 중심이었습니다. Resilio의 기술을 이용한 리딩포인트의 Active-Active NAS DR은 DR 센터의 NAS를 단순한 대기 자원이 아니라, 평상시에도 활용 가능한 Active Site로 전환합니다.</p>
-      <p class="s1-body">Resilio의 기술은 블록 단위 차등 동기화, 실시간 변경 감지, UDP 기반 WAN 최적화, 체크섬 재개 전송, 대역폭 제어, 파일 잠금, REST API 기반 중앙 관리를 통해 NAS 간 데이터를 빠르고 안정적으로 동기화합니다. 이를 통해 RPO 5초 미만, RTO 수분 이내의 Active-Active NAS DR 구성을 지원합니다.</p>
+      <p class="s1-body">LeadingPoint Active-Active NAS DR은 Peer Software의 PeerGFS를 기반으로 Main Center와 DR Center의 NAS를 모두 Read/Write 가능한 Active Site로 운영하는 차세대 NAS DR 아키텍처입니다.</p>
+      <p class="s1-body">PeerGFS의 핵심은 Delta-Level Replication입니다. 파일이 변경될 때 전체 파일을 다시 전송하지 않고 변경된 부분만 식별해 전송하므로, WAN 구간의 전송 데이터 양을 크게 줄이고 복제 속도를 높입니다. 이를 통해 원거리 DR 환경에서도 Near-Zero RPO와 빠른 Failover 구조를 구현합니다.</p>
       <div class="s1-divider"></div>
       <div class="s1-chips">
-        <span class="s1-chip">블록 단위 차등 동기화</span>
-        <span class="s1-chip">실시간 변경 감지</span>
-        <span class="s1-chip">UDP 기반 WAN 최적화</span>
-        <span class="s1-chip">체크섬 재개 전송</span>
-        <span class="s1-chip">대역폭 제어</span>
-        <span class="s1-chip">파일 잠금</span>
-        <span class="s1-chip">REST API 중앙 관리</span>
+        <span class="s1-chip">Delta-Level Replication</span>
+        <span class="s1-chip">변경분만 전송</span>
+        <span class="s1-chip">WAN 전송량 절감</span>
+        <span class="s1-chip">양방향 실시간 복제</span>
+        <span class="s1-chip">Read/Write Active NAS</span>
+        <span class="s1-chip">No Vendor Lock-In</span>
+        <span class="s1-chip">PeerIQ 통합 모니터링</span>
       </div>
     </div>
 
@@ -1081,15 +1081,15 @@
     <div class="s2-divider-col"></div>
 
     <div class="s2-right">
-      <p class="s2-body">일반적인 NAS DR은 복제는 가능하지만, DR 센터의 NAS가 평상시에는 충분히 활용되지 못하거나, 장애 시 전환 절차가 길어지는 한계가 있습니다. Resilio는 NAS 간 실시간 동기화를 통해 주센터와 DR 센터를 모두 Active하게 운영할 수 있도록 하며, 장애 발생 시에도 빠르게 전환할 수 있는 구조를 제공합니다.</p>
+      <p class="s2-body">일반적인 NAS 벤더 복제는 DR 센터 NAS를 Read-Only 또는 Passive 상태로 두는 경우가 많아 Active-Active 구성이 어렵습니다. PeerGFS는 기존 NAS 위에 소프트웨어 오버레이로 동작하며, Delta-Level 복제로 변경된 데이터만 빠르게 동기화해 DR 센터 NAS를 평상시에도 업무에 활용 가능한 Active 자원으로 전환합니다.</p>
       <div class="s2-grid">
         <div class="s2-card">
           <span class="s2-card-num">01</span>
-          <span class="s2-card-label">DR 센터의 평상시 업무 활용</span>
+          <span class="s2-card-label">DR NAS Read/Write Active 운영</span>
         </div>
         <div class="s2-card">
           <span class="s2-card-num">02</span>
-          <span class="s2-card-label">NAS 병목 감소</span>
+          <span class="s2-card-label">변경분 전송으로 WAN 병목 감소</span>
         </div>
         <div class="s2-card">
           <span class="s2-card-num">03</span>
@@ -1097,7 +1097,7 @@
         </div>
         <div class="s2-card">
           <span class="s2-card-num">04</span>
-          <span class="s2-card-label">더 짧은 RPO · RTO</span>
+          <span class="s2-card-label">Near-Zero RPO · RTO</span>
         </div>
       </div>
     </div>
@@ -1111,7 +1111,7 @@
 
     <div class="s3-left">
       <h2 class="s3-title">The Difference</h2>
-      <p class="s3-body">리딩포인트의 Active-Active NAS DR의 차별점은 스토리지 어레이 내부 복제가 아니라, NAS 간 데이터 동기화 계층에 있다는 점입니다.<br><br>즉, 특정 벤더 NAS에 종속된 복제가 아니라, 다양한 NAS와 서버 환경에서 변경된 데이터만 효율적으로 전송하는 범용 동기화 플랫폼입니다.</p>
+      <p class="s3-body">리딩포인트의 Active-Active NAS DR의 차별점은 스토리지 어레이 내부 복제가 아니라, NAS 간 데이터 동기화 계층에 있습니다.<br><br>PeerGFS는 특정 벤더 NAS에 종속되지 않고 변경된 데이터만 효율적으로 전송합니다. 대용량 파일의 일부만 수정된 경우에도 전체 파일이 아니라 변경된 부분만 전송하기 때문에 원거리 DR 환경의 네트워크 부담을 크게 낮춥니다.</p>
     </div>
 
     <div class="s3-divider-col"></div>
@@ -1119,38 +1119,38 @@
     <div class="s3-right">
       <div class="s3-feat">
         <span class="s3-feat-num">01</span>
-        <span class="s3-feat-key">차등 동기화</span>
-        <span class="s3-feat-val">변경된 블록만 전송합니다.</span>
+        <span class="s3-feat-key">Delta-Level Replication</span>
+        <span class="s3-feat-val">파일 전체가 아니라 변경된 부분만 전송합니다.</span>
       </div>
       <div class="s3-feat">
         <span class="s3-feat-num">02</span>
-        <span class="s3-feat-key">파일 분할 및 체크섬 재개</span>
-        <span class="s3-feat-val">대용량 파일도 중단 지점부터 이어서 전송합니다.</span>
+        <span class="s3-feat-key">WAN 전송량 절감</span>
+        <span class="s3-feat-val">전송 데이터 양을 줄여 원거리 복제 속도를 높입니다.</span>
       </div>
       <div class="s3-feat">
         <span class="s3-feat-num">03</span>
-        <span class="s3-feat-key">WAN 최적화</span>
-        <span class="s3-feat-val">UDP 기반 전송으로 고지연, 패킷 손실 환경에 대응합니다.</span>
+        <span class="s3-feat-key">Not in Data Path</span>
+        <span class="s3-feat-val">사용자와 NAS 사이의 I/O 경로 밖에서 동작합니다.</span>
       </div>
       <div class="s3-feat">
         <span class="s3-feat-num">04</span>
-        <span class="s3-feat-key">실시간 변경 감지</span>
-        <span class="s3-feat-val">파일 변경을 감지하는 즉시 동기화합니다.</span>
+        <span class="s3-feat-key">실시간 양방향 복제</span>
+        <span class="s3-feat-val">양쪽 센터의 파일 변경을 감지해 즉시 동기화합니다.</span>
       </div>
       <div class="s3-feat">
         <span class="s3-feat-num">05</span>
-        <span class="s3-feat-key">파일 잠금</span>
-        <span class="s3-feat-val">양쪽 사이트 간 데이터 정합성을 보장합니다.</span>
+        <span class="s3-feat-key">Global File Locking</span>
+        <span class="s3-feat-val">SMB 환경에서 동시 수정 충돌을 방지합니다.</span>
       </div>
       <div class="s3-feat">
         <span class="s3-feat-num">06</span>
-        <span class="s3-feat-key">중앙 관리</span>
-        <span class="s3-feat-val">작업, 대역폭, 상태를 하나의 콘솔에서 관리할 수 있습니다.</span>
+        <span class="s3-feat-key">Multi Vendor NAS</span>
+        <span class="s3-feat-val">Dell, NetApp, Windows, Linux 등 이기종 환경을 지원합니다.</span>
       </div>
       <div class="s3-feat">
         <span class="s3-feat-num">07</span>
-        <span class="s3-feat-key">REST API</span>
-        <span class="s3-feat-val">운영 자동화 및 관제 시스템 연동이 가능합니다.</span>
+        <span class="s3-feat-key">PeerIQ</span>
+        <span class="s3-feat-val">복제 상태, 용량 추이, 이상 징후를 통합 모니터링합니다.</span>
       </div>
     </div>
 
@@ -1171,47 +1171,47 @@
         <thead>
           <tr>
             <th style="width:22%;">솔루션</th>
-            <th style="width:22%;">방식</th>
-            <th style="width:11%;">RPO</th>
-            <th style="width:20%;">RTO</th>
+            <th style="width:24%;">복제 방식</th>
+            <th style="width:13%;">RPO</th>
+            <th style="width:16%;">DR NAS 운영</th>
             <th style="width:25%;">포인트</th>
           </tr>
         </thead>
         <tbody>
           <tr class="s4-row-hi">
-            <td>Leading Point Active-Active NAS DR</td>
-            <td>NAS 간 블록 자동 동기화</td>
-            <td class="s4-acc">&lt; 5초</td>
-            <td class="s4-acc">수분 이내</td>
-            <td>이기종 NAS active-active 구성</td>
+            <td>LeadingPoint PeerGFS</td>
+            <td>Delta-Level Replication</td>
+            <td class="s4-acc">Near-Zero</td>
+            <td class="s4-acc">Read/Write Active</td>
+            <td>변경된 부분만 전송해 WAN 부담을 줄이고 이기종 NAS Active-Active 구성</td>
           </tr>
           <tr>
-            <td>Dell Unity 복제</td>
-            <td>스토리지 어레이 복제</td>
-            <td>비동기 5분까지</td>
-            <td>구성 및 전환 절차에 따라 상이</td>
-            <td>Unity 기반 DR</td>
-          </tr>
-          <tr>
-            <td>Dell PowerScale SyncIQ</td>
-            <td>클러스터 간 비동기 복제</td>
-            <td>정책 기반</td>
-            <td>구성 및 전환 절차에 따라 상이</td>
-            <td>PowerScale 중심</td>
+            <td>Dell SyncIQ</td>
+            <td>PowerScale 전용 비동기 복제</td>
+            <td>수분~수십 분</td>
+            <td>Read-Only 중심</td>
+            <td>동일 벤더 중심, DR 측 NAS Active 운영 제한</td>
           </tr>
           <tr>
             <td>NetApp SnapMirror</td>
-            <td>ONTAP 비동기 복제</td>
-            <td>30분~수시간</td>
-            <td>복제 주기 의존</td>
-            <td>일반 DR용</td>
+            <td>ONTAP 스냅샷 기반 복제</td>
+            <td>수분~수십 분</td>
+            <td>Read-Only 중심</td>
+            <td>SnapMirror 관계 해제 전까지 쓰기 운영 제한</td>
           </tr>
           <tr>
-            <td>NetApp SnapMirror Active Sync</td>
-            <td>ONTAP 동기 복제</td>
-            <td>Zero RPO</td>
-            <td>Zero RTO</td>
-            <td>동기식 연속성, 거리 제약 존재</td>
+            <td>동기식 NAS 복제</td>
+            <td>스토리지 어레이 동기 복제</td>
+            <td>Zero 가능</td>
+            <td>구성 제약</td>
+            <td>낮은 지연 시간이 필요해 100km+ 원거리 DR에 제약</td>
+          </tr>
+          <tr>
+            <td>스냅샷 복제</td>
+            <td>스케줄 기반 전송</td>
+            <td>스냅샷 주기 의존</td>
+            <td>Passive</td>
+            <td>장애 시 수동 전환 절차로 RTO가 길어질 수 있음</td>
           </tr>
         </tbody>
       </table>
