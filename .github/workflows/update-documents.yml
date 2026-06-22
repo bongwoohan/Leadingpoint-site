@@ -38,18 +38,22 @@ jobs:
           git diff --quiet --cached || git commit -m "chore: data.json 자동 갱신 [skip ci]"
           git push
 
-      - name: FTP로 inames 서버에 업로드
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          port: ${{ secrets.FTP_PORT }}
-          local-dir: ./
-          server-dir: ./
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            **/scripts/**
-            **/.github/**
+      - name: lftp 설치
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: FTP로 inames 서버에 업로드 (documents.html, data.json)
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+        run: |
+          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" -p "$FTP_PORT" "$FTP_HOST" -e "
+            set ssl:verify-certificate no;
+            set net:max-retries 5;
+            set net:reconnect-interval-base 5;
+            set net:timeout 30;
+            put -O / documents.html;
+            put -O / data.json;
+            bye
+          "
