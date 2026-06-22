@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<title>LeadingPoint – Documents</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #ffffff;
+  --bg-raised: #f8f8f8;
+  --bg-deep: #eeeeee;
+  --text: #1a1a1a;
+  --muted: rgba(26,26,26,0.45);
+  --faint: rgba(26,26,26,0.30);
+  --border: rgba(0,0,0,0.08);
+  --accent: #f0956e;
+  --dark: #1a2332;
+}
+html { height: 100%; }
+body {
+  width: 100%;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ── PAGE HEADER ── */
+.docs-header {
+  padding: 4.5rem 3rem 2.5rem;
+  text-align: center;
+}
+.docs-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+.docs-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--dark);
+}
+.docs-bar {
+  display: inline-block;
+  width: 32px;
+  height: 2px;
+  background: var(--accent);
+  margin-top: 1rem;
+}
+.docs-sub {
+  margin-top: 1rem;
+  font-size: 0.92rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* ── CONTROLS ── */
+.docs-controls {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 3rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+}
+.docs-search {
+  flex: 1;
+  min-width: 220px;
+  max-width: 360px;
+}
+.docs-search input {
+  width: 100%;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-raised);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.docs-search input:focus {
+  border-color: var(--accent);
+  background: #fff;
+}
+.docs-search input::placeholder { color: var(--faint); }
+
+.docs-filter {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.docs-filter select {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-raised);
+  color: var(--text);
+  outline: none;
+  cursor: pointer;
+}
+
+.docs-count {
+  font-size: 0.78rem;
+  color: var(--faint);
+  white-space: nowrap;
+}
+
+/* ── TABLE ── */
+.docs-table-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 3rem 5rem;
+}
+table.docs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.docs-table thead th {
+  text-align: left;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding: 0.8rem 0.9rem;
+  border-bottom: 1.5px solid var(--text);
+  white-space: nowrap;
+}
+.docs-table tbody td {
+  padding: 1rem 0.9rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--text);
+}
+.docs-table tbody tr {
+  transition: background 0.15s;
+}
+.docs-table tbody tr:hover {
+  background: var(--bg-raised);
+}
+.doc-name {
+  font-weight: 500;
+  color: var(--dark);
+}
+.doc-memo {
+  color: var(--muted);
+  font-size: 0.83rem;
+  margin-top: 0.2rem;
+  line-height: 1.5;
+}
+.tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 0.22rem 0.6rem;
+  border-radius: 4px;
+  background: var(--bg-deep);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.docs-date {
+  color: var(--muted);
+  white-space: nowrap;
+  font-size: 0.83rem;
+}
+.docs-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--dark);
+  text-decoration: none;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  white-space: nowrap;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.docs-download:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(240,149,110,0.06);
+}
+.docs-download-multi {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  align-items: flex-start;
+}
+.no-file {
+  color: var(--faint);
+  font-size: 0.8rem;
+}
+
+/* ── EMPTY / LOADING ── */
+.docs-empty, .docs-loading, .docs-error {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.docs-error { color: #b3503a; }
+
+/* ── FOOTER NOTE ── */
+.docs-footnote {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 3rem 4rem;
+  font-size: 0.76rem;
+  color: var(--faint);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .docs-header { padding: 3rem 1.5rem 2rem; }
+  .docs-controls, .docs-table-wrap, .docs-footnote { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .docs-table thead { display: none; }
+  table.docs-table, .docs-table tbody, .docs-table tbody tr, .docs-table tbody td {
+    display: block;
+    width: 100%;
+  }
+  .docs-table tbody tr {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .docs-table tbody td {
+    border-bottom: none;
+    padding: 0.25rem 0;
+  }
+  .docs-table tbody td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 0.2rem;
+  }
+}
+</style>
+</head>
+<body data-page="documents">
+
+<div id="site-header"></div>
+
+<header class="docs-header">
+  <span class="docs-eyebrow">Resource Library</span>
+  <h1 class="docs-title">Documents</h1>
+  <span class="docs-bar"></span>
+  <p class="docs-sub">LeadingPoint에서 공개한 자료를 확인하고 다운로드하세요.</p>
+</header>
+
+<div class="docs-controls">
+  <div class="docs-search">
+    <input type="text" id="search-input" placeholder="자료명, 메모로 검색..." />
+  </div>
+  <div class="docs-filter">
+    <select id="filter-type">
+      <option value="">전체 종류</option>
+    </select>
+    <select id="filter-author">
+      <option value="">전체 Author</option>
+    </select>
+  </div>
+  <div class="docs-count" id="result-count"></div>
+</div>
+
+<div class="docs-table-wrap">
+  <div id="table-region">
+    <div class="docs-loading">자료를 불러오는 중입니다...</div>
+  </div>
+</div>
+
+<p class="docs-footnote" id="updated-note"></p>
+
+<div id="site-footer"></div>
+
+<script>
+(function () {
+  const state = { items: [], filtered: [] };
+
+  const tableRegion = document.getElementById('table-region');
+  const searchInput = document.getElementById('search-input');
+  const filterType = document.getElementById('filter-type');
+  const filterAuthor = document.getElementById('filter-author');
+  const resultCount = document.getElementById('result-count');
+  const updatedNote = document.getElementById('updated-note');
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>"']/g, (c) => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+  }
+
+  function formatDate(iso) {
+    if (!iso) return '';
+    const d = new Date(iso);
+    if (isNaN(d.getTime())) return iso;
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}.${m}.${day}`;
+  }
+
+  function renderDownloads(files) {
+    if (!files || files.length === 0) {
+      return '<span class="no-file">첨부 없음</span>';
+    }
+    if (files.length === 1) {
+      return `<a class="docs-download" href="${escapeHtml(files[0].url)}" target="_blank" rel="noopener">⬇ 다운로드</a>`;
+    }
+    return '<div class="docs-download-multi">' +
+      files.map((f, i) =>
+        `<a class="docs-download" href="${escapeHtml(f.url)}" target="_blank" rel="noopener">⬇ ${escapeHtml(f.name || ('파일 ' + (i + 1)))}</a>`
+      ).join('') +
+      '</div>';
+  }
+
+  function renderTable(items) {
+    if (items.length === 0) {
+      tableRegion.innerHTML = '<div class="docs-empty">조건에 맞는 자료가 없습니다.</div>';
+      return;
+    }
+
+    const rows = items.map((item) => `
+      <tr>
+        <td data-label="이름">
+          <div class="doc-name">${escapeHtml(item.name || '(제목 없음)')}</div>
+          ${item.memo ? `<div class="doc-memo">${escapeHtml(item.memo)}</div>` : ''}
+        </td>
+        <td data-label="종류">${item.type ? `<span class="tag">${escapeHtml(item.type)}</span>` : ''}</td>
+        <td data-label="Author">${item.author ? `<span class="tag">${escapeHtml(item.author)}</span>` : ''}</td>
+        <td data-label="형식">${item.fileType ? `<span class="tag">${escapeHtml(item.fileType)}</span>` : ''}</td>
+        <td data-label="날짜" class="docs-date">${formatDate(item.date)}</td>
+        <td data-label="다운로드">${renderDownloads(item.files)}</td>
+      </tr>
+    `).join('');
+
+    tableRegion.innerHTML = `
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>이름</th>
+            <th>종류</th>
+            <th>Author</th>
+            <th>형식</th>
+            <th>날짜</th>
+            <th>다운로드</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+  }
+
+  function populateFilterOptions(items) {
+    const types = [...new Set(items.map(i => i.type).filter(Boolean))].sort();
+    const authors = [...new Set(items.map(i => i.author).filter(Boolean))].sort();
+
+    types.forEach(t => {
+      const opt = document.createElement('option');
+      opt.value = t; opt.textContent = t;
+      filterType.appendChild(opt);
+    });
+    authors.forEach(a => {
+      const opt = document.createElement('option');
+      opt.value = a; opt.textContent = a;
+      filterAuthor.appendChild(opt);
+    });
+  }
+
+  function applyFilters() {
+    const q = searchInput.value.trim().toLowerCase();
+    const t = filterType.value;
+    const a = filterAuthor.value;
+
+    state.filtered = state.items.filter((item) => {
+      if (t && item.type !== t) return false;
+      if (a && item.author !== a) return false;
+      if (q) {
+        const haystack = `${item.name || ''} ${item.memo || ''}`.toLowerCase();
+        if (!haystack.includes(q)) return false;
+      }
+      return true;
+    });
+
+    resultCount.textContent = `${state.filtered.length}건`;
+    renderTable(state.filtered);
+  }
+
+  searchInput.addEventListener('input', applyFilters);
+  filterType.addEventListener('change', applyFilters);
+  filterAuthor.addEventListener('change', applyFilters);
+
+  fetch('data.json', { cache: 'no-store' })
+    .then((res) => {
+      if (!res.ok) throw new Error('data.json을 불러올 수 없습니다.');
+      return res.json();
+    })
+    .then((data) => {
+      state.items = data.items || [];
+      populateFilterOptions(state.items);
+      applyFilters();
+
+      if (data.generatedAt) {
+        const d = new Date(data.generatedAt);
+        const formatted = isNaN(d.getTime()) ? data.generatedAt :
+          `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+        updatedNote.textContent = `최근 업데이트: ${formatted}`;
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      tableRegion.innerHTML = '<div class="docs-error">자료를 불러오는 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.</div>';
+    });
+})();
+</script>
+
+<script src="js/components.js"></script>
+</body>
+</html>

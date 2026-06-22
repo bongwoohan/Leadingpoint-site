@@ -1,0 +1,52 @@
+name: Update Documents Page
+
+# 이 workflow는 두 가지 방식으로 실행됩니다:
+# 1) schedule: 매일 정해진 시간에 자동 실행
+# 2) workflow_dispatch: GitHub Actions 탭에서 "Run workflow" 버튼으로 수동 실행
+on:
+  schedule:
+    # UTC 18:00 = 한국시간(KST) 새벽 03:00
+    - cron: '0 18 * * *'
+  workflow_dispatch: {}
+
+jobs:
+  update-documents:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Node.js 설치
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Notion에서 공개 자료 가져오기 (data.json 생성)
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATA_SOURCE_ID: ${{ secrets.NOTION_DATA_SOURCE_ID }}
+        run: node scripts/fetch-notion.js
+
+      - name: 변경사항 저장소에 커밋
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data.json
+          git diff --quiet --cached || git commit -m "chore: data.json 자동 갱신 [skip ci]"
+          git push
+
+      - name: FTP로 inames 서버에 업로드
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT }}
+          local-dir: ./
+          server-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/scripts/**
+            **/.github/**
