@@ -20,7 +20,7 @@ const path = require("path");
 
 const NOTION_TOKEN = process.env.NOTION_TOKEN;
 const DATA_SOURCE_ID = process.env.NOTION_DATA_SOURCE_ID;
-const NOTION_VERSION = "2022-06-28";
+const NOTION_VERSION = "2025-09-03";
 
 if (!NOTION_TOKEN) {
   console.error("오류: NOTION_TOKEN 환경변수가 설정되지 않았습니다.");
