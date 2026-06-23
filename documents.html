@@ -709,7 +709,7 @@ table.docs-table {
   }
 
   function applyFilters() {
-    const q = searchInput.value.trim().toLowerCase();
+    const q = (searchInput ? searchInput.value : '').trim().toLowerCase();
     const t = filterType.value;
     const a = filterAuthor.value;
 
@@ -727,7 +727,7 @@ table.docs-table {
     renderTable(state.filtered);
   }
 
-  searchInput.addEventListener('input', applyFilters);
+  searchInput && searchInput.addEventListener('input', applyFilters);
   filterType.addEventListener('change', applyFilters);
   filterAuthor.addEventListener('change', applyFilters);
 
