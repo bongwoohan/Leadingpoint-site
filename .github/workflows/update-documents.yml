@@ -34,14 +34,14 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data.json
-          git diff --quiet --cached || git commit -m "chore: data.json 자동 갱신 [skip ci]"
+          git add data.json files/
+          git diff --quiet --cached || git commit -m "chore: data.json 및 첨부파일 자동 갱신 [skip ci]"
           git push
 
       - name: lftp 설치
         run: sudo apt-get update && sudo apt-get install -y lftp
 
-      - name: FTP로 inames 서버에 업로드 (documents.html, data.json)
+      - name: FTP로 inames 서버에 업로드 (documents.html, data.json, files/)
         env:
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
@@ -53,7 +53,9 @@ jobs:
             set net:max-retries 5;
             set net:reconnect-interval-base 5;
             set net:timeout 30;
+            set mirror:use-pget-n 1;
             put -O / documents.html;
             put -O / data.json;
+            mirror -R --verbose files/ files/;
             bye
           "
