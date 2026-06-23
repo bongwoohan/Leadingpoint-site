@@ -465,26 +465,45 @@ table.docs-table {
   white-space: nowrap;
 }
 .docs-table tbody td {
-  padding: 1rem 0.9rem;
+  height: 64px;
+  max-height: 64px;
+  padding: 0 0.9rem;
   border-bottom: 1px solid var(--border);
-  vertical-align: top;
+  vertical-align: middle;
   color: var(--text);
+  overflow: hidden;
 }
 .docs-table tbody tr {
+  cursor: pointer;
   transition: background 0.15s;
 }
-.docs-table tbody tr:hover {
+/* 줄무늬: 짝수 행에 살짝 짙은 배경 */
+.docs-table tbody tr:nth-child(even) {
   background: var(--bg-raised);
+}
+.docs-table tbody tr:hover {
+  background: var(--bg-deep);
 }
 .doc-name {
   font-weight: 500;
   color: var(--dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .doc-memo {
   color: var(--muted);
   font-size: 0.83rem;
-  margin-top: 0.2rem;
-  line-height: 1.5;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: 320px;
+}
+.doc-memo-empty {
+  color: var(--faint);
+  font-size: 0.8rem;
 }
 .tag {
   display: inline-block;
@@ -495,6 +514,9 @@ table.docs-table {
   background: var(--bg-deep);
   color: var(--muted);
   white-space: nowrap;
+}
+.docs-table tbody tr:nth-child(even) .tag {
+  background: var(--bg-deep);
 }
 .docs-date {
   color: var(--muted);
@@ -520,11 +542,26 @@ table.docs-table {
   color: var(--accent);
   background: rgba(240,149,110,0.06);
 }
-.docs-download-multi {
-  display: flex;
-  flex-direction: column;
+.docs-download-count {
+  display: inline-flex;
+  align-items: center;
   gap: 0.35rem;
-  align-items: flex-start;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--muted);
+  background: none;
+  text-decoration: none;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.docs-download-count:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(240,149,110,0.06);
 }
 .no-file {
   color: var(--faint);
@@ -549,6 +586,147 @@ table.docs-table {
   color: var(--faint);
 }
 
+/* ════════════════════════════════════════
+   MODAL (자료 상세 보기)
+   ════════════════════════════════════════ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26,26,26,0.45);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.modal-card {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 560px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  transform: translateY(12px) scale(0.98);
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+.modal-overlay.open .modal-card {
+  transform: translateY(0) scale(1);
+}
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.75rem 1.75rem 0;
+}
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--dark);
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+}
+.modal-close {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: var(--bg-raised);
+  color: var(--muted);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+.modal-close:hover {
+  background: var(--bg-deep);
+  color: var(--text);
+}
+.modal-tags {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  padding: 0.9rem 1.75rem 0;
+}
+.modal-section {
+  padding: 1.25rem 1.75rem 0;
+}
+.modal-section-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 0.5rem;
+}
+.modal-memo {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--text);
+  white-space: pre-wrap;
+}
+.modal-memo-empty {
+  font-size: 0.88rem;
+  color: var(--faint);
+}
+.modal-files {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.modal-file-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.modal-file-name {
+  font-size: 0.86rem;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.modal-file-download {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--dark);
+  text-decoration: none;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.modal-file-download:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(240,149,110,0.06);
+}
+.modal-footer {
+  padding: 1.75rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .docs-header { padding: 3rem 1.5rem 2rem; }
@@ -563,6 +741,8 @@ table.docs-table {
     border-bottom: 1px solid var(--border);
   }
   .docs-table tbody td {
+    height: auto;
+    max-height: none;
     border-bottom: none;
     padding: 0.25rem 0;
   }
@@ -576,6 +756,9 @@ table.docs-table {
     color: var(--faint);
     margin-bottom: 0.2rem;
   }
+  .doc-memo { max-width: none; }
+  .modal-overlay { padding: 0; align-items: flex-end; }
+  .modal-card { max-width: none; border-radius: 16px 16px 0 0; max-height: 90vh; }
 }
 </style>
 </head>
@@ -585,7 +768,7 @@ table.docs-table {
 
 <header class="docs-header">
   <span class="docs-eyebrow">Resource Library</span>
-  <h1 class="docs-title">DOCUMENTS</h1>
+  <h1 class="docs-title">LEADING POINT DOCUMENTS</h1>
   <span class="docs-bar"></span>
  
 </header>
@@ -611,6 +794,28 @@ table.docs-table {
 
 <p class="docs-footnote" id="updated-note"></p>
 
+<!-- 자료 상세 모달 -->
+<div class="modal-overlay" id="doc-modal">
+  <div class="modal-card" id="doc-modal-card">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modal-title"></h2>
+      <button class="modal-close" id="modal-close" aria-label="닫기">✕</button>
+    </div>
+    <div class="modal-tags" id="modal-tags"></div>
+    <div class="modal-section">
+      <div class="modal-section-label">메모</div>
+      <div id="modal-memo"></div>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-label">첨부파일</div>
+      <div class="modal-files" id="modal-files"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="modal-close" id="modal-close-2" style="width:auto;height:auto;border-radius:6px;padding:0.5rem 1rem;font-size:0.82rem;">닫기</button>
+    </div>
+  </div>
+</div>
+
 <div id="site-footer"></div>
 
 <script>
@@ -623,6 +828,12 @@ table.docs-table {
   const filterAuthor = document.getElementById('filter-author');
   const resultCount = document.getElementById('result-count');
   const updatedNote = document.getElementById('updated-note');
+
+  const modal = document.getElementById('doc-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalTags = document.getElementById('modal-tags');
+  const modalMemo = document.getElementById('modal-memo');
+  const modalFiles = document.getElementById('modal-files');
 
   function escapeHtml(str) {
     if (!str) return '';
@@ -641,19 +852,56 @@ table.docs-table {
     return `${y}.${m}.${day}`;
   }
 
-  function renderDownloads(files) {
-    if (!files || files.length === 0) {
+  /* 표의 다운로드 열: 파일 1개면 즉시 다운로드 링크, 2개 이상이면 "N개 파일" 버튼(모달 오픈) */
+  function renderDownloadCell(item) {
+    const files = item.files || [];
+    if (files.length === 0) {
       return '<span class="no-file">첨부 없음</span>';
     }
     if (files.length === 1) {
-      return `<a class="docs-download" href="${escapeHtml(files[0].url)}" target="_blank" rel="noopener">⬇ 다운로드</a>`;
+      return `<a class="docs-download" href="${escapeHtml(files[0].url)}" target="_blank" rel="noopener" data-stop="1">⬇ 다운로드</a>`;
     }
-    return '<div class="docs-download-multi">' +
-      files.map((f, i) =>
-        `<a class="docs-download" href="${escapeHtml(f.url)}" target="_blank" rel="noopener">⬇ ${escapeHtml(f.name || ('파일 ' + (i + 1)))}</a>`
-      ).join('') +
-      '</div>';
+    return `<button type="button" class="docs-download-count" data-stop="1" data-open-modal="1">📎 ${files.length}개 파일</button>`;
   }
+
+  /* 모달 채우기 + 열기 */
+  function openModal(item) {
+    modalTitle.textContent = item.name || '(제목 없음)';
+
+    const tags = [item.type, item.author].filter(Boolean);
+    modalTags.innerHTML = tags.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('');
+
+    modalMemo.innerHTML = item.memo
+      ? `<div class="modal-memo">${escapeHtml(item.memo)}</div>`
+      : `<div class="modal-memo-empty">등록된 메모가 없습니다.</div>`;
+
+    const files = item.files || [];
+    modalFiles.innerHTML = files.length === 0
+      ? `<div class="modal-memo-empty">첨부된 파일이 없습니다.</div>`
+      : files.map((f, i) => `
+          <div class="modal-file-row">
+            <span class="modal-file-name">${escapeHtml(f.name || ('파일 ' + (i + 1)))}</span>
+            <a class="modal-file-download" href="${escapeHtml(f.url)}" target="_blank" rel="noopener">⬇ 다운로드</a>
+          </div>
+        `).join('');
+
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  document.getElementById('modal-close-2').addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
 
   function renderTable(items) {
     if (items.length === 0) {
@@ -661,17 +909,16 @@ table.docs-table {
       return;
     }
 
-    const rows = items.map((item) => `
-      <tr>
+    const rows = items.map((item, idx) => `
+      <tr data-idx="${idx}">
         <td data-label="이름">
           <div class="doc-name">${escapeHtml(item.name || '(제목 없음)')}</div>
-          ${item.memo ? `<div class="doc-memo">${escapeHtml(item.memo)}</div>` : ''}
         </td>
         <td data-label="종류">${item.type ? `<span class="tag">${escapeHtml(item.type)}</span>` : ''}</td>
+        <td data-label="메모">${item.memo ? `<div class="doc-memo">${escapeHtml(item.memo)}</div>` : `<span class="doc-memo-empty">—</span>`}</td>
         <td data-label="Author">${item.author ? `<span class="tag">${escapeHtml(item.author)}</span>` : ''}</td>
-        <td data-label="형식">${item.fileType ? `<span class="tag">${escapeHtml(item.fileType)}</span>` : ''}</td>
         <td data-label="날짜" class="docs-date">${formatDate(item.date)}</td>
-        <td data-label="다운로드">${renderDownloads(item.files)}</td>
+        <td data-label="다운로드">${renderDownloadCell(item)}</td>
       </tr>
     `).join('');
 
@@ -681,8 +928,8 @@ table.docs-table {
           <tr>
             <th>이름</th>
             <th>종류</th>
+            <th>메모</th>
             <th>Author</th>
-            <th>형식</th>
             <th>날짜</th>
             <th>다운로드</th>
           </tr>
@@ -690,6 +937,24 @@ table.docs-table {
         <tbody>${rows}</tbody>
       </table>
     `;
+
+    /* 행 클릭 → 모달 (다운로드 영역 클릭은 제외) */
+    tableRegion.querySelectorAll('tbody tr').forEach((tr) => {
+      tr.addEventListener('click', (e) => {
+        if (e.target.closest('[data-stop]')) return; /* 다운로드 버튼/링크 클릭 시 모달 안 띄움 */
+        const idx = Number(tr.getAttribute('data-idx'));
+        openModal(items[idx]);
+      });
+    });
+
+    /* "N개 파일" 버튼 → 모달 오픈 (다운로드 목록 보기) */
+    tableRegion.querySelectorAll('[data-open-modal]').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const tr = e.target.closest('tr');
+        const idx = Number(tr.getAttribute('data-idx'));
+        openModal(items[idx]);
+      });
+    });
   }
 
   function populateFilterOptions(items) {
