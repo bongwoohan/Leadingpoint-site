@@ -54,8 +54,9 @@ jobs:
             set net:reconnect-interval-base 5;
             set net:timeout 30;
             set mirror:use-pget-n 1;
-            put -O / documents.html;
-            put -O / data.json;
+            cd /wwwhome;
+            put -O . documents.html;
+            put -O . data.json;
             mirror -R --verbose files/ files/;
             bye
           "
