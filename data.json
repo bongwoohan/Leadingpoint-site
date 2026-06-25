@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-06-25T06:27:09.867Z",
+  "generatedAt": "2026-06-25T06:32:13.556Z",
   "count": 7,
   "items": [
     {
       "id": "38a2da97-a097-80dc-a48a-dcbdbcdd4a8d",
       "name": "PeerGFS_Datasheet_KR",
       "memo": "Peer Software의 ds_peergfs_en_a4 한글본",
-      "type": "",
+      "type": "영업자료",
       "author": "Peer Software",
       "fileType": "PDF",
       "date": "2026-06-25",
