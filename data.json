@@ -1,22 +1,7 @@
 {
-  "generatedAt": "2026-06-25T06:47:10.362Z",
-  "count": 7,
+  "generatedAt": "2026-06-25T06:52:01.901Z",
+  "count": 6,
   "items": [
-    {
-      "id": "38a2da97-a097-80dc-a48a-dcbdbcdd4a8d",
-      "name": "PeerGFS_Datasheet_KR",
-      "memo": "Peer Software의 ds_peergfs_en_a4 한글본",
-      "type": "영업자료",
-      "author": "Peer Software",
-      "fileType": "PDF",
-      "date": "2026-06-25",
-      "files": [
-        {
-          "name": "PeerGFS_Datasheet_KR.pdf",
-          "url": "files/38a2da97-0-PeerGFS_Datasheet_KR.pdf"
-        }
-      ]
-    },
     {
       "id": "3882da97-a097-80f2-bed8-eff44f61b91d",
       "name": "PeerGFS_DR_Validation_Results_Report",
