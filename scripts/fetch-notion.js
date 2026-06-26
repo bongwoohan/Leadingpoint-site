@@ -129,25 +129,25 @@ function sanitizeFilename(name) {
 }
 
 /**
- * 페이지 ID + 파일 인덱스로 고유하고 충돌 없는 파일명 생성
- * 예: "1f2a3b4c-제안서.pdf"
+ * 페이지 ID 일부로 하위 폴더명을 만듦 (충돌 방지용).
+ * 파일명 자체는 원본 그대로 유지함.
+ * 예: files/38a2da97-0/PeerGFS_Datasheet_KR.pdf
  */
-function buildStoredFilename(pageId, index, originalName) {
+function buildStoredRelPath(pageId, index, originalName) {
   const shortId = pageId.replace(/-/g, "").slice(0, 8);
   const safeName = sanitizeFilename(originalName || `file-${index}`);
-  return `${shortId}-${index}-${safeName}`;
+  const subDir = `${shortId}-${index}`;
+  return path.join(subDir, safeName);
 }
 
 /**
  * 주어진 URL의 파일을 다운로드하여 files/ 폴더에 저장.
- * 이미 같은 이름의 파일이 있으면 다시 받지 않고 건너뜀(불필요한 재다운로드 방지).
+ * Notion에서 파일이 교체되었을 때도 항상 최신 내용을 반영하기 위해
+ * 매번 무조건 새로 받습니다 (기존 파일이 있어도 덮어씀).
  */
-async function downloadFile(url, storedFilename) {
-  const destPath = path.join(FILES_DIR, storedFilename);
-
-  if (fs.existsSync(destPath)) {
-    return; // 이미 받아둔 파일은 재다운로드하지 않음
-  }
+async function downloadFile(url, relPath) {
+  const destPath = path.join(FILES_DIR, relPath);
+  fs.mkdirSync(path.dirname(destPath), { recursive: true });
 
   const res = await fetch(url);
   if (!res.ok) {
@@ -165,11 +165,11 @@ async function processFiles(pageId, rawFiles) {
   const result = [];
   for (let i = 0; i < rawFiles.length; i++) {
     const f = rawFiles[i];
-    const storedFilename = buildStoredFilename(pageId, i, f.name);
-    await downloadFile(f.url, storedFilename);
+    const relPath = buildStoredRelPath(pageId, i, f.name);
+    await downloadFile(f.url, relPath);
     result.push({
       name: f.name,
-      url: `files/${storedFilename}`, // 서버에 영구히 존재하는 상대 경로
+      url: `files/${relPath.split(path.sep).join("/")}`, // 서버에 영구히 존재하는 상대 경로 (슬래시 통일)
     });
   }
   return result;
@@ -201,9 +201,12 @@ async function main() {
   const rawItems = await fetchPublicItems();
   console.log(`총 ${rawItems.length}개의 공개 자료를 찾았습니다.`);
 
-  if (!fs.existsSync(FILES_DIR)) {
-    fs.mkdirSync(FILES_DIR, { recursive: true });
+  // 매번 깨끗하게 새로 받기 위해 기존 files 폴더를 비움
+  // (Notion에서 파일이 교체/삭제된 경우에도 옛 파일이 남지 않도록)
+  if (fs.existsSync(FILES_DIR)) {
+    fs.rmSync(FILES_DIR, { recursive: true, force: true });
   }
+  fs.mkdirSync(FILES_DIR, { recursive: true });
 
   const items = [];
   for (const page of rawItems) {

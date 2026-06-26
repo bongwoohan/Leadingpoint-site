@@ -57,6 +57,6 @@ jobs:
             cd /wwwhome;
             put -O . documents.html;
             put -O . data.json;
-            mirror -R --verbose files/ files/;
+            mirror -R --delete --verbose files/ files/;
             bye
           "
