@@ -1,12 +1,57 @@
 {
-  "generatedAt": "2026-06-23T06:07:10.071Z",
-  "count": 6,
+  "generatedAt": "2026-06-25T19:49:47.454Z",
+  "count": 7,
   "items": [
+    {
+      "id": "38a2da97-a097-80dc-a48a-dcbdbcdd4a8d",
+      "name": "PeerGFS_Datasheet_KR",
+      "memo": "Peer Software의 ds_peergfs_en_a4 한글본",
+      "type": "영업자료",
+      "author": "Peer Software",
+      "fileType": "PDF",
+      "date": "2026-06-25",
+      "files": [
+        {
+          "name": "PeerGFS_Datasheet_KR.pdf",
+          "url": "files/38a2da97-0-PeerGFS_Datasheet_KR.pdf"
+        }
+      ]
+    },
+    {
+      "id": "3882da97-a097-80f2-bed8-eff44f61b91d",
+      "name": "PeerGFS_DR_Validation_Results_Report",
+      "memo": "PeerGFS 검증 결과 보고서 샘플",
+      "type": "영업자료",
+      "author": "Leading Point",
+      "fileType": "",
+      "date": "2026-06-19",
+      "files": [
+        {
+          "name": "PeerGFS_DR_Validation_Results_Report.pdf",
+          "url": "files/3882da97-0-PeerGFS_DR_Validation_Results_Report.pdf"
+        }
+      ]
+    },
+    {
+      "id": "3882da97-a097-8005-bfa6-e701099da82a",
+      "name": "PeerGFS DR Validation Playbook",
+      "memo": "PeerGFS 검증 작업 내용",
+      "type": "기술자료",
+      "author": "Leading Point",
+      "fileType": "",
+      "date": "2026-06-18",
+      "files": [
+        {
+          "name": "PeerGFS_DR_Validation_Playbook.pdf",
+          "url": "files/3882da97-0-PeerGFS_DR_Validation_Playbook.pdf"
+        }
+      ]
+    },
     {
       "id": "3822da97-a097-8087-ae08-da534e43ac9f",
       "name": "Real Active-Active NAS DR powered by PeerGFS",
       "memo": "PeerGFS 브로슈어",
-      "type": "내부자료",
+      "type": "영업자료",
       "author": "Leading Point",
       "fileType": "PDF",
       "date": "2026-06-17",
@@ -14,47 +59,40 @@
         {
           "name": "PeerGFS_Leaflet.pdf",
           "url": "files/3822da97-0-PeerGFS_Leaflet.pdf"
-        },
-        {
-          "name": "PeerGFS_Leaflet.docx",
-          "url": "files/3822da97-1-PeerGFS_Leaflet.docx"
         }
       ]
     },
     {
       "id": "3812da97-a097-80d6-ae9b-d4853690f859",
       "name": "Active-Active NAS DR by PeerGFS",
-      "memo": "PPT 자료 ",
-      "type": "",
+      "memo": "Presenation 용 자료 ",
+      "type": "영업자료",
       "author": "Leading Point",
       "fileType": "PPT",
       "date": "2026-06-16",
-      "files": []
-    },
-    {
-      "id": "3722da97-a097-8011-bc89-dc267a18ae0b",
-      "name": "PeerGFS Validation Plan",
-      "memo": "",
-      "type": "내부자료",
-      "author": "Leading Point",
-      "fileType": "",
-      "date": "",
       "files": [
         {
-          "name": "PeerGFS_Validation_Plan_Summary.pdf",
-          "url": "files/3722da97-0-PeerGFS_Validation_Plan_Summary.pdf"
+          "name": "Active-Active NAS DR Solution_PeerGFS.pdf",
+          "url": "files/3812da97-0-Active-Active NAS DR Solution_PeerGFS.pdf"
+        }
+      ]
+    },
+    {
+      "id": "3882da97-a097-80e7-8b4b-d2f09b1a94ea",
+      "name": "PeerGFS Validation Plan",
+      "memo": "PeerGFS 검증 계획",
+      "type": "기술자료",
+      "author": "Leading Point",
+      "fileType": "",
+      "date": "2026-06-10",
+      "files": [
+        {
+          "name": "PeerGFS_Validation_Plan_v2.pdf",
+          "url": "files/3882da97-0-PeerGFS_Validation_Plan_v2.pdf"
         },
         {
-          "name": "PeerGFS_Validation_Plan_v2e.pdf",
-          "url": "files/3722da97-1-PeerGFS_Validation_Plan_v2e.pdf"
-        },
-        {
-          "name": "PeerGFS_Validation_Plan_Summary.docx",
-          "url": "files/3722da97-2-PeerGFS_Validation_Plan_Summary.docx"
-        },
-        {
-          "name": "PeerGFS_Validation_Plan_v2e.pptx",
-          "url": "files/3722da97-3-PeerGFS_Validation_Plan_v2e.pptx"
+          "name": "PeerGFS_검증계획_개요.pdf",
+          "url": "files/3882da97-1-PeerGFS_검증계획_개요.pdf"
         }
       ]
     },
@@ -98,44 +136,6 @@
         {
           "name": "NAS_Mount_Active시도형.png",
           "url": "files/36e2da97-7-NAS_Mount_Active시도형.png"
-        }
-      ]
-    },
-    {
-      "id": "3642da97-a097-80f0-8d84-f702fbd1c137",
-      "name": "System Diagram Components",
-      "memo": "기본 그림 요소 Figma",
-      "type": "내부자료",
-      "author": "Leading Point",
-      "fileType": "ZIP",
-      "date": "",
-      "files": [
-        {
-          "name": "GT Diagram Kit - Isometric Style (Community).zip",
-          "url": "files/3642da97-0-GT Diagram Kit - Isometric Style (Community).zip"
-        }
-      ]
-    },
-    {
-      "id": "35f2da97-a097-80df-bcf3-f71816714682",
-      "name": "NAS DR 경쟁 자료",
-      "memo": "",
-      "type": "",
-      "author": "",
-      "fileType": "",
-      "date": "",
-      "files": [
-        {
-          "name": "NAS_DR_경쟁비교_상세.pptx",
-          "url": "files/35f2da97-0-NAS_DR_경쟁비교_상세.pptx"
-        },
-        {
-          "name": "NAS-DR-비교.pdf",
-          "url": "files/35f2da97-1-NAS-DR-비교.pdf"
-        },
-        {
-          "name": "NAS-DR-비교.docx",
-          "url": "files/35f2da97-2-NAS-DR-비교.docx"
         }
       ]
     }
