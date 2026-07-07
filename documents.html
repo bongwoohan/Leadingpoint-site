@@ -779,9 +779,6 @@ table.docs-table {
     <select id="filter-type">
       <option value="">전체 종류</option>
     </select>
-    <select id="filter-author">
-      <option value="">전체 Author</option>
-    </select>
   </div>
   <div class="docs-count" id="result-count"></div>
 </div>
@@ -825,7 +822,6 @@ table.docs-table {
   const tableRegion = document.getElementById('table-region');
   const searchInput = document.getElementById('search-input');
   const filterType = document.getElementById('filter-type');
-  const filterAuthor = document.getElementById('filter-author');
   const resultCount = document.getElementById('result-count');
   const updatedNote = document.getElementById('updated-note');
 
@@ -959,28 +955,19 @@ table.docs-table {
 
   function populateFilterOptions(items) {
     const types = [...new Set(items.map(i => i.type).filter(Boolean))].sort();
-    const authors = [...new Set(items.map(i => i.author).filter(Boolean))].sort();
-
     types.forEach(t => {
       const opt = document.createElement('option');
       opt.value = t; opt.textContent = t;
       filterType.appendChild(opt);
-    });
-    authors.forEach(a => {
-      const opt = document.createElement('option');
-      opt.value = a; opt.textContent = a;
-      filterAuthor.appendChild(opt);
     });
   }
 
   function applyFilters() {
     const q = (searchInput ? searchInput.value : '').trim().toLowerCase();
     const t = filterType.value;
-    const a = filterAuthor.value;
 
     state.filtered = state.items.filter((item) => {
       if (t && item.type !== t) return false;
-      if (a && item.author !== a) return false;
       if (q) {
         const haystack = `${item.name || ''} ${item.memo || ''}`.toLowerCase();
         if (!haystack.includes(q)) return false;
@@ -994,9 +981,8 @@ table.docs-table {
 
   searchInput && searchInput.addEventListener('input', applyFilters);
   filterType.addEventListener('change', applyFilters);
-  filterAuthor.addEventListener('change', applyFilters);
 
-  fetch('data.json', { cache: 'no-store' })
+  fetch(`data.json?v=${Date.now()}`, { cache: 'no-store' })
     .then((res) => {
       if (!res.ok) throw new Error('data.json을 불러올 수 없습니다.');
       return res.json();
