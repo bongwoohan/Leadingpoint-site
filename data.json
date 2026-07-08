@@ -1,7 +1,22 @@
 {
-  "generatedAt": "2026-07-07T19:46:09.798Z",
-  "count": 7,
+  "generatedAt": "2026-07-08T03:12:13.320Z",
+  "count": 8,
   "items": [
+    {
+      "id": "3972da97-a097-8085-a912-d52fab23287b",
+      "name": "PeerGFS 기반 차세대 NAS 재해복구 솔루션",
+      "memo": "NAS DR용 브로슈어",
+      "type": "영업자료",
+      "author": "Leading Point",
+      "fileType": "PDF",
+      "date": "2026-07-08",
+      "files": [
+        {
+          "name": "PeerGFS 기반 차세대 NAS 재해 복구 솔루션.pdf",
+          "url": "files/3972da97-0/PeerGFS 기반 차세대 NAS 재해 복구 솔루션.pdf"
+        }
+      ]
+    },
     {
       "id": "38a2da97-a097-80dc-a48a-dcbdbcdd4a8d",
       "name": "PeerGFS_Datasheet_KR",
