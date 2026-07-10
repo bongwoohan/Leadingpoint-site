@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-10T02:29:54.239Z",
+  "generatedAt": "2026-07-10T05:20:00.065Z",
   "count": 8,
   "items": [
     {
@@ -9,11 +9,26 @@
       "type": "영업자료",
       "author": "Leading Point",
       "fileType": "PDF",
-      "date": "2026-07-08",
+      "date": "2026-07-10",
       "files": [
         {
           "name": "PeerGFS 기반 차세대 NAS 재해 복구 솔루션.pdf",
           "url": "files/3972da97-0/PeerGFS 기반 차세대 NAS 재해 복구 솔루션.pdf"
+        }
+      ]
+    },
+    {
+      "id": "3812da97-a097-80d6-ae9b-d4853690f859",
+      "name": "Active-Active NAS DR by PeerGFS",
+      "memo": "Presenation 용 자료 ",
+      "type": "영업자료",
+      "author": "Leading Point",
+      "fileType": "PPT",
+      "date": "2026-07-10",
+      "files": [
+        {
+          "name": "Active-Active NAS DR Solution_PeerGFS.pdf",
+          "url": "files/3812da97-0/Active-Active NAS DR Solution_PeerGFS.pdf"
         }
       ]
     },
@@ -29,21 +44,6 @@
         {
           "name": "PeerGFS_Datasheet_KR.pdf",
           "url": "files/38a2da97-0/PeerGFS_Datasheet_KR.pdf"
-        }
-      ]
-    },
-    {
-      "id": "3812da97-a097-80d6-ae9b-d4853690f859",
-      "name": "Active-Active NAS DR by PeerGFS",
-      "memo": "Presenation 용 자료 ",
-      "type": "영업자료",
-      "author": "Leading Point",
-      "fileType": "PPT",
-      "date": "2026-06-30",
-      "files": [
-        {
-          "name": "Active-Active NAS DR Solution_PeerGFS.pdf",
-          "url": "files/3812da97-0/Active-Active NAS DR Solution_PeerGFS.pdf"
         }
       ]
     },
