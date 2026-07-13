@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-07-12T18:56:09.387Z",
-  "count": 8,
+  "generatedAt": "2026-07-13T02:09:34.915Z",
+  "count": 7,
   "items": [
     {
       "id": "3972da97-a097-8085-a912-d52fab23287b",
@@ -74,21 +74,6 @@
         {
           "name": "PeerGFS_DR_Validation_Playbook.pdf",
           "url": "files/3882da97-0/PeerGFS_DR_Validation_Playbook.pdf"
-        }
-      ]
-    },
-    {
-      "id": "3822da97-a097-8087-ae08-da534e43ac9f",
-      "name": "Real Active-Active NAS DR powered by PeerGFS",
-      "memo": "PeerGFS 브로슈어",
-      "type": "영업자료",
-      "author": "Leading Point",
-      "fileType": "PDF",
-      "date": "2026-06-17",
-      "files": [
-        {
-          "name": "PeerGFS_Leaflet.pdf",
-          "url": "files/3822da97-0/PeerGFS_Leaflet.pdf"
         }
       ]
     },
