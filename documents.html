@@ -571,6 +571,141 @@ a.overlay-item-label:hover { color: rgba(0,0,0,0.3); }
   margin: 0.4rem 0 0 1.05rem;
 }
 
+/* ── PITCH GUIDE (핵심가치/경쟁비교/피치) 아코디언 전용 ── */
+.value-list {
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+  padding-top: 0.3rem;
+}
+.value-list li {
+  position: relative;
+  padding-left: 1.1rem;
+  color: rgba(26,26,26,0.68);
+  font-size: 0.87rem;
+  line-height: 1.7;
+}
+.value-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+.value-list li strong { color: var(--dark); }
+
+.compare-table-wrap {
+  overflow-x: auto;
+  margin-top: 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+table.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.81rem;
+  min-width: 760px;
+}
+.compare-table thead th {
+  text-align: left;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding: 0.7rem 0.8rem;
+  border-bottom: 1.5px solid var(--text);
+  white-space: nowrap;
+  background: var(--bg-raised);
+}
+.compare-table tbody td {
+  padding: 0.8rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  color: rgba(26,26,26,0.72);
+  line-height: 1.6;
+  vertical-align: top;
+}
+.compare-table tbody tr:last-child td { border-bottom: 0; }
+.compare-table tbody tr.compare-highlight td {
+  background: rgba(240,149,110,0.08);
+  color: var(--dark);
+}
+.compare-table tbody tr.compare-highlight td:first-child {
+  font-weight: 700;
+  color: #c5673f;
+  white-space: nowrap;
+}
+.compare-table tbody td:first-child {
+  font-weight: 500;
+  color: var(--dark);
+  white-space: nowrap;
+}
+.compare-strong { color: #c5673f; font-weight: 700; }
+
+.pitch-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 0.3rem;
+}
+@media (min-width: 700px) {
+  .pitch-grid.pitch-grid-2 { grid-template-columns: 1fr 1fr; }
+}
+.pitch-card {
+  padding: 1.1rem 1.2rem;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 6px;
+  background: var(--bg-raised);
+}
+.pitch-card-title {
+  color: var(--dark);
+  font-size: 0.92rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.pitch-card-title .pitch-tag {
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.12rem 0.45rem;
+}
+.pitch-bullets {
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+}
+.pitch-bullets li {
+  position: relative;
+  padding-left: 1.1rem;
+  color: rgba(26,26,26,0.68);
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+.pitch-bullets li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+.pitch-bullets li strong { color: var(--dark); }
+.pitch-quote {
+  margin-top: 0.85rem;
+  padding: 0.85rem 1rem;
+  background: #fff;
+  border-left: 2px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  color: rgba(26,26,26,0.72);
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
 .docs-controls {
   max-width: 1100px;
   margin: 0 auto;
@@ -1050,6 +1185,129 @@ table.docs-table {
             <p class="scenario-resource">발표자료 18번 슬라이드, 또는 브로슈어 3페이지 하단의 동일한 도입 효과 표</p>
             <p class="scenario-text">도입 전/후 비교(NAS RPO/RTO, DR 센터 자원 활용률, 정성적 효과)를 보여주기 좋습니다. 정량 지표가 필요하면 발표자료 18페이지가 더 상세(시스템 전체 RTO, 정성적 효과 4가지 포함)합니다.</p>
           </article>
+        </div>
+      </div>
+    </details>
+
+    <details class="guide-section guide-accordion">
+      <summary>
+        <span class="guide-summary-title">핵심 가치 &amp; 경쟁 솔루션 비교</span>
+        <span class="guide-summary-action"><span class="show-label">펼치기</span><span class="hide-label">접기</span></span>
+      </summary>
+
+      <div class="guide-accordion-body">
+        <p class="guide-intro" style="margin-top:1rem;">고객 앞에서 바로 쓸 수 있도록 압축한 핵심 메시지와 경쟁사 비교표입니다.</p>
+
+        <h3 class="scenario-title" style="margin-top:0.4rem;">핵심 가치</h3>
+        <ul class="value-list">
+          <li><strong>이기종 NAS 간 Active-Active DR</strong> — NetApp, Dell 등 서로 다른 벤더 NAS 간에도 양쪽을 동시에 Read/Write로 운영</li>
+          <li>이를 통해 <strong>WAS도 Active-Active 구성 가능</strong> (기존엔 NAS가 Read-Only라 WAS도 Active-Passive로 묶일 수밖에 없었음)</li>
+          <li>결과적으로 DR 사이트가 대기 자산이 아닌 <strong>상시 가용 자산</strong>이 됨</li>
+        </ul>
+
+        <h3 class="scenario-title" style="margin-top:1.5rem;">경쟁 솔루션 &amp; 비교 우위</h3>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>솔루션</th>
+                <th>방식</th>
+                <th>RPO</th>
+                <th>RTO</th>
+                <th>한계</th>
+                <th>PeerGFS 비교 우위</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>NetApp SnapMirror</td>
+                <td>편도 스냅샷/델타 복제</td>
+                <td>분~시간 단위 (스케줄 주기)</td>
+                <td>수분~수십분 (수동/반자동 전환)</td>
+                <td>DR 볼륨 Read-Only 강제, NetApp 단일 벤더만 지원</td>
+                <td>이기종 벤더 간 양방향 Active-Active</td>
+              </tr>
+              <tr>
+                <td>NetApp MetroCluster</td>
+                <td>동기 복제</td>
+                <td>RPO = 0</td>
+                <td>수분~수십분</td>
+                <td>매 I/O 왕복 지연 누적 → 실질 100km 이내 운영, NetApp 단일 벤더</td>
+                <td>더 넓은 거리, 이기종 벤더 지원</td>
+              </tr>
+              <tr>
+                <td>Dell SyncIQ</td>
+                <td>Directory Scan 방식 편도 복제</td>
+                <td>분~시간 단위 (스케줄 주기)</td>
+                <td>수분~수십분 (수동/반자동 전환)</td>
+                <td>DR 볼륨 Read-Only 강제, Dell 단일 벤더</td>
+                <td>이기종 벤더 간 양방향 Active-Active</td>
+              </tr>
+              <tr>
+                <td>Dell Unity</td>
+                <td>Snapshot 비교 기반 복제</td>
+                <td>분~시간 단위 (스케줄 주기)</td>
+                <td>수분~수십분 (수동/반자동 전환)</td>
+                <td>SyncIQ와 change detection 방식 다름, 동일하게 편도·단일 벤더 한계</td>
+                <td>이기종 벤더 간 양방향 Active-Active</td>
+              </tr>
+              <tr class="compare-highlight">
+                <td>PeerGFS</td>
+                <td>파일 시스템 레벨 실시간 양방향 동기화</td>
+                <td class="compare-strong">Near Zero</td>
+                <td class="compare-strong">Near Zero</td>
+                <td>Oracle Data Guard 스위치오버는 별도 트랙</td>
+                <td>이기종 벤더 간 양방향 Active-Active</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="guide-note">
+          <strong class="guide-note-title">핵심 한 줄</strong>
+          <p>경쟁 솔루션은 모두 “같은 벤더 안에서, 한쪽 방향으로만” 복제합니다. PeerGFS는 “다른 벤더 간에도, 양쪽 방향으로” 동기화합니다.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="guide-section guide-accordion">
+      <summary>
+        <span class="guide-summary-title">영업 피치 가이드 (30초 · 3분)</span>
+        <span class="guide-summary-action"><span class="show-label">펼치기</span><span class="hide-label">접기</span></span>
+      </summary>
+
+      <div class="guide-accordion-body">
+        <p class="guide-intro" style="margin-top:1rem;">고객 유형과 미팅 상황에 맞춰 바로 꺼내 쓸 수 있는 피치입니다.</p>
+
+        <div class="pitch-card">
+          <h3 class="pitch-card-title">30초 피치 <span class="pitch-tag">첫 만남용</span></h3>
+          <ul class="pitch-bullets">
+            <li><strong>문제</strong> — 기존 NAS 이중화(NetApp, Dell 등)는 구조상 DR 사이트를 Read-Only로 묶어둠</li>
+            <li><strong>결과</strong> — WAS도 Active-Passive로 갈 수밖에 없고, DR 자원은 평소 유휴 상태</li>
+            <li><strong>해결</strong> — PeerGFS는 이기종 NAS 간에도 양쪽을 동시에 Read/Write로 열어 WAS Active-Active 구성 가능</li>
+          </ul>
+          <div class="pitch-quote">“이기종 NAS 환경에서도, Active-Active를 실현합니다.”</div>
+        </div>
+
+        <div class="pitch-grid pitch-grid-2" style="margin-top:1rem;">
+          <div class="pitch-card">
+            <h3 class="pitch-card-title">3분 피치 <span class="pitch-tag">기술 담당자용</span></h3>
+            <ul class="pitch-bullets">
+              <li>기존 솔루션(SnapMirror, SyncIQ) 한계: 편도 복제 → DR 볼륨 Read-Only 강제 → WAS 수동/반자동 전환</li>
+              <li>PeerGFS 차별점: 파일 시스템 레벨 양방향 동기화로 <strong>NAS 자체를 이기종 벤더 간 Active-Active 구성 가능</strong></li>
+              <li>명확한 범위 고지: Oracle Data Guard 스위치오버는 PeerGFS 영역 밖 → 별도 트랙 필요</li>
+              <li>PoC 지원: 고객 환경/시나리오에 맞춰 <strong>Peer Software 본사 차원 PoC 지원 가능</strong></li>
+            </ul>
+          </div>
+
+          <div class="pitch-card">
+            <h3 class="pitch-card-title">3분 피치 <span class="pitch-tag">의사결정권자용</span></h3>
+            <ul class="pitch-bullets">
+              <li>핵심 메시지: <strong>NAS를 이기종 벤더 간에도 Active-Active로 구성</strong> → DR 사이트가 유휴 자산이 아닌 가용 자산이 됨</li>
+              <li>효과: DR 사이트 WAS가 평소에도 가동 중이므로 <strong>WAS 전환 자체가 불필요</strong></li>
+              <li>장애 시 복구 시간은 GSLB 트래픽 전환과 DB 전환 시간이 결정 (기존에는 NAS 전환이 가장 오래 걸리는 병목이었음)</li>
+            </ul>
+          </div>
         </div>
       </div>
     </details>
