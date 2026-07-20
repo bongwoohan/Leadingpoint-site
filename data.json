@@ -1,7 +1,22 @@
 {
-  "generatedAt": "2026-07-19T18:57:31.162Z",
-  "count": 7,
+  "generatedAt": "2026-07-20T06:48:40.021Z",
+  "count": 8,
   "items": [
+    {
+      "id": "3a32da97-a097-80b5-b7a5-d9e3c8f87534",
+      "name": "PeerGFS for VDI",
+      "memo": "VDI 환경의 PeerGFS 적용",
+      "type": "영업자료",
+      "author": "Leading Point",
+      "fileType": "PDF",
+      "date": "2026-07-20",
+      "files": [
+        {
+          "name": "PeerGFSforVDI.pdf",
+          "url": "files/3a32da97-0/PeerGFSforVDI.pdf"
+        }
+      ]
+    },
     {
       "id": "38a2da97-a097-80dc-a48a-dcbdbcdd4a8d",
       "name": "PeerGFS_Datasheet_KR",
