@@ -1,7 +1,22 @@
 {
-  "generatedAt": "2026-07-23T19:04:05.735Z",
-  "count": 8,
+  "generatedAt": "2026-07-24T06:14:55.418Z",
+  "count": 9,
   "items": [
+    {
+      "id": "3a72da97-a097-804d-ad0b-d813aa753090",
+      "name": "Distibuted File System",
+      "memo": "DR이 아닌, 일반적인 파일 동기화 적용을 위한 자료 ",
+      "type": "영업자료",
+      "author": "Leading Point",
+      "fileType": "PDF",
+      "date": "2026-07-24",
+      "files": [
+        {
+          "name": "Distibuted File System_PeerGFS.pdf",
+          "url": "files/3a72da97-0/Distibuted File System_PeerGFS.pdf"
+        }
+      ]
+    },
     {
       "id": "3812da97-a097-80d6-ae9b-d4853690f859",
       "name": "Active-Active NAS DR by PeerGFS",
