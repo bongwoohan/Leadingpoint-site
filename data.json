@@ -1,7 +1,22 @@
 {
-  "generatedAt": "2026-08-26T19:41:34.831Z",
-  "count": 11,
+  "generatedAt": "2026-08-27T03:47:54.185Z",
+  "count": 12,
   "items": [
+    {
+      "id": "3c92da97-a097-8095-8aa9-f983f37d4314",
+      "name": "PeerGFS 서버 요구 사항",
+      "memo": "PeerGFS 서버 환경",
+      "type": "기술자료",
+      "author": "Peer Software",
+      "fileType": "PDF",
+      "date": "2026-08-27",
+      "files": [
+        {
+          "name": "PeerGFSenrironmentalrequirements.pdf",
+          "url": "files/3c92da97-0/PeerGFSenrironmentalrequirements.pdf"
+        }
+      ]
+    },
     {
       "id": "3ad2da97-a097-80d9-b8fd-c0064f7f71b1",
       "name": "PeerIQ User Guide",
