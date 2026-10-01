@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-30T21:44:34.761Z",
-  "count": 12,
+  "generatedAt": "2026-10-01T22:12:36.968Z",
+  "count": 13,
   "items": [
     {
       "id": "3c92da97-a097-8095-8aa9-f983f37d4314",
@@ -119,6 +119,25 @@
         {
           "name": "PeerGFS 기반 차세대 NAS 재해 복구 솔루션.pdf",
           "url": "files/3972da97-0/PeerGFS 기반 차세대 NAS 재해 복구 솔루션.pdf"
+        }
+      ]
+    },
+    {
+      "id": "3ec2da97-a097-8022-875e-c055317043cf",
+      "name": "DR 솔루션 비교 자료",
+      "memo": "벤더 솔루션과의 비교 자료, 특징 등",
+      "type": "외부자료",
+      "author": "Leading Point",
+      "fileType": "word",
+      "date": "2026-07-07",
+      "files": [
+        {
+          "name": "Architecture Comparison and Design Guide.docx",
+          "url": "files/3ec2da97-0/Architecture Comparison and Design Guide.docx"
+        },
+        {
+          "name": "Architecture Comparison and Design Guide.pdf",
+          "url": "files/3ec2da97-1/Architecture Comparison and Design Guide.pdf"
         }
       ]
     },
