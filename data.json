@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T21:20:26.661Z",
+  "generatedAt": "2026-10-12T06:35:47.108Z",
   "count": 14,
   "items": [
     {
@@ -9,15 +9,26 @@
       "type": "영업자료",
       "author": "Leading Point",
       "fileType": "PPT",
-      "date": "2026-10-07",
+      "date": "2026-10-12",
       "files": [
         {
-          "name": "PeerGFS 주요 기능.pptx",
-          "url": "files/3f22da97-0/PeerGFS 주요 기능.pptx"
-        },
-        {
           "name": "PeerGFS 주요 기능.pdf",
-          "url": "files/3f22da97-1/PeerGFS 주요 기능.pdf"
+          "url": "files/3f22da97-0/PeerGFS 주요 기능.pdf"
+        }
+      ]
+    },
+    {
+      "id": "3812da97-a097-80d6-ae9b-d4853690f859",
+      "name": "Active-Active NAS DR by PeerGFS",
+      "memo": "Presenation 용 자료. PMC 스크린샷 추가",
+      "type": "영업자료",
+      "author": "Leading Point",
+      "fileType": "PPT",
+      "date": "2026-10-12",
+      "files": [
+        {
+          "name": "Active-Active NAS DR Solution_PeerGFS.pdf",
+          "url": "files/3812da97-0/Active-Active NAS DR Solution_PeerGFS.pdf"
         }
       ]
     },
@@ -78,21 +89,6 @@
         {
           "name": "Distibuted File System_PeerGFS.pdf",
           "url": "files/3a72da97-0/Distibuted File System_PeerGFS.pdf"
-        }
-      ]
-    },
-    {
-      "id": "3812da97-a097-80d6-ae9b-d4853690f859",
-      "name": "Active-Active NAS DR by PeerGFS",
-      "memo": "Presenation 용 자료 ",
-      "type": "영업자료",
-      "author": "Leading Point",
-      "fileType": "PPT",
-      "date": "2026-07-23",
-      "files": [
-        {
-          "name": "Active-Active NAS DR Solution_PeerGFS.pdf",
-          "url": "files/3812da97-0/Active-Active NAS DR Solution_PeerGFS.pdf"
         }
       ]
     },
