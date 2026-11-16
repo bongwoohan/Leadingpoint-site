@@ -1,7 +1,22 @@
 {
-  "generatedAt": "2026-11-15T22:22:00.312Z",
-  "count": 14,
+  "generatedAt": "2026-11-16T06:24:13.920Z",
+  "count": 15,
   "items": [
+    {
+      "id": "41a2da97-a097-80cc-8c4d-e2ba774b9abc",
+      "name": "PeerGFS 기능 상세 ",
+      "memo": "PeerGFSHelp 자료를 기반으로 PeerGFS의 대부분 기능 상세 정리",
+      "type": "영업자료",
+      "author": "Leading Point",
+      "fileType": "PDF",
+      "date": "2026-11-16",
+      "files": [
+        {
+          "name": "PeerGFS 기능 상세.pdf",
+          "url": "files/41a2da97-0/PeerGFS 기능 상세.pdf"
+        }
+      ]
+    },
     {
       "id": "3f22da97-a097-803c-b429-e509e63a256e",
       "name": "PeerGFS 주요 기능",
