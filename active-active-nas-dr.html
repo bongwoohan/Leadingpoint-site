@@ -926,6 +926,8 @@
       padding: 1.2rem 1rem;
       text-align: left;
       border-bottom: 1px solid rgba(200,216,240,0.10);
+      overflow-wrap: break-word;
+      word-break: break-word;
     }
 
     .s4-table td {
@@ -936,6 +938,8 @@
       border-bottom: 1px solid rgba(200,216,240,0.07);
       vertical-align: top;
       line-height: 1.65;
+      overflow-wrap: break-word;
+      word-break: break-word;
     }
 
     .s4-table tr:last-child td { border-bottom: none; }
@@ -944,9 +948,28 @@
     .s4-row-hi td:first-child { color: #eaf6ff; font-weight: 700; }
     .s4-acc { color: #7ab0e0 !important; font-weight: 500 !important; }
 
+    .s4-table th.s4-col-hi,
+    .s4-table td.s4-col-hi { background: rgba(122,176,224,0.10); }
+    .s4-table th.s4-col-hi { color: #7ab0e0; }
+    .s4-table td.s4-col-hi { color: #eaf6ff; font-weight: 600; }
+
+    .s4-footnote {
+      margin-top: 1.2rem;
+      font-size: 0.72rem;
+      line-height: 1.7;
+      color: rgba(200,216,240,0.4);
+    }
+    .s4-footnote p { margin: 0; }
+
     @media (max-width: 1100px) {
       .s4-inner { padding: 5rem 1.5rem 4rem; }
       .s4-table th, .s4-table td { padding: 0.9rem 0.6rem; font-size: 0.78rem; }
+      .s4-table td, .s4-table th { white-space: normal; }
+    }
+
+    @media (max-width: 640px) {
+      .s4-table th, .s4-table td { padding: 0.6rem 0.4rem; font-size: 0.68rem; line-height: 1.4; }
+      .s4-table th { letter-spacing: 0.02em; }
     }
 
     /* ── RESPONSIVE ── */
@@ -1013,7 +1036,7 @@
       </div>
       <div class="hero-slogan">
         <p class="slogan-main" id="slogan-main">DR 센터를 대기 자원에서 운영 자원으로</p>
-        <p class="slogan-sub" id="slogan-sub">변경된 데이타 Delta-Change만 전송하는 실시간 NAS 동기화</p>
+        <p class="slogan-sub" id="slogan-sub">Main Center와 DR Center의 NAS를 모두 Read/Write로 운영하는 DR 아키텍처</p>
       </div>
     </div>
 
@@ -1170,51 +1193,94 @@
       <table class="s4-table">
         <thead>
           <tr>
-            <th style="width:22%;">솔루션</th>
-            <th style="width:24%;">복제 방식</th>
-            <th style="width:13%;">RPO</th>
-            <th style="width:16%;">DR NAS 운영</th>
-            <th style="width:25%;">포인트</th>
+            <th style="width:18%;">비교 항목</th>
+            <th class="s4-col-hi" style="width:16.4%;">Leading Point PeerGFS</th>
+            <th style="width:16.4%;">Dell PowerScale SyncIQ</th>
+            <th style="width:16.4%;">Dell Unity</th>
+            <th style="width:16.4%;">NetApp SnapMirror</th>
+            <th style="width:16.4%;">NetApp MetroCluster</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="s4-row-hi">
-            <td>LeadingPoint PeerGFS</td>
-            <td>Delta-Level Replication</td>
-            <td class="s4-acc">Near-Zero</td>
-            <td class="s4-acc">Read/Write Active</td>
-            <td>변경된 부분만 전송해 WAN 부담을 줄이고 이기종 NAS Active-Active 구성</td>
+          <tr>
+            <td>Active-Active 가능</td>
+            <td class="s4-col-hi">완전 양방향</td>
+            <td>DR 측 Read-Only 강제</td>
+            <td>DR 측 Read-Only 강제</td>
+            <td>DR 측 Read-Only 강제</td>
+            <td>한쪽 Passive 강제</td>
           </tr>
           <tr>
-            <td>Dell SyncIQ</td>
-            <td>PowerScale 전용 비동기 복제</td>
-            <td>수분~수십 분</td>
-            <td>Read-Only 중심</td>
-            <td>동일 벤더 중심, DR 측 NAS Active 운영 제한</td>
+            <td>설계 목적</td>
+            <td class="s4-col-hi">서비스 지속</td>
+            <td>데이터 보호</td>
+            <td>데이터 보호</td>
+            <td>데이터 보호</td>
+            <td>지속적 가용성</td>
           </tr>
           <tr>
-            <td>NetApp SnapMirror</td>
-            <td>ONTAP 스냅샷 기반 복제</td>
-            <td>수분~수십 분</td>
-            <td>Read-Only 중심</td>
-            <td>SnapMirror 관계 해제 전까지 쓰기 운영 제한</td>
+            <td>복제 방식</td>
+            <td class="s4-col-hi">Byte-Level Delta (증분)</td>
+            <td>Snapshot</td>
+            <td>Snapshot</td>
+            <td>Snapshot</td>
+            <td>동기 복제 (Sync)</td>
           </tr>
           <tr>
-            <td>동기식 NAS 복제</td>
-            <td>스토리지 어레이 동기 복제</td>
-            <td>Zero 가능</td>
-            <td>구성 제약</td>
-            <td>낮은 지연 시간이 필요해 100km+ 원거리 DR에 제약</td>
+            <td>변경 감지</td>
+            <td class="s4-col-hi">Event-Based</td>
+            <td>Directory Scan</td>
+            <td>Snapshot 비교</td>
+            <td>Snapshot 비교</td>
+            <td>동기 I/O</td>
           </tr>
           <tr>
-            <td>스냅샷 복제</td>
-            <td>스케줄 기반 전송</td>
-            <td>스냅샷 주기 의존</td>
-            <td>Passive</td>
-            <td>장애 시 수동 전환 절차로 RTO가 길어질 수 있음</td>
+            <td>RPO</td>
+            <td class="s4-col-hi">Near-Zero</td>
+            <td>수 분~수십 분</td>
+            <td>수 분~수십 분</td>
+            <td>수 분~수십 분</td>
+            <td>0(거리 제한 조건부)</td>
+          </tr>
+          <tr>
+            <td>RTO</td>
+            <td class="s4-col-hi">Near-Zero</td>
+            <td>수십 분~수 시간</td>
+            <td>수십 분~수 시간</td>
+            <td>수십 분~수 시간</td>
+            <td>수 분~수십 분</td>
+          </tr>
+          <tr>
+            <td>100km+ 거리</td>
+            <td class="s4-col-hi">제한 없음</td>
+            <td>운용 제약 발생*</td>
+            <td>운용 제약 발생*</td>
+            <td>운용 제약 발생*</td>
+            <td>최대 700km(RTT 7ms)**</td>
+          </tr>
+          <tr>
+            <td>소프트웨어 전용</td>
+            <td class="s4-col-hi">Yes</td>
+            <td>No</td>
+            <td>No</td>
+            <td>No</td>
+            <td>No (전용 HW 필수)</td>
+          </tr>
+          <tr>
+            <td>이기종 NAS 지원</td>
+            <td class="s4-col-hi">완전 지원</td>
+            <td>PowerScale 전용</td>
+            <td>Unity 전용</td>
+            <td>ONTAP 전용</td>
+            <td>ONTAP 전용</td>
           </tr>
         </tbody>
       </table>
+    </div>
+
+    <div class="s4-footnote">
+      <p>* DR 센터 NAS가 Read-Only이므로, DR 전환 전까지 DR 센터 WAS는 쓰기 가능한 NAS가 없음</p>
+      <p>** Lenovo ONTAP 공식 문서 기준. 단 실제 케이블 경로 및 지연 요소로 인해 실무 배포 거리는 이보다 짧은 수십~200km 수준에서 운용</p>
     </div>
 
   </div>
