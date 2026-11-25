@@ -778,43 +778,119 @@
       color: rgba(200,216,240,0.58);
     }
 
-    .s2-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
+    /* 소제목: 이 구역의 핵심 메시지 */
+    .s2-sub {
+      font-size: clamp(1.15rem, 1.9vw, 1.5rem);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.45;
+      color: #eaf4ff;
     }
 
-    .s2-card {
-      border-top: 1px solid rgba(200,216,240,0.10);
-      padding: 1.2rem 1.4rem 1.2rem 0;
+    /* 본문 아래 넓은 줄: 구성도 → 표 */
+    .s2-wide {
+      grid-column: 1 / -1;
+      min-width: 0;                 /* 모바일에서 그림 폭이 구역을 넓히지 않도록 */
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 3rem;
+      padding-top: 3.5rem;
     }
 
-    .s2-card:nth-child(odd)  { padding-right: 2rem; }
-    .s2-card:nth-child(even) { padding-left: 2rem; border-left: 1px solid rgba(200,216,240,0.10); }
+    /* 구성도 (라인아트, illustrations/system-diagram-as-is-1) — 바탕 없이 남색 구역 위에 바로 */
+    .s2-figure { margin: 0; }
+    .s2-figure-scroll { width: 100%; }
+    .s2-figure-card {
+      width: 100%;
+      aspect-ratio: 1800 / 1090;
+      background: transparent;
+    }
+    #as-is-1, #as-is-1 svg { display: block; width: 100%; height: 100%; }
+    #as-is-1 svg { user-select: none; touch-action: manipulation; }
+    #as-is-1 .pp { fill: #fdfcf8; }
 
-    .s2-card-num {
+    .s2-figure figcaption {
+      margin-top: 0.9rem;
+      font-size: 0.75rem;
+      color: rgba(200,216,240,0.45);
+      text-align: center;
+    }
+
+    /* 표: 계층별 DR 수단 (공유 NAS 줄 강조) */
+    .s2-table-wrap { width: 100%; }
+
+    .s2-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: 0.8rem;
+      line-height: 1.55;
+    }
+
+    .s2-table caption {
+      caption-side: top;
+      text-align: left;
       font-size: 0.62rem;
       font-weight: 500;
-      color: rgba(200,216,240,0.30);
-      letter-spacing: 0.10em;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(200,216,240,0.40);
+      padding-bottom: 0.8rem;
     }
 
-    .s2-card-label {
-      font-size: 0.85rem;
-      font-weight: 400;
-      line-height: 1.6;
-      color: rgba(200,216,240,0.65);
+    .s2-table th,
+    .s2-table td {
+      padding: 0.85rem 0.9rem;
+      border-top: 1px solid rgba(200,216,240,0.10);
+      text-align: left;
+      vertical-align: top;
+      overflow-wrap: break-word;
+      word-break: keep-all;
+    }
+
+    .s2-table thead th {
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: rgba(200,216,240,0.45);
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .s2-table tbody th { width: 26%; font-weight: 500; color: rgba(200,216,240,0.80); }
+    .s2-table tbody td { color: rgba(200,216,240,0.60); }
+
+    .s2-table tbody tr:last-child th,
+    .s2-table tbody tr:last-child td { border-bottom: 1px solid rgba(200,216,240,0.10); }
+
+    .s2-table tr.s2-row-hi th,
+    .s2-table tr.s2-row-hi td { background: rgba(122,176,224,0.10); }
+    .s2-table tr.s2-row-hi th { color: #eaf6ff; }
+    .s2-table tr.s2-row-hi td { color: rgba(234,246,255,0.80); }
+    .s2-table td.s2-cell-key { color: #eaf6ff; font-weight: 600; }
+
+    .s2-note  { color: rgba(200,216,240,0.45); font-size: 0.92em; }
+    .s2-arrow { color: #7ab0e0; font-weight: 700; }
+
+    @media (max-width: 1100px) {
+      .s2-inner { grid-template-columns: minmax(0, 1fr); padding: 5rem 1.5rem 4rem; gap: 2rem; }
+      .s2-divider-col { display: none; }
+      .s2-left { align-items: flex-start; text-align: left; border-bottom: 1px solid rgba(200,216,240,0.10); padding-right: 0; padding-bottom: 2rem; }
+      .s2-right { padding-left: 0; }
     }
 
     @media (max-width: 1100px) {
-      .s2-inner { grid-template-columns: 1fr; padding: 5rem 1.5rem 4rem; gap: 2rem; }
-      .s2-divider-col { display: none; }
-      .s2-left { align-items: flex-start; text-align: left; border-bottom: 1px solid rgba(200,216,240,0.10); padding-right: 0; padding-bottom: 2rem; }
-      .s2-right { padding-left: 0; gap: 0; }
-      .s2-body { margin-bottom: 1.6rem; }
+      .s2-wide { padding-top: 1rem; gap: 2.5rem; }
+    }
+
+    @media (max-width: 640px) {
+      /* 모바일: 구성도는 글자가 읽히는 폭으로 두고 옆으로 밀어서 봄 */
+      .s2-figure-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+      .s2-figure-card { width: 760px; }
+      .s2-figure figcaption::after { content: ' · 옆으로 밀어서 보세요'; }
+      .s2-table { font-size: 0.72rem; }
+      .s2-table th, .s2-table td { padding: 0.7rem 0.5rem; }
+      .s2-table tbody th { width: 24%; }
     }
 
     /* ── SECTION 03 ── */
@@ -1141,24 +1217,47 @@
     <div class="s2-divider-col"></div>
 
     <div class="s2-right">
-      <p class="s2-body">일반적인 NAS 벤더 복제는 DR 센터 NAS를 Read-Only 또는 Passive 상태로 두는 경우가 많아 Active-Active 구성이 어렵습니다. PeerGFS는 기존 NAS 위에 소프트웨어 오버레이로 동작하며, Delta-Level 복제로 변경된 데이터만 빠르게 동기화해 DR 센터 NAS를 평상시에도 업무에 활용 가능한 Active 자원으로 전환합니다.</p>
-      <div class="s2-grid">
-        <div class="s2-card">
-          <span class="s2-card-num">01</span>
-          <span class="s2-card-label">DR NAS Read/Write Active 운영</span>
+      <p class="s2-sub">시스템 전체의 DR을 결정하는 것은 NAS입니다</p>
+      <p class="s2-body">서비스 시스템을 구성하는 Web·WAS, 데이터베이스와 같은 요소들은 동시에 서비스하는 Active-Active 구성 수단이 있습니다. 그러나 공유 NAS는 스토리지 자체 복제 기능이 DR 센터를 대기 상태로 두기 때문에, 다른 계층이 준비되어 있어도 NAS가 전환될 때까지 서비스를 재개할 수 없습니다.</p>
+    </div>
+
+    <!-- 본문 아래 넓은 줄: 구성도(라인아트) → 표 -->
+    <div class="s2-wide">
+      <figure class="s2-figure">
+        <div class="s2-figure-scroll">
+          <div class="s2-figure-card"><div id="as-is-1"></div></div>
         </div>
-        <div class="s2-card">
-          <span class="s2-card-num">02</span>
-          <span class="s2-card-label">변경분 전송으로 WAN 병목 감소</span>
-        </div>
-        <div class="s2-card">
-          <span class="s2-card-num">03</span>
-          <span class="s2-card-label">이기종 NAS 환경 지원</span>
-        </div>
-        <div class="s2-card">
-          <span class="s2-card-num">04</span>
-          <span class="s2-card-label">Near-Zero RPO · RTO</span>
-        </div>
+        <figcaption>일반적인 3-Tier 시스템과 공유 NAS의 DR 구성</figcaption>
+      </figure>
+
+      <div class="s2-table-wrap">
+        <table class="s2-table">
+          <caption>계층별 DR 수단</caption>
+          <thead>
+            <tr>
+              <th scope="col">계층</th>
+              <th scope="col">Active-Passive</th>
+              <th scope="col">Active-Active</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Web / WAS</th>
+              <td>GSLB + 대기 서버</td>
+              <td>GSLB 트래픽 분산</td>
+            </tr>
+            <tr>
+              <th scope="row">데이터베이스</th>
+              <td>복제 기반 Standby</td>
+              <td>논리 복제 기반 양방향 구성</td>
+            </tr>
+            <tr class="s2-row-hi">
+              <th scope="row">공유 NAS</th>
+              <td>스토리지 내장 복제<br><span class="s2-note">DR 센터 Read-Only</span></td>
+              <td class="s2-cell-key">스토리지 내장 기능으로는 구성 불가<br><span class="s2-arrow">→ PeerGFS</span></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
@@ -1617,7 +1716,7 @@
       }
 
       if (id === 'section-02') {
-        entry.target.querySelectorAll('.s2-title, .s2-body, .s2-card').forEach((el, i) => {
+        entry.target.querySelectorAll('.s2-title, .s2-sub, .s2-body, .s2-figure, .s2-table-wrap').forEach((el, i) => {
           if (isIn) {
             el.style.transition = `opacity 0.65s cubic-bezier(0.22,1,0.36,1) ${i * 0.07}s, transform 0.65s cubic-bezier(0.22,1,0.36,1) ${i * 0.07}s`;
             el.style.opacity = '1';
@@ -1662,7 +1761,7 @@
 
   /* init hidden state */
   ['.s1-left-wrap','.s1-body','.s1-divider','.s1-chips','.s1-kpi',
-   '.s2-title','.s2-body','.s2-card',
+   '.s2-title','.s2-sub','.s2-body','.s2-figure','.s2-table-wrap',
    '.s3-title','.s3-body','.s3-feat',
    '.s4-title','.s4-table'].forEach(sel => {
     document.querySelectorAll(sel).forEach(el => {
@@ -1678,5 +1777,7 @@
   });
 </script>
   <script src="js/components.js"></script>
+  <!-- 02 구역 구성도 (라인아트 애니메이션) -->
+  <script type="module" src="illustrations/system-diagram-as-is-1/js/scene.js"></script>
 </body>
 </html>
