@@ -580,6 +580,7 @@
     }
 
     .s1-left {
+      container-type: inline-size;  /* 숫자판 글자 크기를 이 칸 폭에 맞춤 */
       padding-right: 4rem;
       border-right: 1px solid rgba(24,95,165,0.10);
       display: flex;
@@ -612,7 +613,8 @@
 
     .s1-kpi {
       display: flex;
-      gap: 2rem;
+      flex-wrap: nowrap;            /* 모바일에서도 항상 한 줄 */
+      gap: clamp(0.7rem, 3cqw, 1.6rem);
       align-items: flex-start;
       justify-content: flex-end;
     }
@@ -639,18 +641,23 @@
       font-weight: 500;
     }
 
+    .s1-kpi-key { white-space: nowrap; }
+
     .s1-kpi-val {
-      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-size: clamp(1rem, 5.6cqw, 2rem);   /* 왼쪽 칸 폭에 맞춰 줄어 한 줄 유지 */
       font-weight: 700;
       color: #1a2332;
       letter-spacing: -0.03em;
       line-height: 1;
+      white-space: nowrap;
     }
 
     .s1-kpi-desc {
       font-size: 0.65rem;
       color: #ba7517;
       font-weight: 400;
+      line-height: 1.5;
+      white-space: nowrap;
     }
 
     .s1-right {
@@ -673,21 +680,45 @@
       background: rgba(26,35,50,0.15);
     }
 
+    /* 태그: 같은 가로폭으로 줄 맞춤 (그리드) */
     .s1-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+      gap: 16px 14px;
+      padding: 6px;                 /* 그림자가 잘리지 않도록 여백 */
     }
 
+    /* Neumorphism: 섹션 배경(#eef4fa)과 같은 색 위에 밝은·어두운 그림자로 볼록하게 */
     .s1-chip {
-      font-size: 0.72rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 2.34rem;          /* 2.6rem에서 10% 줄임 */
+      padding: 6px 12px;
+      font-size: 0.76rem;
       font-weight: 500;
-      letter-spacing: 0.02em;
-      color: var(--light-muted);
-      background: rgba(26,35,50,0.05);
-      border: 0.5px solid rgba(26,35,50,0.15);
-      padding: 5px 12px;
-      border-radius: 20px;
+      letter-spacing: 0.01em;
+      color: rgba(26,35,50,0.62);
+      background: #eef4fa;
+      border: none;
+      border-radius: 12px;
+      box-shadow:
+        5px 5px 10px rgba(163,177,198,0.55),
+        -5px -5px 10px rgba(255,255,255,0.95);
+      transition: box-shadow 0.25s ease, color 0.25s ease;
+    }
+
+    .s1-chip:hover {
+      color: #185fa5;
+      box-shadow:
+        inset 3px 3px 6px rgba(163,177,198,0.55),
+        inset -3px -3px 6px rgba(255,255,255,0.95);
+    }
+
+    @media (max-width: 640px) {
+      .s1-chips { grid-template-columns: repeat(2, 1fr); gap: 12px 10px; }
+      .s1-chip { font-size: 0.7rem; padding: 8px 6px; }
     }
 
     @media (max-width: 1100px) {
@@ -1036,7 +1067,7 @@
       </div>
       <div class="hero-slogan">
         <p class="slogan-main" id="slogan-main">DR 센터를 대기 자원에서 운영 자원으로</p>
-        <p class="slogan-sub" id="slogan-sub">Main Center와 DR Center의 NAS를 모두 Read/Write로 운영하는 DR 아키텍처</p>
+        <p class="slogan-sub" id="slogan-sub">주 센터와 DR 센터의 NAS를 모두 Read/Write로 운영하는 DR 아키텍처</p>
       </div>
     </div>
 
@@ -1070,22 +1101,28 @@
             <span class="s1-kpi-val">Near-Zero</span>
             <span class="s1-kpi-desc">복구 목표 시간</span>
           </div>
+          <div class="s1-kpi-sep"></div>
+          <div class="s1-kpi-item">
+            <span class="s1-kpi-key">DR NAS</span>
+            <span class="s1-kpi-val">Read/Write</span>
+            <span class="s1-kpi-desc">상시 운영 자원</span>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="s1-right">
-      <p class="s1-body">LeadingPoint Active-Active NAS DR은 Peer Software의 PeerGFS를 기반으로 Main Center와 DR Center의 NAS를 모두 Read/Write 가능한 Active Site로 운영하는 차세대 NAS DR 아키텍처입니다.</p>
-      <p class="s1-body">PeerGFS의 핵심은 Delta-Level Replication입니다. 파일이 변경될 때 전체 파일을 다시 전송하지 않고 변경된 부분만 식별해 전송하므로, WAN 구간의 전송 데이터 양을 크게 줄이고 복제 속도를 높입니다. 이를 통해 원거리 DR 환경에서도 Near-Zero RPO와 빠른 Failover 구조를 구현합니다.</p>
+      <p class="s1-body">LeadingPoint Active-Active NAS DR은 Peer Software의 PeerGFS를 기반으로 주 센터와 DR 센터의 NAS를 모두 Read/Write 가능한 Active Site로 운영하는 NAS DR 아키텍처입니다.</p>
+      <p class="s1-body">PeerGFS는 NAS에서 파일이 변경되는 순간을 감지해 상대 센터로 복제합니다. 복제 주기를 기다리지 않으므로 장애 시 유실될 수 있는 구간이 줄어듭니다. 전송할 때는 파일 전체가 아니라 변경된 부분만 보내 원거리 회선의 부담을 낮춥니다.</p>
+      <p class="s1-body">기존 NAS는 그대로 사용합니다. Agent 서버와 관리 서버를 추가하는 것으로 구성이 끝나며, 주 센터와 DR 센터의 NAS가 서로 다른 벤더 제품이어도 됩니다.</p>
       <div class="s1-divider"></div>
       <div class="s1-chips">
-        <span class="s1-chip">Delta-Level Replication</span>
-        <span class="s1-chip">변경분만 전송</span>
-        <span class="s1-chip">WAN 전송량 절감</span>
         <span class="s1-chip">양방향 실시간 복제</span>
         <span class="s1-chip">Read/Write Active NAS</span>
+        <span class="s1-chip">이벤트 기반 변경 감지</span>
+        <span class="s1-chip">Delta-Level Replication</span>
         <span class="s1-chip">No Vendor Lock-In</span>
-        <span class="s1-chip">PeerIQ 통합 모니터링</span>
+        <span class="s1-chip">Not in Data Path</span>
       </div>
     </div>
 

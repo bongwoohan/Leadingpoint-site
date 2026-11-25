@@ -254,6 +254,44 @@
             height: 16px;
           }
         }
+
+        /* 꺾쇠 모양 — 원 없이 꺾쇠만. 원 지름(48px)만큼 크게, 원을 채우던 색, Neumorphism 그림자 */
+        #back-to-top.btt-chevron {
+          background: transparent;
+          box-shadow: none;
+          color: #1f2b3d;
+        }
+        #back-to-top.btt-chevron:hover {
+          background: transparent;
+          box-shadow: none;
+          color: #f0956e;
+        }
+        #back-to-top.btt-chevron svg {
+          width: 38.4px;              /* 48px에서 20% 줄임 */
+          height: 22.4px;
+          overflow: visible;
+          filter:
+            drop-shadow(-2px -2px 2px rgba(255,255,255,0.45))
+            drop-shadow( 3px  3px 4px rgba(0,0,0,0.40));
+        }
+        /* 어두운 구역 위에 있을 때: 밝은 파랑 (비교표 강조색) */
+        #back-to-top.btt-chevron.btt-on-dark {
+          color: #7ab0e0;
+        }
+        #back-to-top.btt-chevron.btt-on-dark svg {
+          filter:
+            drop-shadow(-1.5px -1.5px 1.5px rgba(255,255,255,0.12))
+            drop-shadow( 3px  3px 4px rgba(0,0,0,0.55));
+        }
+        #back-to-top.btt-chevron.btt-on-dark:hover {
+          color: #f0956e;
+        }
+        @media (max-width: 640px) {
+          #back-to-top.btt-chevron svg {
+            width: 33.6px;            /* 42px에서 20% 줄임 */
+            height: 19.6px;
+          }
+        }
       `;
       document.head.appendChild(style);
     }
@@ -263,22 +301,65 @@
     btn.id = 'back-to-top';
     btn.setAttribute('aria-label', 'Back to top');
     btn.classList.add('btt-' + theme);
-    btn.innerHTML = `
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="18 15 12 9 6 15"/>
-      </svg>
-    `;
+    if ((cfg.bttShape || 'chevron') === 'chevron') {   /* 모든 페이지 기본: 꺾쇠 (원형은 bttShape: 'circle') */
+      /* 꺾쇠만: 가로폭을 버튼 지름에 맞추고, 굵기는 크기에 비례 (원래 18px 아이콘 대비) */
+      btn.classList.add('btt-chevron');
+      btn.innerHTML = `
+        <svg viewBox="0 0 24 14" fill="none" stroke="currentColor"
+             stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="2.2 11.8 12 2.2 21.8 11.8"/>
+        </svg>
+      `;
+    } else {
+      btn.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="18 15 12 9 6 15"/>
+        </svg>
+      `;
+    }
     document.body.appendChild(btn);
 
+    /* 꺾쇠 모양: 버튼 뒤 배경이 어두우면 밝은 색으로 바꿈 */
+    function updateChevronTone() {
+      if (!btn.classList.contains('btt-chevron')) return;
+      const r = btn.getBoundingClientRect();
+      const x = r.left + r.width / 2;
+      const y = r.top + r.height / 2;
+      let dark = false;
+      for (const el of document.elementsFromPoint(x, y)) {
+        if (el === btn || btn.contains(el)) continue;
+        let node = el, found = false;
+        while (node && node.nodeType === 1) {
+          const m = getComputedStyle(node).backgroundColor.match(/[\d.]+/g);
+          if (m && (m[3] === undefined || parseFloat(m[3]) > 0.5)) {
+            const lum = 0.2126 * m[0] + 0.7152 * m[1] + 0.0722 * m[2];
+            dark = lum < 128;
+            found = true;
+            break;
+          }
+          node = node.parentElement;
+        }
+        if (found) break;
+      }
+      btn.classList.toggle('btt-on-dark', dark);
+    }
+
     /* 스크롤 감지 — 200px 이상 내려가면 버튼 표시 */
+    let toneQueued = false;
     scrollContainer.addEventListener('scroll', () => {
       if (scrollContainer.scrollTop > 200) {
         btn.classList.add('btt-visible');
       } else {
         btn.classList.remove('btt-visible');
       }
+      if (!toneQueued) {
+        toneQueued = true;
+        requestAnimationFrame(() => { toneQueued = false; updateChevronTone(); });
+      }
     }, { passive: true });
+    window.addEventListener('resize', updateChevronTone);
+    updateChevronTone();
 
     /* 클릭 → 최상단으로 부드럽게 이동 */
     btn.addEventListener('click', () => {
