@@ -809,11 +809,16 @@
     #as-is-1 svg { user-select: none; touch-action: manipulation; }
     #as-is-1 .pp { fill: #fdfcf8; }
 
+    /* 그림 제목 (그림 아래) */
     .s2-figure figcaption {
-      margin-top: 0.9rem;
-      font-size: 0.75rem;
-      color: rgba(200,216,240,0.45);
+      margin-top: 1.4rem;
+      font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.45;
+      color: #eaf4ff;
       text-align: center;
+      word-break: keep-all;
     }
 
     /* 표: 계층별 DR 수단 (공유 NAS 줄 강조) */
@@ -827,15 +832,17 @@
       line-height: 1.55;
     }
 
+    /* 표 제목: 그림 제목과 같은 크기 */
     .s2-table caption {
       caption-side: top;
       text-align: left;
-      font-size: 0.62rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(200,216,240,0.40);
-      padding-bottom: 0.8rem;
+      font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.45;
+      color: #eaf4ff;
+      padding-bottom: 1.1rem;
+      word-break: keep-all;
     }
 
     .s2-table th,
@@ -887,10 +894,115 @@
       /* 모바일: 구성도는 글자가 읽히는 폭으로 두고 옆으로 밀어서 봄 */
       .s2-figure-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
       .s2-figure-card { width: 760px; }
-      .s2-figure figcaption::after { content: ' · 옆으로 밀어서 보세요'; }
+      .s2-figure figcaption::after { content: '옆으로 밀어서 보세요'; display: block; margin-top: 0.3rem; font-size: 0.72rem; font-weight: 400; color: rgba(200,216,240,0.45); }
       .s2-table { font-size: 0.72rem; }
       .s2-table th, .s2-table td { padding: 0.7rem 0.5rem; }
       .s2-table tbody th { width: 24%; }
+    }
+
+    /* ── SECTION A-A · Active-Active NAS DR with PeerGFS (밝음) ── */
+    .sa-inner {
+      width: 100%;
+      max-width: 1300px;
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      align-items: start;
+      padding: 4rem 3rem;
+    }
+    .sa-left {
+      padding-right: 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      text-align: right;
+    }
+    .sa-title {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: var(--light-title);
+    }
+    .sa-divider-col { background: rgba(24,95,165,0.10); width: 1px; align-self: stretch; }
+    .sa-right { padding-left: 4rem; display: flex; flex-direction: column; gap: 1.6rem; }
+    .sa-sub {
+      font-size: clamp(1.15rem, 1.9vw, 1.5rem);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.45;
+      color: var(--light-title);
+    }
+    .sa-body {
+      font-size: clamp(0.95rem, 1.35vw, 1.05rem);
+      line-height: 1.9;
+      color: var(--light-body);
+    }
+
+    /* 본문 아래 넓은 줄: 그림 → 표 → 보조 문단 */
+    .sa-wide { grid-column: 1 / -1; min-width: 0; display: flex; flex-direction: column; gap: 3rem; padding-top: 3.5rem; }
+
+    /* 그림 자리 (라인아트 완성 전 임시 표시) */
+    .sa-figure { margin: 0; }
+    .sa-figure-scroll { width: 100%; }
+    .sa-figure-card {
+      width: 100%;                   /* 그림이 구역 배경(#eef4fa) 위에 바로 놓임 */
+    }
+    #ap-aa, #ap-aa svg { display: block; width: 100%; }
+    #ap-aa svg { height: auto; user-select: none; touch-action: manipulation; }
+    /* 그림 제목 (그림 아래) */
+    .sa-figure figcaption {
+      margin-top: 1.4rem;
+      font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.45;
+      color: var(--light-title);
+      text-align: center;
+    }
+
+    /* 표: 도입 전후 ('도입 후' 열 강조) */
+    .sa-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 0.85rem; line-height: 1.55; }
+    /* 표 제목: 그림 제목과 같은 크기 */
+    .sa-table caption {
+      caption-side: top; text-align: left;
+      font-size: clamp(1.05rem, 1.6vw, 1.3rem); font-weight: 600; letter-spacing: -0.01em; line-height: 1.45;
+      color: var(--light-title); padding-bottom: 1.1rem; word-break: keep-all;
+    }
+    .sa-table th, .sa-table td {
+      padding: 0.85rem 0.9rem;
+      border-top: 1px solid rgba(26,35,50,0.10);
+      text-align: left; vertical-align: top;
+      word-break: keep-all; overflow-wrap: break-word;
+    }
+    .sa-table thead th {
+      font-size: 0.66rem; font-weight: 500; letter-spacing: 0.08em;
+      color: var(--light-muted); border-top: none; padding-top: 0;
+    }
+    .sa-table tbody th { width: 24%; font-weight: 600; color: var(--light-title); }
+    .sa-table tbody td { color: var(--light-muted); }
+    .sa-table tbody tr:last-child th, .sa-table tbody tr:last-child td { border-bottom: 1px solid rgba(26,35,50,0.10); }
+    .sa-table .sa-col-after { background: rgba(24,95,165,0.06); }
+    .sa-table thead th.sa-col-after { color: #185fa5; }
+    .sa-table tbody td.sa-col-after { color: #042c53; font-weight: 600; }
+
+    .sa-note { font-size: 0.85rem; line-height: 1.8; color: var(--light-muted); margin-top: -1.6rem; }
+    .sa-sub, .sa-body, .sa-note, .sa-figure figcaption { word-break: keep-all; overflow-wrap: break-word; }
+
+    @media (max-width: 1100px) {
+      .sa-inner { grid-template-columns: minmax(0, 1fr); padding: 5rem 1.5rem 4rem; gap: 2rem; }
+      .sa-divider-col { display: none; }
+      .sa-left { align-items: flex-start; text-align: left; border-bottom: 1px solid rgba(24,95,165,0.10); padding-right: 0; padding-bottom: 2rem; }
+      .sa-right { padding-left: 0; }
+      .sa-wide { padding-top: 1rem; gap: 2.5rem; }
+    }
+    @media (max-width: 640px) {
+      /* 모바일: 그림은 글자가 읽히는 폭으로 두고 옆으로 밀어서 봄 */
+      .sa-figure-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+      .sa-figure-card { width: 760px; }
+      .sa-figure figcaption::after { content: '옆으로 밀어서 보세요'; display: block; margin-top: 0.3rem; font-size: 0.72rem; font-weight: 400; color: var(--light-muted); }
+      .sa-table { font-size: 0.75rem; }
+      .sa-table th, .sa-table td { padding: 0.7rem 0.5rem; }
+      .sa-table tbody th { width: 26%; }
     }
 
     /* ── SECTION 03 ── */
@@ -979,6 +1091,15 @@
       .s3-right .s3-feat:first-child { border-top: none; }
       .s3-title { white-space: normal; }
       .s3-feat { grid-template-columns: 1.5rem 8rem 1fr; }
+    }
+
+    /* 한글이 단어 중간에서 끊기지 않게 */
+    .s3-feat-key, .s3-feat-val { word-break: keep-all; overflow-wrap: break-word; }
+
+    /* 모바일: 기능 이름 아래에 설명 */
+    @media (max-width: 640px) {
+      .s3-feat { grid-template-columns: 1.5rem 1fr; row-gap: 0.3rem; }
+      .s3-feat-val { grid-column: 2; }
     }
 
     /* ── SECTION 04 ── */
@@ -1217,7 +1338,7 @@
     <div class="s2-divider-col"></div>
 
     <div class="s2-right">
-      <p class="s2-sub">시스템 전체의 DR을 결정하는 것은 NAS입니다</p>
+      <p class="s2-sub">NAS, 시스템 전체의 DR 성능을 좌우합니다.</p>
       <p class="s2-body">서비스 시스템을 구성하는 Web·WAS, 데이터베이스와 같은 요소들은 동시에 서비스하는 Active-Active 구성 수단이 있습니다. 그러나 공유 NAS는 스토리지 자체 복제 기능이 DR 센터를 대기 상태로 두기 때문에, 다른 계층이 준비되어 있어도 NAS가 전환될 때까지 서비스를 재개할 수 없습니다.</p>
     </div>
 
@@ -1263,14 +1384,64 @@
 
   </div>
 </section>
+<!-- ── SECTION A-A · Light · Active-Active NAS DR with PeerGFS ── -->
+<section class="sec sec-light" id="section-aa">
+  <span class="sec-num">03</span>
+  <div class="sa-inner">
+
+    <div class="sa-left">
+      <h2 class="sa-title">Active-Active<br>NAS DR<br>with PeerGFS</h2>
+    </div>
+
+    <div class="sa-divider-col"></div>
+
+    <div class="sa-right">
+      <p class="sa-sub">DR 센터 NAS를 평상시에도 운영 자원으로</p>
+      <p class="sa-body">PeerGFS는 모든 센터의 NAS를 실시간으로 동기화합니다. DR 센터 NAS가 평상시에도 Read/Write이고 DR 센터 WAS가 로컬 NAS를 마운트한 상태로 운영되므로, 장애가 나도 NAS와 WAS는 전환할 것이 없습니다.</p>
+    </div>
+
+    <div class="sa-wide">
+      <!-- 그림: 라인아트 (illustrations/active-passive-vs-active) — 밝은 구역 배경용 -->
+      <figure class="sa-figure">
+        <div class="sa-figure-scroll">
+          <div class="sa-figure-card"><div id="ap-aa"></div></div>
+        </div>
+        <figcaption>Active-Passive와 Active-Active 구성 비교</figcaption>
+      </figure>
+
+      <div class="sa-table-wrap">
+        <table class="sa-table">
+          <caption>도입 전후</caption>
+          <thead>
+            <tr>
+              <th scope="col">항목</th>
+              <th scope="col">도입 전</th>
+              <th scope="col" class="sa-col-after">도입 후</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">DR 센터 NAS</th><td>Read-Only 또는 대기</td><td class="sa-col-after">Read/Write</td></tr>
+            <tr><th scope="row">복제 방식</th><td>스냅샷 기반, 주기 복제</td><td class="sa-col-after">이벤트 기반, 변경 즉시 복제</td></tr>
+            <tr><th scope="row">장애 시 NAS 전환</th><td>복제 해제와 마운트 전환 필요</td><td class="sa-col-after">불필요</td></tr>
+            <tr><th scope="row">DR 센터 자원</th><td>평상시 미활용</td><td class="sa-col-after">평상시 업무에 활용</td></tr>
+            <tr><th scope="row">NAS 벤더</th><td>동일 벤더, 동일 제품군</td><td class="sa-col-after">이기종 구성 가능</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="sa-note">요구사항이 Active-Passive로 정해진 경우에도 적용할 수 있습니다. 단방향 복제로 구성하면 DR 센터 NAS가 항상 최신 상태로 유지됩니다.</p>
+    </div>
+
+  </div>
+</section>
 <!-- ── SECTION 03 · Light ── -->
 <section class="sec sec-light" id="section-03">
-  <span class="sec-num">03</span>
+  <span class="sec-num">04</span>
   <div class="s3-inner">
 
     <div class="s3-left">
       <h2 class="s3-title">The Difference</h2>
-      <p class="s3-body">리딩포인트의 Active-Active NAS DR의 차별점은 스토리지 어레이 내부 복제가 아니라, NAS 간 데이터 동기화 계층에 있습니다.<br><br>PeerGFS는 특정 벤더 NAS에 종속되지 않고 변경된 데이터만 효율적으로 전송합니다. 대용량 파일의 일부만 수정된 경우에도 전체 파일이 아니라 변경된 부분만 전송하기 때문에 원거리 DR 환경의 네트워크 부담을 크게 낮춥니다.</p>
+      <p class="s3-body">LeadingPoint Active-Active NAS DR의 차별점은 스토리지 내부의 복제 기능이 아니라, 스토리지 바깥에서 NAS와 NAS를 잇는 동기화 계층에 있습니다.<br><br>스토리지 내장 복제는 같은 벤더 제품 사이에서만 동작하고 DR 센터를 대기 상태로 둡니다. PeerGFS는 벤더와 관계없이 양쪽 NAS를 모두 운영 상태로 유지하고, 장애 복귀·파일 충돌·랜섬웨어 같은 운영 상황까지 함께 다룹니다.</p>
     </div>
 
     <div class="s3-divider-col"></div>
@@ -1278,38 +1449,43 @@
     <div class="s3-right">
       <div class="s3-feat">
         <span class="s3-feat-num">01</span>
-        <span class="s3-feat-key">Delta-Level Replication</span>
-        <span class="s3-feat-val">파일 전체가 아니라 변경된 부분만 전송합니다.</span>
+        <span class="s3-feat-key">양방향 실시간 복제</span>
+        <span class="s3-feat-val">모든 센터가 변경을 주고받아 양쪽 NAS를 모두 Read/Write로 서비스합니다.</span>
       </div>
       <div class="s3-feat">
         <span class="s3-feat-num">02</span>
-        <span class="s3-feat-key">WAN 전송량 절감</span>
-        <span class="s3-feat-val">전송 데이터 양을 줄여 원거리 복제 속도를 높입니다.</span>
+        <span class="s3-feat-key">이벤트 기반 변경 감지</span>
+        <span class="s3-feat-val">NAS의 파일 변경 이벤트를 받아, 복제 주기를 기다리지 않고 즉시 복제를 시작합니다.</span>
       </div>
       <div class="s3-feat">
         <span class="s3-feat-num">03</span>
         <span class="s3-feat-key">Not in Data Path</span>
-        <span class="s3-feat-val">사용자와 NAS 사이의 I/O 경로 밖에서 동작합니다.</span>
+        <span class="s3-feat-val">사용자와 NAS 사이의 접근 경로에 개입하지 않습니다.</span>
       </div>
       <div class="s3-feat">
         <span class="s3-feat-num">04</span>
-        <span class="s3-feat-key">실시간 양방향 복제</span>
-        <span class="s3-feat-val">양쪽 센터의 파일 변경을 감지해 즉시 동기화합니다.</span>
+        <span class="s3-feat-key">이기종 NAS 지원</span>
+        <span class="s3-feat-val">Dell, NetApp, Nutanix, Windows, Linux 등 서로 다른 벤더의 NAS를 하나의 복제 환경으로 묶습니다.</span>
       </div>
       <div class="s3-feat">
         <span class="s3-feat-num">05</span>
-        <span class="s3-feat-key">Global File Locking</span>
-        <span class="s3-feat-val">SMB 환경에서 동시 수정 충돌을 방지합니다.</span>
+        <span class="s3-feat-key">Delta-Level Replication</span>
+        <span class="s3-feat-val">파일 전체가 아니라 변경된 블록만 보내 원거리 회선의 부담을 줄입니다.</span>
       </div>
       <div class="s3-feat">
         <span class="s3-feat-num">06</span>
-        <span class="s3-feat-key">Multi Vendor NAS</span>
-        <span class="s3-feat-val">Dell, NetApp, Windows, Linux 등 이기종 환경을 지원합니다.</span>
+        <span class="s3-feat-key">장애 감지와 자동 재편입</span>
+        <span class="s3-feat-val">응답 없는 센터를 복제에서 분리하고, 복귀하면 자동으로 다시 시작합니다.</span>
       </div>
       <div class="s3-feat">
         <span class="s3-feat-num">07</span>
-        <span class="s3-feat-key">PeerIQ</span>
-        <span class="s3-feat-val">복제 상태, 용량 추이, 이상 징후를 통합 모니터링합니다.</span>
+        <span class="s3-feat-key">정합성 안전망</span>
+        <span class="s3-feat-val">충돌 파일은 격리하고, 삭제·덮어쓸 파일은 먼저 보관해 되돌릴 수 있게 합니다.</span>
+      </div>
+      <div class="s3-feat">
+        <span class="s3-feat-num">08</span>
+        <span class="s3-feat-key">악성 이벤트 탐지 (MED)</span>
+        <span class="s3-feat-val">랜섬웨어 같은 이상 행동을 탐지해 알리고, 해당 서버를 복제에서 분리해 확산을 줄입니다.</span>
       </div>
     </div>
 
@@ -1318,7 +1494,7 @@
 
 <!-- ── SECTION 04 · Dark ── -->
 <section class="sec sec-dark" id="section-04">
-  <span class="sec-num">04</span>
+  <span class="sec-num">05</span>
   <div class="s4-inner">
 
     <div class="s4-top">
@@ -1741,6 +1917,19 @@
         });
       }
 
+      if (id === 'section-aa') {
+        entry.target.querySelectorAll('.sa-title, .sa-sub, .sa-body, .sa-figure, .sa-table-wrap, .sa-note').forEach((el, i) => {
+          if (isIn) {
+            el.style.transition = `opacity 0.65s cubic-bezier(0.22,1,0.36,1) ${i * 0.07}s, transform 0.65s cubic-bezier(0.22,1,0.36,1) ${i * 0.07}s`;
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+          } else {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+          }
+        });
+      }
+
       if (id === 'section-04') {
         entry.target.querySelectorAll('.s4-title, .s4-table').forEach((el, i) => {
           if (isIn) {
@@ -1762,6 +1951,7 @@
   /* init hidden state */
   ['.s1-left-wrap','.s1-body','.s1-divider','.s1-chips','.s1-kpi',
    '.s2-title','.s2-sub','.s2-body','.s2-figure','.s2-table-wrap',
+   '.sa-title','.sa-sub','.sa-body','.sa-figure','.sa-table-wrap','.sa-note',
    '.s3-title','.s3-body','.s3-feat',
    '.s4-title','.s4-table'].forEach(sel => {
     document.querySelectorAll(sel).forEach(el => {
@@ -1771,7 +1961,7 @@
     });
   });
 
-  ['section-01','section-02','section-03','section-04'].forEach(id => {
+  ['section-01','section-02','section-aa','section-03','section-04'].forEach(id => {
     const el = document.getElementById(id);
     if (el) revealObserver.observe(el);
   });
@@ -1779,5 +1969,7 @@
   <script src="js/components.js"></script>
   <!-- 02 구역 구성도 (라인아트 애니메이션) -->
   <script type="module" src="illustrations/system-diagram-as-is-1/js/scene.js"></script>
+  <!-- 03 구역 그림 (Active-Passive ↔ Active-Active 라인아트) -->
+  <script type="module" src="illustrations/active-passive-vs-active/js/scene.js"></script>
 </body>
 </html>
