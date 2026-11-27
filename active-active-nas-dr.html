@@ -1005,6 +1005,94 @@
       .sa-table tbody th { width: 26%; }
     }
 
+    /* ── SECTION HW · How It Works (어두움) ── */
+    .hw-inner {
+      width: 100%;
+      max-width: 1300px;
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      align-items: start;
+      padding: 4rem 3rem;
+    }
+    .hw-left { padding-right: 4rem; display: flex; flex-direction: column; align-items: flex-end; text-align: right; }
+    .hw-title { font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; color: #c8d8f0; }
+    .hw-divider-col { background: rgba(200,216,240,0.10); width: 1px; align-self: stretch; }
+    .hw-right { padding-left: 4rem; display: flex; flex-direction: column; gap: 1.6rem; }
+    .hw-sub { font-size: clamp(1.15rem, 1.9vw, 1.5rem); font-weight: 600; letter-spacing: -0.01em; line-height: 1.45; color: #eaf4ff; word-break: keep-all; }
+    .hw-body { font-size: clamp(0.95rem, 1.5vw, 1.15rem); font-weight: 300; line-height: 1.9; color: rgba(200,216,240,0.58); word-break: keep-all; }
+
+    .hw-wide { grid-column: 1 / -1; min-width: 0; display: flex; flex-direction: column; gap: 3.5rem; padding-top: 3.5rem; }
+
+    /* 블록 제목: 그림·표 제목과 같은 크기 */
+    .hw-block-title {
+      font-size: clamp(1.05rem, 1.6vw, 1.3rem); font-weight: 600; letter-spacing: -0.01em; line-height: 1.45;
+      color: #eaf4ff; margin-bottom: 1.1rem; word-break: keep-all;
+    }
+
+    /* 구성 요소 3개 */
+    .hw-comps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.2rem; }
+    .hw-comp {
+      border: 1px solid rgba(200,216,240,0.12);
+      border-radius: 14px;
+      padding: 1.5rem 1.4rem 1.6rem;
+      background: rgba(200,216,240,0.03);
+    }
+    .hw-comp-name { font-size: 1.02rem; font-weight: 600; color: #eaf4ff; line-height: 1.35; }
+    .hw-comp-abbr { color: #7ab0e0; font-weight: 600; }
+    .hw-comp-desc { margin-top: 0.75rem; font-size: 0.86rem; line-height: 1.75; color: rgba(200,216,240,0.62); word-break: keep-all; }
+
+    /* 복제 흐름 5단계 */
+    .hw-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; }
+    .hw-step { position: relative; padding: 1.2rem 1.1rem 0 0; border-top: 1px solid rgba(200,216,240,0.18); }
+    .hw-step::before {
+      content: ''; position: absolute; top: -5px; left: 0;
+      width: 9px; height: 9px; border-radius: 50%; background: #7ab0e0;
+    }
+    .hw-step-num { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; color: #7ab0e0; }
+    .hw-step-name { margin-top: 0.4rem; font-size: 0.98rem; font-weight: 600; color: #eaf4ff; }
+    .hw-step-desc { margin-top: 0.5rem; font-size: 0.82rem; line-height: 1.7; color: rgba(200,216,240,0.60); word-break: keep-all; }
+
+    /* 그림 자리 (라인아트 완성 전 임시 표시) */
+    .hw-figure { margin: 0; }
+    .hw-figure-scroll { width: 100%; }
+    .hw-figure-card { width: 100%; aspect-ratio: 1800 / 1090; }
+    .hw-figure-card--wide { aspect-ratio: 1800 / 560; }
+    #hw-overlay, #hw-overlay svg, #hw-event, #hw-event svg { display: block; width: 100%; height: 100%; }
+    #hw-overlay svg, #hw-event svg { user-select: none; touch-action: manipulation; }
+    .hw-figure-card.is-placeholder {
+      display: flex; align-items: center; justify-content: center;
+      border: 1.5px dashed rgba(200,216,240,0.22); border-radius: 16px;
+      color: rgba(200,216,240,0.40); font-size: 0.85rem; text-align: center; padding: 1rem;
+    }
+    .hw-figure figcaption {
+      margin-top: 1.4rem; font-size: clamp(1.05rem, 1.6vw, 1.3rem); font-weight: 600; letter-spacing: -0.01em;
+      line-height: 1.45; color: #eaf4ff; text-align: center; word-break: keep-all;
+    }
+
+    @media (max-width: 1100px) {
+      .hw-inner { grid-template-columns: minmax(0, 1fr); padding: 5rem 1.5rem 4rem; gap: 2rem; }
+      .hw-divider-col { display: none; }
+      .hw-left { align-items: flex-start; text-align: left; border-bottom: 1px solid rgba(200,216,240,0.10); padding-right: 0; padding-bottom: 2rem; }
+      .hw-right { padding-left: 0; }
+      .hw-wide { padding-top: 1rem; gap: 3rem; }
+      .hw-comps { grid-template-columns: minmax(0, 1fr); }
+    }
+    @media (max-width: 900px) {
+      /* 단계: 세로 줄 */
+      .hw-steps { grid-template-columns: minmax(0, 1fr); gap: 0; }
+      .hw-step { border-top: none; border-left: 1px solid rgba(200,216,240,0.18); padding: 0 0 1.6rem 1.4rem; }
+      .hw-step:last-child { padding-bottom: 0; }
+      .hw-step::before { top: 0.15rem; left: -5px; }
+      .hw-step-name { margin-top: 0.2rem; }
+    }
+    @media (max-width: 640px) {
+      /* 모바일: 그림은 글자가 읽히는 폭으로 두고 옆으로 밀어서 봄 */
+      .hw-figure-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+      .hw-figure-scroll .hw-figure-card { width: 760px; }
+      .hw-figure-scroll .hw-figure-card--wide { width: 1000px; }
+      .hw-figure:has(.hw-figure-scroll) figcaption::after { content: '옆으로 밀어서 보세요'; display: block; margin-top: 0.3rem; font-size: 0.72rem; font-weight: 400; color: rgba(200,216,240,0.45); }
+    }
+
     /* ── SECTION 03 ── */
     .s3-inner {
       width: 100%;
@@ -1434,9 +1522,74 @@
 
   </div>
 </section>
+<!-- ── SECTION HW · Dark · How It Works ── -->
+<section class="sec sec-dark" id="section-hw">
+  <span class="sec-num">04</span>
+  <div class="hw-inner">
+
+    <div class="hw-left">
+      <h2 class="hw-title">How It Works</h2>
+    </div>
+
+    <div class="hw-divider-col"></div>
+
+    <div class="hw-right">
+      <p class="hw-sub">서비스 경로 밖에서 동작하는 소프트웨어 오버레이</p>
+      <p class="hw-body">PeerGFS는 NAS마다 Agent 서버를 두고 복제를 수행합니다. 사용자와 애플리케이션이 NAS에 접근하는 경로에는 개입하지 않으므로, 복제 소프트웨어에 문제가 생겨도 NAS 서비스 중단으로 이어지지 않습니다.</p>
+    </div>
+
+    <div class="hw-wide">
+      <div class="hw-block">
+        <p class="hw-block-title">구성 요소</p>
+        <div class="hw-comps">
+          <div class="hw-comp">
+            <p class="hw-comp-name">Peer Agent</p>
+            <p class="hw-comp-desc">NAS와 연결된 전용 서버(Windows 또는 Linux)에 설치합니다. NAS의 파일 변경 이벤트를 받아 변경 내용을 보냅니다.</p>
+          </div>
+          <div class="hw-comp">
+            <p class="hw-comp-name">Peer Management Center <span class="hw-comp-abbr">(PMC)</span></p>
+            <p class="hw-comp-desc">모든 Agent와 복제 작업을 구성하고 감시하는 중앙 관리 서버입니다.</p>
+          </div>
+          <div class="hw-comp">
+            <p class="hw-comp-name">Peer Management Broker</p>
+            <p class="hw-comp-desc">PMC와 Agent 사이의 통신을 중계하는 메시징 서버입니다. 기본적으로 PMC와 같은 서버에 함께 설치되며, 규모에 따라 여러 대로 나눠 둘 수 있습니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 그림 1: 라인아트 illustrations/software-overlay -->
+      <figure class="hw-figure">
+        <div class="hw-figure-scroll">
+          <div class="hw-figure-card"><div id="hw-overlay"></div></div>
+        </div>
+        <figcaption>서비스 경로와 복제 경로가 분리된 구조</figcaption>
+      </figure>
+
+      <div class="hw-block">
+        <p class="hw-block-title">복제 흐름</p>
+        <ol class="hw-steps">
+          <li class="hw-step"><span class="hw-step-num">01</span><p class="hw-step-name">파일 변경</p><p class="hw-step-desc">WAS 또는 사용자가 NAS에 파일을 씁니다.</p></li>
+          <li class="hw-step"><span class="hw-step-num">02</span><p class="hw-step-name">이벤트 감지</p><p class="hw-step-desc">NAS가 변경 이벤트를 Agent에 알립니다.</p></li>
+          <li class="hw-step"><span class="hw-step-num">03</span><p class="hw-step-name">변경분 추출</p><p class="hw-step-desc">파일 전체가 아니라 변경된 블록을 가려냅니다.</p></li>
+          <li class="hw-step"><span class="hw-step-num">04</span><p class="hw-step-name">전송</p><p class="hw-step-desc">TLS로 암호화하여 상대 센터의 Agent로 보냅니다.</p></li>
+          <li class="hw-step"><span class="hw-step-num">05</span><p class="hw-step-name">반영과 검증</p><p class="hw-step-desc">상대 센터 NAS에 반영하고 체크섬으로 무결성을 검증합니다.</p></li>
+        </ol>
+      </div>
+
+      <!-- 그림 2: 라인아트 illustrations/event-detection (VH 스케치를 다시 그림) -->
+      <figure class="hw-figure">
+        <div class="hw-figure-scroll">
+          <div class="hw-figure-card hw-figure-card--wide"><div id="hw-event"></div></div>
+        </div>
+        <figcaption>스냅샷 기반 복제와 이벤트 기반 복제의 차이</figcaption>
+      </figure>
+    </div>
+
+  </div>
+</section>
 <!-- ── SECTION 03 · Light ── -->
 <section class="sec sec-light" id="section-03">
-  <span class="sec-num">04</span>
+  <span class="sec-num">05</span>
   <div class="s3-inner">
 
     <div class="s3-left">
@@ -1494,7 +1647,7 @@
 
 <!-- ── SECTION 04 · Dark ── -->
 <section class="sec sec-dark" id="section-04">
-  <span class="sec-num">05</span>
+  <span class="sec-num">06</span>
   <div class="s4-inner">
 
     <div class="s4-top">
@@ -1930,6 +2083,19 @@
         });
       }
 
+      if (id === 'section-hw') {
+        entry.target.querySelectorAll('.hw-title, .hw-sub, .hw-body, .hw-block, .hw-figure').forEach((el, i) => {
+          if (isIn) {
+            el.style.transition = `opacity 0.65s cubic-bezier(0.22,1,0.36,1) ${i * 0.07}s, transform 0.65s cubic-bezier(0.22,1,0.36,1) ${i * 0.07}s`;
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+          } else {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+          }
+        });
+      }
+
       if (id === 'section-04') {
         entry.target.querySelectorAll('.s4-title, .s4-table').forEach((el, i) => {
           if (isIn) {
@@ -1952,6 +2118,7 @@
   ['.s1-left-wrap','.s1-body','.s1-divider','.s1-chips','.s1-kpi',
    '.s2-title','.s2-sub','.s2-body','.s2-figure','.s2-table-wrap',
    '.sa-title','.sa-sub','.sa-body','.sa-figure','.sa-table-wrap','.sa-note',
+   '.hw-title','.hw-sub','.hw-body','.hw-block','.hw-figure',
    '.s3-title','.s3-body','.s3-feat',
    '.s4-title','.s4-table'].forEach(sel => {
     document.querySelectorAll(sel).forEach(el => {
@@ -1961,7 +2128,7 @@
     });
   });
 
-  ['section-01','section-02','section-aa','section-03','section-04'].forEach(id => {
+  ['section-01','section-02','section-aa','section-hw','section-03','section-04'].forEach(id => {
     const el = document.getElementById(id);
     if (el) revealObserver.observe(el);
   });
@@ -1971,5 +2138,7 @@
   <script type="module" src="illustrations/system-diagram-as-is-1/js/scene.js"></script>
   <!-- 03 구역 그림 (Active-Passive ↔ Active-Active 라인아트) -->
   <script type="module" src="illustrations/active-passive-vs-active/js/scene.js"></script>
+  <script type="module" src="illustrations/software-overlay/js/scene.js"></script>
+  <script type="module" src="illustrations/event-detection/js/scene.js"></script>
 </body>
 </html>

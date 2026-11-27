@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Event detection · line art</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+<style>
+  html, body { margin: 0; min-height: 100%; background: #162538; }
+  body { display: grid; place-items: center; min-height: 100vh; }
+  /* the page reserves 1800 × 560; ?narrow shows the 1000px mobile card */
+  .wrap { width: min(94vw, calc((100vh - 48px) * 1800 / 560)); aspect-ratio: 1800 / 560; }
+  body.narrow .wrap { width: 1000px; }
+</style>
+</head>
+<body>
+  <div class="wrap"><div id="hw-event"></div></div>
+  <script>if (location.search.includes('narrow')) document.body.classList.add('narrow');</script>
+  <script type="module" src="./js/scene.js"></script>
+</body>
+</html>
