@@ -445,6 +445,48 @@
     }
     .hero-since.up { opacity: 1; }
 
+    /* Hero 슬로건 단락 아래: Active-Active NAS DR 바로가기 (테두리 빛 돌기 + 화살표 움직임) */
+    @property --hero-cta-r { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+    .hero-cta {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: 1.5px solid transparent;
+      border-radius: 4px;
+      background:
+        linear-gradient(var(--bg), var(--bg)) padding-box,
+        conic-gradient(from var(--hero-cta-r), rgba(240,149,110,0.18) 0 68%, #f0956e 84%, rgba(240,149,110,0.18) 100%) border-box;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: #c8d8f0;
+      text-decoration: none;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1) 0.35s, transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.35s, box-shadow 0.2s;
+      animation: heroCtaSpin 3s linear infinite;
+    }
+    .hero-cta.up { opacity: 1; transform: translateY(0); }
+    .hero-cta { align-self: flex-start; margin-top: 1.6rem; }   /* 슬로건 단락 아래 왼쪽 */
+    @keyframes heroCtaSpin { to { --hero-cta-r: 360deg; } }
+    .hero-cta:hover { box-shadow: 0 0 0 4px rgba(240,149,110,0.15); }
+    .hero-cta-text { position: relative; display: inline-flex; flex-direction: column; height: 1.2em; overflow: hidden; }
+    .hero-cta-text span { display: block; line-height: 1.2em; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); }
+    .hero-cta-text span:last-child { color: #f0956e; position: absolute; top: 100%; left: 0; }
+    .hero-cta:hover .hero-cta-text span { transform: translateY(-100%); }
+    .hero-cta-arrow { display: inline-block; font-size: 0.9rem; color: #f0956e; animation: heroCtaNudge 1.6s ease-in-out infinite; }
+    @keyframes heroCtaNudge { 0%, 55%, 100% { transform: translate(0, 0); } 25% { transform: translate(4px, -4px); } }
+    @media (max-width: 600px) {
+      .hero-cta { padding: 0.65rem 1.1rem; font-size: 0.8rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-cta, .hero-cta-arrow { animation: none; }
+      .hero-cta { background: transparent; border-color: rgba(240,149,110,0.6); }
+    }
+
     /* ── DEFINITION SECTION ── */
     .def-section {
       scroll-snap-align: start;
@@ -1050,14 +1092,17 @@
       align-items: center;
       gap: 0.5rem;
       padding: 0.75rem 1.5rem;
-      border: 1.5px solid rgba(240,149,110,0.4);
+      border: 1.5px solid transparent;
       border-radius: 4px;
       font-size: 0.85rem;
       font-weight: 500;
       letter-spacing: 0.02em;
       color: #c8d8f0;
       text-decoration: none;
-      background: transparent;
+      /* Hero 버튼과 같은 효과: 테두리 따라 빛 돌기 */
+      background:
+        linear-gradient(#111720, #111720) padding-box,
+        conic-gradient(from var(--hero-cta-r), rgba(240,149,110,0.18) 0 68%, #f0956e 84%, rgba(240,149,110,0.18) 100%) border-box;
       overflow: hidden;
       cursor: pointer;
       opacity: 0;
@@ -1067,9 +1112,9 @@
     .adv-btn.active {
       opacity: 1;
       transform: translateY(0);
-      animation: btnPulse 2s ease-in-out infinite 0.7s;
+      animation: heroCtaSpin 3s linear infinite;
     }
-    .adv-btn:hover { border-color: #f0956e; animation: none; box-shadow: 0 0 0 4px rgba(240,149,110,0.15); }
+    .adv-btn:hover { box-shadow: 0 0 0 4px rgba(240,149,110,0.15); }
 
     .adv-btn-text {
       position: relative;
@@ -1095,14 +1140,15 @@
     .adv-btn:hover .adv-btn-text span:last-child  { transform: translateY(-100%); }
 
     .adv-btn-arrow {
+      display: inline-block;
       font-size: 0.9rem;
-      opacity: 0.5;
-      transition: transform 0.3s ease, opacity 0.3s ease, color 0.3s ease;
-    }
-    .adv-btn:hover .adv-btn-arrow {
-      transform: translate(2px, -2px);
-      opacity: 1;
       color: #f0956e;
+      animation: heroCtaNudge 1.6s ease-in-out infinite;   /* Hero 버튼과 같은 화살표 움직임 */
+    }
+    @property --hero-cta-r { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+    @media (prefers-reduced-motion: reduce) {
+      .adv-btn.active, .adv-btn-arrow { animation: none; }
+      .adv-btn { background: transparent; border-color: rgba(240,149,110,0.6); }
     }
 
     @media (max-width: 1100px) {
@@ -1156,6 +1202,13 @@
           오랜 경험을 바탕으로 안정적인 DR 환경을<br>
           설계하고 구현합니다.
         </p>
+        <a href="active-active-nas-dr.html" class="hero-cta" id="hero-cta">
+          <span class="hero-cta-text">
+            <span>Active-Active NAS DR</span>
+            <span aria-hidden="true">Active-Active NAS DR</span>
+          </span>
+          <span class="hero-cta-arrow" aria-hidden="true">↗</span>
+        </a>
       </div>
     </div>
     <div class="hero-bottom" style="position:relative;z-index:1;">
@@ -1569,6 +1622,8 @@
     if (sm) sm.classList.add('up');
     if (ss) ss.classList.add('up');
     if (hs) hs.classList.add('up');
+    const hc = document.getElementById('hero-cta');
+    if (hc) hc.classList.add('up');
   }
 
   /* ── SCROLL REVEAL ── */
